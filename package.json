@@ -1,0 +1,58 @@
+{
+  "name": "abramov",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "http://localhost:8080/cspine/trunk/hplabs/build/",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "csvtojson": "^2.0.10",
+    "exponential-moving-average": "^1.0.0",
+    "express-ws": "^4.0.0",
+    "fast-glob": "^3.2.4",
+    "jStat": "^1.8.6",
+    "lodash": "^4.17.20",
+    "nodemailer": "^6.4.11",
+    "package-name": "^0.1.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-addons-update": "^15.6.2",
+    "react-bootstrap": "^2.10.4",
+    "react-csv": "^2.0.3",
+    "react-datepicker": "^2.16.0",
+    "react-dom": "^16.13.1",
+    "react-json-pretty": "^2.2.0",
+    "react-linechart": "^1.1.12",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.8",
+    "react-selectable-grid": "0.0.2",
+    "react-spinners": "^0.14.1",
+    "react-websocket": "^2.1.0",
+    "reactstrap": "^8.6.0",
+    "stats-lite": "^2.2.0",
+    "ts-react-json-table": "^0.1.2",
+    "webpack": "4.28.3"
+  },
+  "engines": {
+    "npm": "10.8.2",
+    "node": "20.17.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build --force",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
+    "moment": "^2.29.0",
+    "path": "^0.12.7",
+    "react-search-field": "^1.1.0"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
