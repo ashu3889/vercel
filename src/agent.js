@@ -3,12 +3,14 @@ import _superagent from 'superagent';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = 'https://conduit.productionready.io/api';
+const API_ROOT = 'https://djrytkwnujpltybvcpcu.supabase.co';
 
 const encode = encodeURIComponent;
 const responseBody = res => res.body;
 
-let token = null;
+let token = 'hMwpp9IZLpIxVNblTrfJGXXik+pqIH78pwSjk9aBjdh6+ppYIwGqHSj+oIuUOKLR9pBxMLjv1U6P5z/bsuhvYg==';
+
+
 const tokenPlugin = req => {
   if (token) {
     req.set('authorization', `Token ${token}`);
@@ -45,7 +47,8 @@ const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
 const omitSlug = article => Object.assign({}, article, { slug: undefined })
 const Articles = {
   all: page =>
-    requests.get(`/articles?${limit(10, page)}`),
+    requests.get(``),
+    // requests.get(`/articles?${limit(10, page)}`),
   byAuthor: (author, page) =>
     requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
   byTag: (tag, page) =>
