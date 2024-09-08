@@ -3,17 +3,18 @@ import _superagent from 'superagent';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = 'https://djrytkwnujpltybvcpcu.supabase.co';
+const API_ROOT = 'https://djrytkwnujpltybvcpcu.supabase.co/rest/v1/result';
 
 const encode = encodeURIComponent;
 const responseBody = res => res.body;
 
-let token = 'hMwpp9IZLpIxVNblTrfJGXXik+pqIH78pwSjk9aBjdh6+ppYIwGqHSj+oIuUOKLR9pBxMLjv1U6P5z/bsuhvYg==';
+let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqcnl0a3dudWpwbHR5YnZjcGN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjUyODQ5MDEsImV4cCI6MjA0MDg2MDkwMX0.jk7aMJYJmDzKKP9SaMZrqcobzuGPnUX8jKOjeK_3hGo';
 
 
 const tokenPlugin = req => {
   if (token) {
-    req.set('authorization', `Token ${token}`);
+    req.set('apiKey', `${token}`);
+    req.set('Authorization', `Bearer ${token}`);
   }
 }
 
