@@ -1,7 +1,6 @@
 import ArticlePreview from './ArticlePreview';
 import ListPagination from './ListPagination';
 import React from 'react';
-import Table from './Table';
 
 const ArticleList = props => {
   if (!props.articles) {
@@ -31,9 +30,7 @@ const ArticleList = props => {
       <ListPagination
         pager={props.pager}
         articlesCount={props.articlesCount}
-        currentPage={props.currentPage} 
-      />
-      {/* <Table/> */}
+        currentPage={props.currentPage} />
     </div>
   );
 };
