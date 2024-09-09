@@ -4,28 +4,47 @@ import './styles.css';
 import 'react-virtualized/styles.css';
 
 function TableData({articles}) {
-  const [arr, setArr] = React.useState([]);
+  const [searchedStock, setSearchedStock] = React.useState('');
+  const [dataArticle, setDataArticle] = React.useState([...articles]);
 
   React.useEffect(() => {
-    for (let i = 0; i < 1000; i++) {
-      setArr((prevArr) => [...prevArr, { number: i, name: 'uwu' }]);
+    if(searchedStock == '') {
+      setDataArticle(articles);
     }
-  }, []);
+    else if(searchedStock.length> 0) {
+      const newData = articles.filter(a => a.scripName.toLowerCase().startsWith(searchedStock));
+      debugger;
+      setDataArticle(newData);
+    }
+  }, [searchedStock]);
+ 
 
+  // articles = articles.map((e) =>  {
+  //   e['date'] = new Date(e.date).toLocaleDateString('en-GB', {
+  //     day: 'numeric', month: 'short', year: 'numeric'
+  //   }).replace(/ /g, '-');
+  //   e['tradeType'] = 'Buy';
+  //   return e;
+  // });
 
-  articles = articles.map((e) =>  {
-    e['date'] = new Date(e.date).toLocaleDateString('en-GB', {
-      day: 'numeric', month: 'short', year: 'numeric'
-    }).replace(/ /g, '-');
-    e['tradeType'] = 'Buy';
-    return e;
-  });
+  const _handleKeyDown = (e)  => {
+    if (e.key === 'Enter') {
+      console.log('do validate');
+      setSearchedStock(e.target.value.trim());
+      debugger;
+    }
+  }
 
   return (
     <div class="wrapper">
       <div class="header">
         <div class="search_box">
-          <input type="text" id="search_input" placeholder="Filter table using stock name"/>
+          <input 
+            type="text" 
+            id="search_input" 
+            placeholder="Filter table by stock name to check past result"
+            onKeyDown={_handleKeyDown}
+          />
         </div>
       </div>
 
@@ -38,12 +57,12 @@ function TableData({articles}) {
                 height={height}
                 headerHeight={50}
                 rowHeight={50}
-                rowCount={articles.length}
+                rowCount={dataArticle.length}
                 sortBy='date'
                 sortDirection='ASC'
-                rowGetter={({ index }) => articles[index]}>
+                rowGetter={({ index }) => dataArticle[index]}>
                 <Column width={150} label="Trigger date" dataKey="date" />
-                <Column width={300} label="Stock" dataKey="scripName" />
+                <Column width={350} label="Stock" dataKey="scripName" />
                 <Column width={100} label="Exchange" dataKey="exchange" />
                 <Column class="buy-signal" width={100} label="Signal" dataKey="tradeType"/> 
               </Table>

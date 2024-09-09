@@ -23,6 +23,13 @@ const ArticleList = props => {
     // articleData = props.articles.sort((a, b) => new Date(b.date) - new Date(a.date)) ;
     // // debugger;;
     articleData = props.articles.filter(a => a.tradeType !== "Sell").sort((a, b) => new Date(b.date) - new Date(a.date)) ;
+    articleData = articleData.map((e) =>  {
+      e['date'] = new Date(e.date).toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'short', year: 'numeric'
+      }).replace(/ /g, '-');
+      e['tradeType'] = 'Buy';
+      return e;
+    });
   }
 
 
