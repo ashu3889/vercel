@@ -147,9 +147,9 @@ class Profile extends React.Component {
 
             <div className="col-xs-12 col-md-10 offset-md-1">
 
-              <div className="articles-toggle">
+              {/* <div className="articles-toggle">
                 {this.renderTabs()}
-              </div>
+              </div> */}
 
               <ArticleList
                 pager={this.props.pager}

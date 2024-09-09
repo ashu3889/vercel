@@ -19,15 +19,19 @@ const ArticleList = props => {
     );
   }
 
-  // if(props.articles.length > 0){
-  //   articleData = props.articles.filter(a => a.tradeType !== "Sell").sort((a, b) => a.date - b.date) ;
-  // }
+  if(props.articles.length > 0){
+    // articleData = props.articles.sort((a, b) => new Date(b.date) - new Date(a.date)) ;
+    // // debugger;;
+    articleData = props.articles.filter(a => a.tradeType !== "Sell").sort((a, b) => new Date(b.date) - new Date(a.date)) ;
+  }
+
+
 
   return (
 
     <div>
       <TableData
-        articles={props.articles}
+        articles={articleData}
       />
     </div>
     // <div>

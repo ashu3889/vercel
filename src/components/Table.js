@@ -12,30 +12,35 @@ function TableData({articles}) {
     }
   }, []);
 
-  // alert('alert length ...' + articles.length);
-  debugger;
 
-  let articleData = articles.filter(a => a.tradeType !== "Sell");
-  // sort((a, b) => new Date(b.date) - new Date(a.date)) ;
+  articles = articles.map((e) =>  {
+    e['date'] = new Date(e.date).toLocaleDateString('en-GB', {
+      day: 'numeric', month: 'short', year: 'numeric'
+    }).replace(/ /g, '-');
+    return e;
+  });
+
   return (
     <div className="TableData">
       <div style={{ height: '100vh', width: '100%' }}>
         <AutoSizer>
           {({ height, width }) => (
             <Table
-              gridStyle={{ outline: 'none' }}
+              gridStyle={{ 
+
+              }}
               width={width}
               height={height}
-              headerHeight={20}
-              rowHeight={70}
-              rowCount={articleData.length}
-              sortBy='scripName'
+              headerHeight={30}
+              rowHeight={40}
+              rowCount={articles.length}
+              sortBy='date'
               sortDirection='ASC'
-              rowGetter={({ index }) => articleData[index]}>
-              <Column width={400} label="Stock" dataKey="scripName" />
-              <Column width={200} label="Exchange" dataKey="exchange" />
-              <Column width={400} label="Date of trade" dataKey="date" />
-              <Column width={300} label="Trade type" dataKey="tradeType" /> 
+              rowGetter={({ index }) => articles[index]}>
+              <Column width={150} label="Trigger date" dataKey="date" />
+              <Column width={300} label="Stock" dataKey="scripName" />
+              <Column width={100} label="Exchange" dataKey="exchange" />
+              {/* <Column width={50} label="Trade type" dataKey="tradeType" value="Buy"/>  */}
             </Table>
           )}
         </AutoSizer>
