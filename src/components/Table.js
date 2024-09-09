@@ -17,6 +17,7 @@ function TableData({articles}) {
     e['date'] = new Date(e.date).toLocaleDateString('en-GB', {
       day: 'numeric', month: 'short', year: 'numeric'
     }).replace(/ /g, '-');
+    e['tradeType'] = 'Buy';
     return e;
   });
 
@@ -40,7 +41,7 @@ function TableData({articles}) {
               <Column width={150} label="Trigger date" dataKey="date" />
               <Column width={300} label="Stock" dataKey="scripName" />
               <Column width={100} label="Exchange" dataKey="exchange" />
-              {/* <Column width={50} label="Trade type" dataKey="tradeType" value="Buy"/>  */}
+              <Column width={100} label="Signal" dataKey="tradeType"/> 
             </Table>
           )}
         </AutoSizer>

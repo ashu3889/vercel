@@ -14,11 +14,11 @@
 }
 
 .TableData {
-  border: 2px solid black;
+  border: 2px solid gray;
 }  
 
 .ReactVirtualized__Table__headerRow {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid gray;
 }
 
 .ReactVirtualized__Table__row {
@@ -29,6 +29,6 @@
   width: 821px;
   overflow: hidden;
   padding-right: 0px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid gray;
 }
 
