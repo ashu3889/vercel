@@ -4,11 +4,10 @@ import React from 'react';
 import TableData from './Table';
 
 const ArticleList = props => {
+  let articleData = [];
   if (!props.articles) {
     return (
-      // <div className="article-preview">Loading...</div>
-
-      <TableData/>
+      <div className="article-preview">Loading...</div>
     );
   }
 
@@ -20,21 +19,31 @@ const ArticleList = props => {
     );
   }
 
-  return (
-    <div>
-      {
-        props.articles.map(article => {
-          return (
-            <ArticlePreview article={article} key={article.slug} />
-          );
-        })
-      }
+  // if(props.articles.length > 0){
+  //   articleData = props.articles.filter(a => a.tradeType !== "Sell").sort((a, b) => a.date - b.date) ;
+  // }
 
-      <ListPagination
-        pager={props.pager}
-        articlesCount={props.articlesCount}
-        currentPage={props.currentPage} />
+  return (
+
+    <div>
+      <TableData
+        articles={props.articles}
+      />
     </div>
+    // <div>
+    //   {
+    //     props.articles.map(article => {
+    //       return (
+    //         <ArticlePreview article={article} key={article.slug} />
+    //       );
+    //     })
+    //   }
+
+    //   <ListPagination
+    //     pager={props.pager}
+    //     articlesCount={props.articlesCount}
+    //     currentPage={props.currentPage} />
+    // </div>
   );
 };
 

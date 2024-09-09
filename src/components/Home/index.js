@@ -34,7 +34,7 @@ class Home extends React.Component {
       agent.Articles.feed :
       agent.Articles.all;
 
-    this.props.onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
+    this.props.onLoad(tab, articlesPromise, Promise.all([articlesPromise()]));
   }
 
   componentWillUnmount() {
@@ -50,7 +50,7 @@ class Home extends React.Component {
         <div className="container page">
           <div className="row">
             <MainView />
-
+{/* 
             <div className="col-md-3">
               <div className="sidebar">
 
@@ -61,7 +61,7 @@ class Home extends React.Component {
                   onClickTag={this.props.onClickTag} />
 
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 

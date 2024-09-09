@@ -47,14 +47,15 @@ export default (state = {}, action) => {
         currentPage: 0
       };
     case HOME_PAGE_LOADED:
+      console.log('data...' + JSON.stringify(action.payload[0]))
       return {
         ...state,
-        pager: action.pager,
-        tags: action.payload[0].tags,
-        articles: action.payload[1].articles,
-        articlesCount: action.payload[1].articlesCount,
+        // pager: action.pager,
+        // tags: action.payload[0].tags,
+        articles: action.payload[0],
+        articlesCount: action.payload[0].length,
         currentPage: 0,
-        tab: action.tab
+        // tab: action.tab
       };
     case HOME_PAGE_UNLOADED:
       return {};
