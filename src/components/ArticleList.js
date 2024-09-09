@@ -1,11 +1,14 @@
 import ArticlePreview from './ArticlePreview';
 import ListPagination from './ListPagination';
 import React from 'react';
+import TableData from './Table';
 
 const ArticleList = props => {
   if (!props.articles) {
     return (
-      <div className="article-preview">Loading...</div>
+      // <div className="article-preview">Loading...</div>
+
+      <TableData/>
     );
   }
 
