@@ -28,10 +28,13 @@ function TableData({articles}) {
   // });
 
   const _handleKeyDown = (e)  => {
+    console.log('e key is...' + e.key + '...e.target.value.trim()...' + e.target.value.trim());
     if (e.key === 'Enter') {
       console.log('do validate');
       setSearchedStock(e.target.value.trim());
-      debugger;
+    }
+    else if(e.key === "Backspace" && e.target.value.trim() == "") {
+      setSearchedStock('');
     }
   }
 
