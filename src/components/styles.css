@@ -178,7 +178,6 @@ body {
 
 .ReactVirtualized__Table__headerRow {
   font-family: "Montserrat", sans-serif !important;
-  width: 100%;
   background-color: white;
   height: 50px;
   font-weight: 600 !important;
@@ -214,6 +213,18 @@ body {
     background: #cff1f0;
     color: #0dbeb6;
     height: 30px;
+  }
+
+  .ReactVirtualized__Table__headerColumn:nth-child(1) {
+    width: 30%;
+  }
+
+  .ReactVirtualized__Table__headerColumn:nth-child(2) {
+    width: 25%;
+  }
+
+  .ReactVirtualized__Table__headerColumn:nth-child(3) {
+    width: 30%;
   }
 
 
