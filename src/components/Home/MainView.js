@@ -67,28 +67,16 @@ const mapDispatchToProps = dispatch => ({
 
 const MainView = props => {
   return (
-    <div className="col-md-12">
-      <div className="feed-toggle">
-        <ul className="nav nav-pills outline-active">
+    <div className="col-md-12 col-sm-12">
 
-          <YourFeedTab
-            token={props.token}
-            tab={props.tab}
-            onTabClick={props.onTabClick} />
-
-          {/* <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} /> */}
-
-          <TagFilterTab tag={props.tag} />
-
-        </ul>
-      </div>
 
       <ArticleList
         pager={props.pager}
         articles={props.articles}
         loading={props.loading}
         articlesCount={props.articlesCount}
-        currentPage={props.currentPage} />
+        currentPage={props.currentPage} 
+      />
     </div>
   );
 };
