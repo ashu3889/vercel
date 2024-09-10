@@ -65,7 +65,7 @@ function TableData({articles}) {
                   sortBy='date'
                   sortDirection='ASC'
                   rowGetter={({ index }) => dataArticle[index]}>
-                  <Column label="Trigger date" dataKey="date" />
+                  <Column label="Date" dataKey="date" />
                   <Column label="Stock" dataKey="scripName" />
                   <Column label="Exchange" dataKey="exchange" />
                   <Column label="Signal" dataKey="tradeType"/> 
