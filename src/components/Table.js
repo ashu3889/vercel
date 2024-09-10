@@ -29,7 +29,7 @@ function TableData({articles}) {
 
   const _handleKeyDown = (e)  => {
     console.log('e key is...' + e.key + '...e.target.value.trim()...' + e.target.value.trim());
-    alert('e key is...' + e.keyCode);
+    // alert('e key is...' + e.keyCode);
     if (e.key === 'Enter' || e.keyCode === 13 ) {
       console.log('do validate');
       setSearchedStock(e.target.value.trim());
