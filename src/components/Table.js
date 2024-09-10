@@ -52,7 +52,7 @@ function TableData({articles}) {
       </div>
 
       <div style={{ display: 'flex' }}>
-        <div style={{ flex: '1 1 auto', height: '100vh' }}>
+        <div style={{ flex: '1 1 auto', height: '60vh' }}>
             <AutoSizer>
               {({ height, width }) => (
                 <Table
@@ -71,8 +71,8 @@ function TableData({articles}) {
                 </Table>
               )}
             </AutoSizer>
-          </div>
         </div>
+      </div>
     </div>
   )
 }
