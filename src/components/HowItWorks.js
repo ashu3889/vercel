@@ -47,11 +47,9 @@ class HowItWorks extends React.Component {
 						
 						<h1 class="entry-title">Trading plan</h1>
 					  <div class="entry-content">
-              <p data-adtags-visited="true">Hello readers, Thanks for visiting my site</p>
-              <p data-adtags-visited="true">I would like to explain my trading plan in this short write-up. My trading system identifies the sideways setup and and if price shows weakness outside sideways range then it generates trigger. This helps is getting trade setup with great risk and reward ratio.</p>
-              <p data-adtags-visited="true"> Price trades in three directions, uptrend, downtrend and sideways.  If price breaks the sideways trend and shows weakness then it will likely move back to sideways range and that gives a good trading opportunity</p>
-              <p data-adtags-visited="true"> My trading system scans various markets (nasdaq 8500+ stocks, european , asian) daily and find the stocks which meets the setup rules. I am currently listing only nasdaq trades here but will other market results in the future</p>
-
+              <p data-adtags-visited="true">Hello readers, Thanks for visiting my site.</p>
+              <p data-adtags-visited="true"> This website lists the trades made by an algorithmic trading system that searches the different markets (the Nasdaq 8500+ stocks, European, and Asian stock markets) every day to identify the stocks that satisfy the trading setup rules.</p>
+              <p data-adtags-visited="true"> This algo setup identifies the stock which moves in sideways trend and waits for the price to break the sideways range. If price shows weakness outside sideways range then price will likely move back to sideways range and present an opportunity with good risk and reward ratio. This system detects that point of inflection and generate the triggers. </p>
             </div>
           </header>
         </div>
