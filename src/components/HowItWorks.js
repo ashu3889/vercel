@@ -43,51 +43,17 @@ class HowItWorks extends React.Component {
     return (
       <div className="auth-page">
         <div className="container page">
-          <div className="row">
+					<header class="entry-header">
+						
+						<h1 class="entry-title">Trading plan</h1>
+					  <div class="entry-content">
+              <p data-adtags-visited="true">Hello readers, Thanks for visiting my site</p>
+              <p data-adtags-visited="true">I would like to explain my trading plan in this short write-up. My trading system identifies the sideways setup and and if price shows weakness outside sideways range then it generates trigger. This helps is getting trade setup with great risk and reward ratio.</p>
+              <p data-adtags-visited="true"> Price trades in three directions, uptrend, downtrend and sideways.  If price breaks the sideways trend and shows weakness then it will likely move back to sideways range and that gives a good trading opportunity</p>
+              <p data-adtags-visited="true"> My trading system scans various markets (nasdaq 8500+ stocks, european , asian) daily and find the stocks which meets the setup rules. I am currently listing only nasdaq trades here but will other market results in the future</p>
 
-            <div className="col-md-6 offset-md-3 col-xs-12">
-              <h1 className="text-xs-center">Sign In</h1>
-              <p className="text-xs-center">
-                <Link to="/register">
-                  Need an account?
-                </Link>
-              </p>
-
-              <ListErrors errors={this.props.errors} />
-
-              <form onSubmit={this.submitForm(email, password)}>
-                <fieldset>
-
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="email"
-                      placeholder="Email"
-                      value={email}
-                      onChange={this.changeEmail} />
-                  </fieldset>
-
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={this.changePassword} />
-                  </fieldset>
-
-                  <button
-                    className="btn btn-lg btn-primary pull-xs-right"
-                    type="submit"
-                    disabled={this.props.inProgress}>
-                    Sign in
-                  </button>
-
-                </fieldset>
-              </form>
             </div>
-
-          </div>
+          </header>
         </div>
       </div>
     );
