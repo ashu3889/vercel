@@ -7,16 +7,37 @@ function TableData({articles}) {
   const [searchedStock, setSearchedStock] = React.useState('');
   const [dataArticle, setDataArticle] = React.useState([...articles]);
 
-  React.useEffect(() => {
-    if(searchedStock == '') {
+  const [inputValue, setInputValue] = React.useState("");
+  const [debouncedInputValue, setDebouncedInputValue] = React.useState("");
+
+  // React.useEffect(() => {
+  //   if(searchedStock == '') {
+  //     setDataArticle(articles);
+  //   }
+  //   else if(searchedStock.length> 0) {
+  //     const newData = articles.filter(a => a.scripName.toLowerCase().startsWith(searchedStock));
+  //     debugger;
+  //     setDataArticle(newData);
+  //   }
+  // }, [searchedStock]);
+
+    React.useEffect(() => {
+    if(debouncedInputValue == '') {
       setDataArticle(articles);
     }
-    else if(searchedStock.length> 0) {
-      const newData = articles.filter(a => a.scripName.toLowerCase().startsWith(searchedStock));
+    else if(debouncedInputValue.length> 0) {
+      const newData = articles.filter(a => a.scripName.toLowerCase().startsWith(debouncedInputValue));
       debugger;
       setDataArticle(newData);
     }
-  }, [searchedStock]);
+  }, [debouncedInputValue]);
+
+  React.useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setDebouncedInputValue(inputValue);
+    }, 500);
+    return () => clearTimeout(timeoutId);
+  }, [inputValue, 500]);
  
 
   // articles = articles.map((e) =>  {
@@ -39,6 +60,10 @@ function TableData({articles}) {
     }
   }
 
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
   return (
     <div class="wrapper">
       <div class="header">
@@ -47,7 +72,8 @@ function TableData({articles}) {
             type="text" 
             id="search_input" 
             placeholder="Filter table by stock name to check past result"
-            onKeyDown={_handleKeyDown}
+            // onKeyDown={_handleKeyDown}
+            onChange={handleInputChange}
           />
         </div>
       </div>
