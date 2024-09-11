@@ -27,7 +27,6 @@ function TableData({articles}) {
     }
     else if(debouncedInputValue.length> 0) {
       const newData = articles.filter(a => a.scripName.toLowerCase().startsWith(debouncedInputValue));
-      debugger;
       setDataArticle(newData);
     }
   }, [debouncedInputValue]);
@@ -66,7 +65,7 @@ function TableData({articles}) {
 
   return (
     <div class="wrapper">
-      <div class="header">
+      <div class="header search-input">
         <div class="search_box">
           <input 
             type="text" 
