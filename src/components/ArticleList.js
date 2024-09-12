@@ -21,10 +21,9 @@ const ArticleList = props => {
 
   if(props.articles.length > 0){
     // articleData = props.articles.sort((a, b) => new Date(b.date) - new Date(a.date)) ;
-    debugger;
     //articleData = props.articles.filter(a => a.tradeType !== "Sell").filter(a => a.globalHasRiskInsight > 0 && a.isNewIteration).sort((a, b) => new Date(b.date) - new Date(a.date)) ;
     //articleData = props.articles.filter(a => a.isNewIteration).filter(a => a.tradeType != "Sell").filter(a => parseInt(a.globalEbidt)> 0).sort((a, b) => new Date(b.date) - new Date(a.date)) ;
-    articleData = props.articles.filter(a => a.tradeType !== "Sell").filter(a => a.isNewIteration).filter(a => parseInt(a.globalEbidt)> 0).sort((a, b) => new Date(b.date) - new Date(a.date)) ;
+    articleData = props.articles.filter(a => a.tradeType !== "Sell");
 
     articleData = articleData.map((e) =>  {
       e['date'] = new Date(e.date).toLocaleDateString('en-GB', {

@@ -10,25 +10,52 @@ function TableData({articles}) {
   const [inputValue, setInputValue] = React.useState("");
   const [debouncedInputValue, setDebouncedInputValue] = React.useState("");
 
-  // debugger;
+  const [dropDownVal, setDropDownVal] = React.useState("us");
 
-  // React.useEffect(() => {
-  //   if(searchedStock == '') {
-  //     setDataArticle(articles);
-  //   }
-  //   else if(searchedStock.length> 0) {
-  //     const newData = articles.filter(a => a.scripName.toLowerCase().startsWith(searchedStock));
-  //     debugger;
-  //     setDataArticle(newData);
-  //   }
-  // }, [searchedStock]);
 
-    React.useEffect(() => {
+  const getDataBasedOnCountry = (data) => {
+    let modData = [];
+    if(dropDownVal == "us") {
+      modData = data.filter(x => {
+         if(x.exchange.toLowerCase() == "nasdaq" || x.exchange.toLowerCase() == "nyse" ) {
+          return true;
+         }
+         return false;
+      }).filter(a => a.isNewIteration).sort((a, b) => new Date(b.date) - new Date(a.date)) ;
+      return modData;
+     }
+     else if(dropDownVal == "ind") {
+      modData = data.filter(x => {
+        if(x.exchange.toLowerCase() == "nse" ) {
+         return true;
+        }
+        return false;
+     }).sort((a, b) => new Date(b.date) - new Date(a.date));
+     return modData;
+    }
+    return [];
+  }
+
+  React.useEffect(() => {
+    let data = getDataBasedOnCountry(articles);
+    setDataArticle(data);
+  }, [dropDownVal]);
+
+  React.useEffect(() => {
     if(debouncedInputValue == '') {
-      setDataArticle(articles);
+      let data = getDataBasedOnCountry(articles);
+      setDataArticle(data);
     }
     else if(debouncedInputValue.length> 0) {
-      const newData = articles.filter(a => a.scripName.toLowerCase().startsWith(debouncedInputValue));
+      // const newData = articles.filter(a => a.scripName.toLowerCase().startsWith(debouncedInputValue));
+      let data1 = getDataBasedOnCountry(articles);
+      console.log('data...' + JSON.stringify(data1));
+      const newData = data1.filter(a =>  {
+        if(a.scripName) {
+          return a.scripName.toLowerCase().startsWith(debouncedInputValue);
+        }
+        return false;
+      });
       setDataArticle(newData);
     }
   }, [debouncedInputValue]);
@@ -65,6 +92,11 @@ function TableData({articles}) {
     setInputValue(event.target.value);
   };
 
+  const change = (event) => {
+    // this.setState({setDropDownVal: event.target.value});
+    setDropDownVal(event.target.value);
+  };
+
   return (
     <div class="wrapper">
       <div class="header search-input">
@@ -76,6 +108,10 @@ function TableData({articles}) {
             // onKeyDown={_handleKeyDown}
             onChange={handleInputChange}
           />
+          <select  class="market-selector" id="lang" onChange={change} value={dropDownVal}>
+            <option value="us">US market</option>
+            <option value="ind">Indian market</option>
+          </select>
         </div>
       </div>
 
