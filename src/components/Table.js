@@ -10,6 +10,8 @@ function TableData({articles}) {
   const [inputValue, setInputValue] = React.useState("");
   const [debouncedInputValue, setDebouncedInputValue] = React.useState("");
 
+  // debugger;
+
   // React.useEffect(() => {
   //   if(searchedStock == '') {
   //     setDataArticle(articles);
