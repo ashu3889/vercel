@@ -26,8 +26,8 @@ function TableData({articles}) {
      }
      else if(dropDownVal == "ind") {
       modData = data.filter(x => {
-        if(x.exchange.toLowerCase() == "nse" ) {
-         return true;
+        if(x.exchange.toLowerCase() == "nse"  && x.scripName && x.scripName.trim().length > 0) {
+          return true;
         }
         return false;
      }).sort((a, b) => new Date(b.date) - new Date(a.date));
