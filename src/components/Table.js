@@ -109,8 +109,8 @@ function TableData({articles}) {
 
   return (
     <div class="wrapper">
-      <div class="header search-input">
-        <div class="search_box">
+      <div class="header search-input" style={{height: '150px'}}>
+        <div class="search_box" style={{height: '20px'}}>
           <input 
             type="text" 
             id="search_input" 
@@ -127,7 +127,7 @@ function TableData({articles}) {
         </div>
       </div>
 
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', marginTop: '20px' }}>
         <div style={{ flex: '1 1 auto', height: '60vh' }}>
             <AutoSizer>
               {({ height, width }) => (
