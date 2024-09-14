@@ -113,7 +113,7 @@ function TableData({articles}) {
           <input 
             type="text" 
             id="search_input" 
-            placeholder="Filter table by stock name to check past result"
+            placeholder="Search by stock name and backtest past results."
             // onKeyDown={_handleKeyDown}
             onChange={handleInputChange}
           />
