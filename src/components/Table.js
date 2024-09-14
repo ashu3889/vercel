@@ -33,6 +33,15 @@ function TableData({articles}) {
      }).sort((a, b) => new Date(b.date) - new Date(a.date));
      return modData;
     }
+    else if(dropDownVal == "luna") {
+      modData = data.filter(x => {
+        if(x.exchange.toLowerCase() == "coindcx" ) {
+         return true;
+        }
+        return false;
+     }).sort((a, b) => new Date(b.date) - new Date(a.date));
+     return modData;
+    }
     return [];
   }
 
@@ -111,6 +120,7 @@ function TableData({articles}) {
           <select  class="market-selector" id="lang" onChange={change} value={dropDownVal}>
             <option value="us">US market</option>
             <option value="ind">Indian market</option>
+            <option value="luna">Crypto</option>
           </select>
         </div>
       </div>
