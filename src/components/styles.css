@@ -241,6 +241,17 @@ body {
       display: none;
     }
 
+    .backtest-notes {
+      visibility: hidden;
+      clear: both;
+      float: left;
+      margin: 10px auto 5px 20px;
+      width: 28%;
+      display: none;
+    }
+
+
+
     .ReactVirtualized__Grid__innerScrollContainer {
       font-size: 10px !important;
     }
@@ -264,6 +275,14 @@ body {
     padding: 13px;
     margin-left: 20px;
     border-bottom: 2px solid #e5edfa;
+  }
+
+  .backtest-notes {
+    font-family: font-family Montserrat, sans-serif;
+    color: white;
+    font-size: 11px;
+    margin-top: 8px;
+    margin-left: 5px;
   }
 
 
