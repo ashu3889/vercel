@@ -25,8 +25,9 @@ function TableData({articles}) {
       return modData;
      }
      else if(dropDownVal == "ind") {
+       // BSE
       modData = data.filter(x => {
-        if(x.exchange.toLowerCase() == "nse"  && x.scripName && x.scripName.trim().length > 0) {
+        if((x.exchange.toLowerCase() == "nse" || x.exchange.toLowerCase() == "bse" )&& x.scripName && x.scripName.trim().length > 0) {
           return true;
         }
         return false;
