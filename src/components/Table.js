@@ -120,7 +120,7 @@ function TableData({articles}) {
           />
           <select  class="market-selector" id="lang" onChange={change} value={dropDownVal}>
             <option value="us">US market</option>
-            {/* <option value="ind">Indian market</option> */}
+            <option value="ind">Indian market</option>
             <option value="luna">Crypto</option>
           </select>
           <p class="backtest-notes"> Note: Last 4 year dataset will be published shortly for backtesting.</p>
