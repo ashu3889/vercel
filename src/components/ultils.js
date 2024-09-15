@@ -15,3 +15,12 @@ var uniq = names.reduce(function(a,b){
   },[]);
 
 console.log(uniq, names);
+
+
+///
+var b = a.filter(x => {
+    if ( x.exchange == "NSE" ||  x.exchange == "BSE" ) {
+        return false;
+    }
+    return true;
+})
