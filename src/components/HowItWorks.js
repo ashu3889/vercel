@@ -54,7 +54,7 @@ class HowItWorks extends React.Component {
               <ul style={{paddingLeft: 50}}>
                 <li style={{listStyle: 'auto'}}>Detects a sideways trend and draw sideways support and resistance line.</li>
                 <li style={{listStyle: 'auto'}}>Wait for price to break sideways range and check price strength post breakout.</li>
-                <li style={{listStyle: 'auto'}}>If price shows weakness, plan the entry, this will give a entry with good risk:reward ratio</li>
+                <li style={{listStyle: 'auto'}}>If price shows weakness, plan the entry, this will give an entry with good risk:reward ratio</li>
               </ul>
               <a href="mailto:algo_trader@tickerscanner.com"> 
                 Email:algo_trader@tickerscanner.com for any queries on algo.
