@@ -45,7 +45,7 @@ class HowItWorks extends React.Component {
         <div className="container page">
 					<header class="entry-header">
 						
-						<h2 class="entry-title">About</h2>
+						<h2 class="entry-title" style={{ fontFamily: 'Titillium Web'}}>About</h2>
 					  <div class="entry-content">
               <p data-adtags-visited="true">Hello readers, Thanks for visiting my site.</p>
               <p data-adtags-visited="true">
