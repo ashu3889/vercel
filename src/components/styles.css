@@ -159,7 +159,11 @@ body {
 
 .TableData {
   border: 2px solid gray;
-}  
+} 
+
+.search-input{
+  height: 150px;
+}
 
 /* .ReactVirtualized__Table__headerRow {
   border-bottom: 2px solid gray;
@@ -249,11 +253,15 @@ body {
 
   @media screen and (max-width: 900px) {
 
+    .search-input{
+      height: 90px;
+    }
+
     div.ReactVirtualized__Table__row :nth-child(4) {
       margin-right: 0px !important;
     }
 
-    .search-input {
+    #search_input {
       visibility: hidden;
       clear: both;
       float: left;
@@ -296,6 +304,7 @@ body {
     padding: 13px;
     margin-left: 20px;
     border-bottom: 2px solid #e5edfa;
+    outline: 1px solid white;
   }
 
   .direction-selector {
@@ -304,6 +313,7 @@ body {
     padding: 13px;
     margin-left: 20px;
     border-bottom: 2px solid #e5edfa;
+    outline: 1px solid white;
   }
 
   .backtest-notes {
