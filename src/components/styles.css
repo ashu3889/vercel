@@ -244,9 +244,13 @@ body {
       height: auto;
     }
 
-    /* .search_box {
-      height: 0px  !important;
-    } */
+    .search_box {
+      visibility: hidden;
+    }
+
+    .market-selector{
+      visibility: hidden;
+    }
 
     #search_input {
       visibility: hidden;
