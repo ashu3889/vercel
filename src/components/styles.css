@@ -205,7 +205,13 @@ body {
     padding: 15px 0;
   }
 
+  /* //     margin-right: -200px; */
+
   div.ReactVirtualized__Table__row :nth-child(4) {
+    margin-right: -200px !important;
+  }
+
+  div.ReactVirtualized__Table__row :nth-child(4) .buy {
     padding: 5px 20px;
     border-radius: 25px;
     max-width: 115px;
@@ -214,6 +220,16 @@ body {
     color: #0dbeb6;
     height: 30px;
   }
+
+  div.ReactVirtualized__Table__row :nth-child(4) .sell {
+    padding: 5px 20px;
+    border-radius: 25px;
+    max-width: 115px;
+    display: inline-block;
+    background: red;
+    color:  white;
+    height: 30px;
+  } 
 
   .ReactVirtualized__Table__headerColumn:nth-child(1) {
     width: 30%;
@@ -232,6 +248,11 @@ body {
   }
 
   @media screen and (max-width: 600px) {
+
+    div.ReactVirtualized__Table__row :nth-child(4) {
+      margin-right: 0px !important;
+    }
+
     .search-input {
       visibility: hidden;
       clear: both;

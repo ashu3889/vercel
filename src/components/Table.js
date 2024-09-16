@@ -135,15 +135,26 @@ function TableData({articles}) {
                   width={width}
                   height={height}
                   headerHeight={50}
-                  rowHeight={50}
+                  rowHeight={70}
                   rowCount={dataArticle.length}
                   sortBy='date'
                   sortDirection='ASC'
                   rowGetter={({ index }) => dataArticle[index]}>
-                  <Column label="Date" dataKey="date" />
-                  <Column label="Stock" dataKey="scripName" />
-                  <Column label="Exchange" dataKey="exchange" />
-                  <Column label="Signal" dataKey="tradeType"/> 
+                    <Column label="Date" dataKey="date" />
+                    <Column label="Stock" dataKey="scripName" />
+                    <Column label="Exchange" dataKey="exchange" />
+                    <Column label="Signal" dataKey="tradeType"
+                        cellRenderer={
+                          ({ cellData, rowIndex, dataKey }) => {
+                            if(cellData == "Buy" ) {
+                              return <span className="buy">{cellData}</span>
+                            }
+                            else if(cellData == "Sell" ) {
+                              return <span className="sell">{cellData}</span>
+                            }
+                          }
+                      }
+                    /> 
                 </Table>
               )}
             </AutoSizer>
