@@ -110,7 +110,7 @@ function TableData({articles}) {
   return (
     <div class="wrapper">
       <div class="header search-input" style={{height: '150px'}}>
-        <div class="search_box" style={{height: '20px'}}>
+        <div class="search_box">
           <input 
             type="text" 
             id="search_input" 

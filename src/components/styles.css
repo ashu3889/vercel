@@ -231,10 +231,22 @@ body {
     font-size: 12px !important;
   }
 
+  .search_box{
+    height: 20px;
+  }
+
   @media screen and (max-width: 600px) {
     .search-input {
       height: 80px !important;
     }
+
+    .search_box{
+      height: auto;
+    }
+
+    /* .search_box {
+      height: 0px  !important;
+    } */
 
     #search_input {
       visibility: hidden;
