@@ -11,22 +11,31 @@ function TableData({articles}) {
   const [debouncedInputValue, setDebouncedInputValue] = React.useState("");
 
   const [dropDownVal, setDropDownVal] = React.useState("us");
+  const [dropDownValTradetype, setDropDownValTradetype] = React.useState("buy");
+
 
 
   const getDataBasedOnCountry = (data) => {
-    let modData = [];
+    let modData = [...data];
+    if(dropDownValTradetype === "buy") {
+      modData = modData.filter(a => a.tradeType === "Buy");
+    }
+    else if(dropDownValTradetype === "sell"){
+      modData = modData.filter(a => a.tradeType === "Sell");
+    }
     if(dropDownVal == "us") {
-      modData = data.filter(x => {
+      // (a => a.tradeType !== "Sell");
+      modData = modData.filter(x => {
          if(x.exchange.toLowerCase() == "nasdaq" || x.exchange.toLowerCase() == "nyse" ) {
           return true;
          }
          return false;
       }).filter(a => a.isNewIteration).sort((a, b) => new Date(b.date) - new Date(a.date)) ;
       return modData;
-     }
-     else if(dropDownVal == "ind") {
+    }
+    else if(dropDownVal == "ind") {
        // BSE
-      modData = data.filter(x => {
+      modData = modData.filter(x => {
         if((x.exchange.toLowerCase() == "nse" || x.exchange.toLowerCase() == "bse" )&& x.scripName && x.scripName.trim().length > 0) {
           return true;
         }
@@ -35,7 +44,7 @@ function TableData({articles}) {
      return modData;
     }
     else if(dropDownVal == "luna") {
-      modData = data.filter(x => {
+      modData = modData.filter(x => {
         if(x.exchange.toLowerCase() == "coindcx" ) {
          return true;
         }
@@ -49,7 +58,12 @@ function TableData({articles}) {
   React.useEffect(() => {
     let data = getDataBasedOnCountry(articles);
     setDataArticle(data);
-  }, [dropDownVal]);
+  }, [dropDownVal, dropDownValTradetype]);
+
+  // React.useEffect(() => {
+  //   let data = getDataBasedOnCountry(articles);
+  //   setDataArticle(data);
+  // }, [dropDownValTradetype]);
 
   React.useEffect(() => {
     if(debouncedInputValue == '') {
@@ -107,6 +121,11 @@ function TableData({articles}) {
     setDropDownVal(event.target.value);
   };
 
+  const changeTradetype = (event) => {
+    // this.setState({setDropDownVal: event.target.value});
+    setDropDownValTradetype(event.target.value);
+  };
+
   return (
     <div class="wrapper">
       <div class="header search-input" style={{height: '150px'}}>
@@ -118,11 +137,17 @@ function TableData({articles}) {
             // onKeyDown={_handleKeyDown}
             onChange={handleInputChange}
           />
-          <select  class="market-selector" id="lang" onChange={change} value={dropDownVal}>
-            <option value="us">US market</option>
-            {/* <option value="ind">Indian market</option> */}
-            <option value="luna">Crypto</option>
-          </select>
+            <select  class="market-selector" id="lang" onChange={change} value={dropDownVal}>
+              <option value="us">US market</option>
+              {/* <option value="ind">Indian market</option> */}
+              <option value="luna">Crypto</option>
+            </select>
+            <select  class="direction-selector" id="lang" onChange={changeTradetype} value={dropDownValTradetype}>
+              <option value="buy">Long trades</option>
+              <option value="sell">Short trades</option>
+              {/* <option value="ind">Indian market</option> */}
+              <option value="both">Show both</option>
+            </select>
           <p class="backtest-notes"> Note: Last 4 year dataset will be published shortly for backtesting.</p>
         </div>
       </div>
