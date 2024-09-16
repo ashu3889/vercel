@@ -231,39 +231,14 @@ body {
     font-size: 12px !important;
   }
 
-  .search_box{
-    height: 20px;
-  }
-
   @media screen and (max-width: 600px) {
     .search-input {
-      height: 80px !important;
-    }
-
-    .search_box{
-      height: auto;
-    }
-
-    .search_box {
-      visibility: hidden;
-    }
-
-    .market-selector{
-      visibility: hidden;
-    }
-
-    #search_input {
       visibility: hidden;
       clear: both;
       float: left;
       margin: 10px auto 5px 20px;
       width: 28%;
       display: none;
-    }
-
-    .market-selector {
-      width: 50%;
-      height: 50px;
     }
 
     .backtest-notes {
@@ -300,8 +275,6 @@ body {
     padding: 13px;
     margin-left: 20px;
     border-bottom: 2px solid #e5edfa;
-    outline: 1px solid white;
-
   }
 
   .backtest-notes {
@@ -311,9 +284,3 @@ body {
     margin-top: 8px;
     margin-left: 5px;
   }
-
-
-
-
-
-
