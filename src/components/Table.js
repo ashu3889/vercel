@@ -119,6 +119,15 @@ function TableData({articles}) {
   const change = (event) => {
     // this.setState({setDropDownVal: event.target.value});
     setDropDownVal(event.target.value);
+
+    if(event.target.value === "ind") {
+      setDropDownValTradetype('buy');
+    }
+    if(event.target.value === "luna") {
+      setDropDownValTradetype('buy');
+    }
+
+
   };
 
   const changeTradetype = (event) => {
@@ -144,9 +153,8 @@ function TableData({articles}) {
             </select>
             <select  class="direction-selector" id="lang" onChange={changeTradetype} value={dropDownValTradetype}>
               <option value="buy">Long trades</option>
-              <option value="sell">Short trades</option>
-              {/* <option value="ind">Indian market</option> */}
-              <option value="both">Show both</option>
+              <option value="sell" disabled={(dropDownVal === "ind" || dropDownVal === "luna" ) ? true: false}>Short trades</option>
+              <option value="both" disabled={(dropDownVal === "ind" || dropDownVal === "luna" ) ? true: false}>Show both</option>
             </select>
           <p class="backtest-notes"> Note: Last 4 year dataset will be published shortly for backtesting.</p>
         </div>
