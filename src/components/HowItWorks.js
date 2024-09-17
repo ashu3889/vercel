@@ -59,6 +59,18 @@ class HowItWorks extends React.Component {
               <a href="mailto:algo_trader@tickerscanner.com"> 
                 Email:algo_trader@tickerscanner.com for any queries on algo.
               </a>
+              <p style={{fontSize: '15px', marginTop: '20px'}}> 
+                <a 
+                  id="follow-button" 
+                  target="_blank"
+                  class="btn_twitter" 
+                  title="Follow @trader_alg88109 on X"
+                  href="https://x.com/trader_alg88109"
+                >
+                  <i></i>
+                  <span class="label" id="l">Follow <b>@trader_alg88109</b></span>
+                </a>
+              </p>
             </div>
           </header>
         </div>
