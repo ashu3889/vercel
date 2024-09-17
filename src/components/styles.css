@@ -251,7 +251,7 @@ body {
     font-size: 12px !important;
   }
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 800px) {
 
     .search-input{
       height: 90px;
@@ -295,6 +295,15 @@ body {
 
     .footer-banner {
       font-size: 14px !important;
+    }
+
+    .market-selector {
+      width: 40%;
+    }
+
+    .direction-selector {
+      width: 40%;
+      margin-left: 10%;
     }
   }
 

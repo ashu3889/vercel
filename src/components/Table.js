@@ -37,7 +37,7 @@ function TableData({articles}) {
        // BSE
        // || x.exchange.toLowerCase() == "bse" 
       modData = modData.filter(x => {
-        if((x.exchange.toLowerCase() == "nse")&& x.scripName && x.scripName.trim().length > 0) {
+        if((x.exchange.toLowerCase() == "nse" )&& x.scripName && x.scripName.trim().length > 0) {
           return true;
         }
         return false;
@@ -121,9 +121,9 @@ function TableData({articles}) {
     // this.setState({setDropDownVal: event.target.value});
     setDropDownVal(event.target.value);
 
-    if(event.target.value === "ind") {
-      setDropDownValTradetype('buy');
-    }
+    // if(event.target.value === "ind") {
+    //   setDropDownValTradetype('buy');
+    // }
     if(event.target.value === "luna") {
       setDropDownValTradetype('buy');
     }
@@ -154,7 +154,7 @@ function TableData({articles}) {
             </select>
             <select  class="direction-selector" id="lang" onChange={changeTradetype} value={dropDownValTradetype}>
               <option value="buy">Long trades</option>
-              <option value="sell" disabled={(dropDownVal === "ind" || dropDownVal === "luna" ) ? true: false}>Short trades</option>
+              <option value="sell">Short trades</option>
               <option value="both" disabled={(dropDownVal === "ind" || dropDownVal === "luna" ) ? true: false}>Show both</option>
             </select>
           <p class="backtest-notes"> Note: Last 4 year dataset will be published shortly for backtesting.</p>
