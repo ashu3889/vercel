@@ -332,3 +332,15 @@ body {
     margin-top: 8px;
     margin-left: 5px;
   }
+
+  .btn_twitter {
+    position: relative;
+    height: 20px;
+    box-sizing: border-box;
+    padding: 1px 12px 1px 12px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 9999px;
+    font-weight: 500;
+    cursor: pointer;
+  }
