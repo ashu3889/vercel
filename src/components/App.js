@@ -8,6 +8,9 @@ import Article from '../components/Article';
 import Editor from '../components/Editor';
 import Home from '../components/Home';
 import HowItWorks from '../components/HowItWorks';
+import HowToUse from '../components/HowToUse';
+
+
 import Disclaimer from '../components/Disclaimer';
 import Profile from '../components/Profile';
 import ProfileFavorites from '../components/ProfileFavorites';
@@ -59,6 +62,7 @@ class App extends React.Component {
             <Switch>
             <Route exact path="/" component={Home}/>
             <Route path="/about" component={HowItWorks} />
+            <Route path="/how-to-use" component={HowToUse} />
             <Route path="/register" component={Register} />
             <Route path="/editor/:slug" component={Editor} />
             <Route path="/editor" component={Editor} />
