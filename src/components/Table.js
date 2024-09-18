@@ -157,7 +157,6 @@ function TableData({articles}) {
               <option value="sell" disabled={(dropDownVal === "ind" || dropDownVal === "luna" ) ? true: false} >Short trades</option>
               <option value="both" disabled={(dropDownVal === "ind" || dropDownVal === "luna" ) ? true: false}>Show both</option>
             </select>
-          <p class="backtest-notes"> Note: Last 4 year dataset will be published shortly for backtesting.</p>
         </div>
       </div>
 
