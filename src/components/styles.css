@@ -253,6 +253,12 @@ body {
 
   @media screen and (max-width: 800px) {
 
+    .scrip-table-container {
+      .scrip-table {
+        height: 200vh !important;
+      }
+    }
+
     .search-input{
       height: 90px;
     }
