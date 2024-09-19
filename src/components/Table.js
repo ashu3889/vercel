@@ -155,8 +155,8 @@ function TableData({articles}) {
               <option value="luna">Crypto</option>
             </select>
             <select  class="direction-selector" id="lang" onChange={changeTradetype} value={dropDownValTradetype}>
-              <option value="buy">Long trades</option>
-              <option value="sell" disabled={(dropDownVal === "ind" || dropDownVal === "luna" ) ? true: false} >Short trades</option>
+              <option value="buy">Buy</option>
+              <option value="sell" disabled={(dropDownVal === "ind" || dropDownVal === "luna" ) ? true: false} >Sell</option>
               <option value="both" disabled={(dropDownVal === "ind" || dropDownVal === "luna" ) ? true: false}>Show both</option>
             </select>
         </div>

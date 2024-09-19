@@ -49,7 +49,7 @@ class HowItWorks extends React.Component {
 					  <div class="entry-content">
               {/* <p style={{ fontFamily: 'Titillium Web'}}></p> */}
               <ul style={{paddingLeft: 50}}>
-                <li>1. Select the market ex. US Market and choose the trade type "Long(buy)" or "Short(sell)" in home page.</li>
+                <li>1. Select the market ex. US Market and choose the trade type "buy" or "sell" in home page.</li>
                 <li>2. Pick the latest stock and analyze the chart in tradingview.com</li>
                 <li>3. If risk and reward ratio is favourable, then plan entry and exit point should be 2% of the entry price. Goal is to take only 2% and exit. </li>
                 <li>4. This trade should ideally complete in  max 2-3 days considering the volume is sufficient. If not, then exit after 3 days and plan a entry in new stock (follow first step)</li>
