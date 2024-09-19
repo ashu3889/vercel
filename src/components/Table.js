@@ -136,7 +136,7 @@ function TableData({articles}) {
     setDropDownValTradetype(event.target.value);
   };
 
-  const MIN_TABLE_WIDTH = 600;
+  const MIN_TABLE_WIDTH = 500;
 
   return (
     <div class="wrapper">
@@ -167,7 +167,8 @@ function TableData({articles}) {
             <AutoSizer>
               {({ height, width }) => (
                 <Table
-                  width={width < MIN_TABLE_WIDTH ? MIN_TABLE_WIDTH : width}
+                  overflow={"scroll"}
+                  width={width}
                   height={height}
                   headerHeight={50}
                   rowHeight={70}
