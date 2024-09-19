@@ -163,7 +163,7 @@ function TableData({articles}) {
       </div>
 
       <div className="scrip-table-container" style={{ display: 'flex', marginTop: '20px' }}>
-        <div className="scrip-table" style={{ flex: '1 1 auto', height: '100vh' }}>
+        <div className="scrip-table" style={{ flex: '1 1 auto' ,height: '100vh' }}>
             <AutoSizer>
               {({ height, width }) => (
                 <Table
