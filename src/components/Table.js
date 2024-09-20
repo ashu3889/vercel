@@ -228,10 +228,7 @@ function TableData({articles}) {
                               <p style={{
                                 height: '7px',
                               }}> Signal </p>
-                              <p style={{
-                                fontWeight: 100,
-                                fontSize: '7px',
-                              }}> Disclaimer: This is informational only.
+                              <p className="disclaimer-text-grid"> Disclaimer: This is informational only.
                               <a style={{color: '#29a5d8'}} href="/disclaimer"> Learn more</a> </p>
                             </div>
                           )
