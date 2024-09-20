@@ -253,6 +253,13 @@ body {
 
   @media screen and (max-width: 800px) {
 
+    .about {
+      visibility: hidden;
+      clear: both;
+      float: left;
+      display: none;
+    }
+
     .scrip-table-container {
       .scrip-table {
         height: 200vh !important;
