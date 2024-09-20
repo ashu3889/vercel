@@ -64,7 +64,7 @@ body {
   height: 50px;
 }
 
-.table_wrap ul li .item .name,
+/* .table_wrap ul li .item .name,
 .table_wrap ul li .item .phone {
   width: 20%;
   padding: 0 15px;
@@ -87,9 +87,9 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
+} */
 
-.table_header ul li .item {
+/* .table_header ul li .item {
   border-bottom: 2px solid #eaeaea;
   font-weight: 600;
 }
@@ -138,7 +138,7 @@ body {
 .table_body ul li .item .canceled {
   background: #ffdbd6;
   color: #e87060;
-}
+} */
 
 
 
@@ -257,6 +257,18 @@ body {
   }
 
   @media screen and (max-width: 800px) {
+
+    .ReactVirtualized__Table__headerColumn:nth-child(1) {
+      width: 25%;
+    }
+  
+    .ReactVirtualized__Table__headerColumn:nth-child(2) {
+      width: 40%;
+    }
+  
+    .ReactVirtualized__Table__headerColumn:nth-child(3) {
+      width: 35%;
+    }
 
     .disclaimer-content {
       font-weight: 100,

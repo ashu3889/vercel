@@ -173,8 +173,8 @@ function TableData({articles}) {
                   headerHeight={50}
                   rowHeight={70}
                   rowCount={dataArticle.length}
-                  sortBy='date'
-                  sortDirection='ASC'
+                  // sortBy='date'
+                  // sortDirection='ASC'
                   rowGetter={({ index }) => dataArticle[index]}>
                     <Column label="Date" dataKey="date" />
                     <Column 
