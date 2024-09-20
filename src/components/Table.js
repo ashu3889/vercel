@@ -177,8 +177,29 @@ function TableData({articles}) {
                   sortDirection='ASC'
                   rowGetter={({ index }) => dataArticle[index]}>
                     <Column label="Date" dataKey="date" />
-                    <Column label="Stock" dataKey="scripName" />
-                    <Column label="Exchange" dataKey="exchange" />
+                    <Column 
+                      label="Stock" 
+                      dataKey="scripName" 
+                      cellRenderer={
+                        ({ cellData }) => {
+                          return <span className="stock-name-column">{cellData}</span>
+                        }
+                      }
+                    />
+                    <Column  
+                      className="exchange-row" 
+                      // label="Exchange" 
+                      dataKey="exchange" 
+                      headerRenderer = {
+                        () => {
+                          return (
+                            <div className="exchange-row-header" >
+                              Exchange
+                            </div>
+                          )
+                        }
+                      }
+                    />
                     <Column dataKey="tradeType"
                       cellRenderer={
                           ({ cellData, rowIndex, dataKey }) => {

@@ -251,7 +251,35 @@ body {
     font-size: 12px !important;
   }
 
+  .disclaimer-content {
+    font-weight: 100,
+    /* font-size: '7px', */
+  }
+
   @media screen and (max-width: 800px) {
+
+    .disclaimer-content {
+      font-weight: 100,
+      /* font-size: '3px', */
+    }
+
+    .stock-name-column {
+      margin-right: 30px;;
+    }
+
+    .exchange-row {
+      visibility: hidden;
+      clear: both;
+      float: left;
+      display: none;
+    }
+
+    .exchange-row-header {
+      visibility: hidden;
+      clear: both;
+      float: left;
+      display: none;
+    }
 
     .about {
       visibility: hidden;
