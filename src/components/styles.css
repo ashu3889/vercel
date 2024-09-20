@@ -263,6 +263,10 @@ body {
       /* font-size: '3px', */
     }
 
+    .stock-row-header {
+      margin-left: 50px;
+    }
+
     .stock-name-column {
       margin-right: 30px;;
     }

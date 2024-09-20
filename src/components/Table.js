@@ -178,7 +178,15 @@ function TableData({articles}) {
                   rowGetter={({ index }) => dataArticle[index]}>
                     <Column label="Date" dataKey="date" />
                     <Column 
-                      label="Stock" 
+                      headerRenderer = {
+                        () => {
+                          return (
+                            <div className="stock-row-header" >
+                              Stock
+                            </div>
+                          )
+                        }
+                      }
                       dataKey="scripName" 
                       cellRenderer={
                         ({ cellData }) => {
