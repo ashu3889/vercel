@@ -150,7 +150,7 @@ function TableData({articles}) {
             onChange={handleInputChange}
           />
             <select  class="market-selector" id="lang" onChange={change} value={dropDownVal}>
-              <option value="us">US market</option>
+              <option value="us">Nasdaq</option>
               <option value="ind">Indian market</option>
               <option value="luna">Crypto</option>
             </select>
