@@ -259,7 +259,7 @@ body {
   @media screen and (max-width: 800px) {
 
     .ReactVirtualized__Table__headerColumn:nth-child(1) {
-      width: 25%;
+      width: 30%;
     }
   
     .ReactVirtualized__Table__headerColumn:nth-child(2) {
@@ -267,7 +267,7 @@ body {
     }
   
     .ReactVirtualized__Table__headerColumn:nth-child(3) {
-      width: 35%;
+      width: 30%;
     }
 
     .disclaimer-content {
