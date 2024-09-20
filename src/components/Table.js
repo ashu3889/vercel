@@ -179,8 +179,8 @@ function TableData({articles}) {
                     <Column label="Date" dataKey="date" />
                     <Column label="Stock" dataKey="scripName" />
                     <Column label="Exchange" dataKey="exchange" />
-                    <Column label="Signal" dataKey="tradeType"
-                        cellRenderer={
+                    <Column dataKey="tradeType"
+                      cellRenderer={
                           ({ cellData, rowIndex, dataKey }) => {
                             if(cellData == "Buy" ) {
                               return <span className="buy">{cellData}</span>
@@ -189,6 +189,24 @@ function TableData({articles}) {
                               return <span className="sell">{cellData}</span>
                             }
                           }
+                      }
+                      headerRenderer = {
+                        () => {
+                          return (
+                            <div style={{
+                              height: '36px'
+                            }}>
+                              <p style={{
+                                height: '7px',
+                              }}> Signal </p>
+                              <p style={{
+                                fontWeight: 100,
+                                fontSize: '7px',
+                              }}> Disclaimer: This is informational only.
+                              <a style={{color: '#29a5d8'}} href="/disclaimer"> Learn more</a> </p>
+                            </div>
+                          )
+                        }
                       }
                     /> 
                 </Table>
