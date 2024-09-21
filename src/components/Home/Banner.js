@@ -11,7 +11,7 @@ const Banner = ({ appName, token }) => {
         <h1 className="logo-font" className="banner-appname">
           {appName.toLowerCase()}
         </h1>
-        <p className="banner-heading">An equities and crypto screener tool for professional traders and investors.</p>
+        <p className="banner-heading">A stock screener tool for professional traders and investors.</p>
       </div>
     </div>
   );
