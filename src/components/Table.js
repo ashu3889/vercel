@@ -149,11 +149,23 @@ function TableData({articles}) {
             // onKeyDown={_handleKeyDown}
             onChange={handleInputChange}
           />
+            <legend className="market-title-legend" style={{
+              display: 'contents',
+              color: 'white',
+              fontSize: '10px',
+              marginLeft: '10px'
+            }}>Select market</legend>
             <select  class="market-selector" id="lang" onChange={change} value={dropDownVal}>
               <option value="us">Nasdaq</option>
               <option value="ind">Indian market</option>
               <option value="luna">Crypto</option>
             </select>
+            <legend className="trade-title-legend" style={{
+              display: 'contents',
+              color: 'white',
+              fontSize: '10px',
+              marginLeft: '10px'
+            }}>Select trade</legend>
             <select  class="direction-selector" id="lang" onChange={changeTradetype} value={dropDownValTradetype}>
               <option value="buy">Buy</option>
               <option value="sell" disabled={(dropDownVal === "ind" || dropDownVal === "luna" ) ? true: false} >Sell</option>

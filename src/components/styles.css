@@ -35,12 +35,13 @@ body {
 .wrapper .search_box input {
   border: 0;
   border-bottom: 2px solid #e5edfa;
-  width: 50%;
+  width: 40%;
   outline: none;
   padding: 10px;
   background: transparent;
   color: #fff;
   font-size: 16px;
+  margin-right: 20px;
 }
 
 ::placeholder {
@@ -265,6 +266,17 @@ body {
 
   @media screen and (max-width: 800px) {
 
+    .wrapper .search_box input {
+      border: 0;
+      border-bottom: 2px solid #e5edfa;
+      width: 40%;
+      outline: none;
+      padding: 10px;
+      background: transparent;
+      color: #fff;
+      font-size: 16px;
+    }
+
     .disclaimer-text-grid {
       font-size: 5px;
       font-weight: 100;
@@ -293,6 +305,20 @@ body {
 
     .stock-name-column {
       margin-right: 30px;;
+    }
+
+    .market-title-legend {
+      visibility: hidden;
+      clear: both;
+      float: left;
+      display: none !important;
+    }
+
+    .trade-title-legend {
+      visibility: hidden;
+      clear: both;
+      float: left;
+      display: none !important;
     }
 
     .exchange-row {
@@ -383,6 +409,7 @@ body {
     margin-left: 20px;
     border-bottom: 1px solid #e5edfa;
     outline: 0.5px solid white;
+    margin-right: 20px;
   }
 
   .direction-selector {
