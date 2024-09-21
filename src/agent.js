@@ -5,7 +5,7 @@ const superagent = superagentPromise(_superagent, global.Promise);
 
 // const API_ROOT = 'https://djrytkwnujpltybvcpcu.supabase.co/rest/v1/result';
 
-const API_ROOT = 'https://gvvvybsctuddylxfiecz.supabase.co/rest/v1/test_data';
+const API_ROOT = 'https://gvvvybsctuddylxfiecz.supabase.co/rest/v1/result';
 
 const encode = encodeURIComponent;
 const responseBody = res => res.body;2222
