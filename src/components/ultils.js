@@ -24,3 +24,14 @@ var b = a.filter(x => {
     }
     return true;
 })
+
+var b = a.filter(x => {
+    var date1 = new Date(x.date);
+    var month = date1.getMonth();
+    var date = date1.getDate();
+    var year = date1.getFullYear();
+    if(year === 2024 &&  date >=19 && month ==8){
+        return true;
+    }
+    return false;
+})
