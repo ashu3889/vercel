@@ -37,7 +37,7 @@ function TableData({articles}) {
        // BSE
        // || x.exchange.toLowerCase() == "bse" 
       modData = modData.filter(x => {
-        if((x.exchange.toLowerCase() == "nse"  || x.exchange.toLowerCase() == "bse"  )&& x.scripName && x.scripName.trim().length > 0) {
+        if((x.exchange.toLowerCase() == "nse"  )&& x.scripName && x.scripName.trim().length > 0) {
           return true;
         }
         return false;
