@@ -403,8 +403,8 @@ body {
   }
 
   .market-selector {
-    background: #29a5d8;
-    color: white;
+    /* background: #29a5d8;
+    color: white; */
     padding: 13px;
     margin-left: 20px;
     border-bottom: 1px solid #e5edfa;
@@ -413,8 +413,8 @@ body {
   }
 
   .direction-selector {
-    background: #29a5d8;
-    color: white;
+    /* background: #29a5d8;
+    color: white; */
     padding: 13px;
     margin-left: 20px;
     border-bottom: 1px solid #e5edfa;
