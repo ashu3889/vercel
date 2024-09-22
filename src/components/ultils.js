@@ -35,3 +35,17 @@ var b = a.filter(x => {
     }
     return false;
 })
+
+
+var b = a.filter(x => {
+    if(
+        x.exchange.toLowerCase() !== "nyse" ||
+        x.exchange.toLowerCase() !== "nasdaq" ||
+        x.exchange.toLowerCase() !== "coindcx" ||
+        x.exchange.toLowerCase() !== "nse" ||
+        x.exchange.toLowerCase() !== "bse"
+    ){
+        return true;
+    }
+    return false
+})

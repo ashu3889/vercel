@@ -75,38 +75,38 @@ function TableData({articles}) {
      }).sort((a, b) => new Date(b.date) - new Date(a.date));
      return modData;
     }
-    else if(dropDownVal !== "us" &&  dropDownVal !== "ind"  && dropDownVal !== "luna") {
-      modData = modData.filter(x => {
-        if((x.exchange == dropDownVal) && x.scripName && x.scripName.trim().length > 0) {
-          return true;
-        }
-        return false;
-     }).sort((a, b) => new Date(b.date) - new Date(a.date));
-     return modData;
-    }
-    // else if(dropDownVal == "euro") {
+    // else if(dropDownVal !== "us" &&  dropDownVal !== "ind"  && dropDownVal !== "luna") {
     //   modData = modData.filter(x => {
-    //     if(
-    //       x.exchange.toLowerCase() !== "coindcx" && 
-    //       x.exchange.toLowerCase() !== "nse" &&
-    //       x.exchange.toLowerCase() !== "bse" &&
-    //       x.exchange.toLowerCase() !=="nasdaq" &&
-    //       x.exchange.toLowerCase()  !== "nyse"
-    //     ) {
-    //      return true;
+    //     if((x.exchange == dropDownVal) && x.scripName && x.scripName.trim().length > 0) {
+    //       return true;
     //     }
     //     return false;
     //  }).sort((a, b) => new Date(b.date) - new Date(a.date));
-    //   // if() {
-
-    //   // }
-    //   var exchange =  modData.map(x => x.exchange);
-    //   var exchangeArray = exchange.filter(function(item, pos) {
-    //   return exchange.indexOf(item) == pos;
-    //   })
-    //  debugger;
     //  return modData;
     // }
+    else if(dropDownVal == "euro") {
+      modData = modData.filter(x => {
+        if(
+          x.exchange.toLowerCase() !== "coindcx" && 
+          x.exchange.toLowerCase() !== "nse" &&
+          x.exchange.toLowerCase() !== "bse" &&
+          x.exchange.toLowerCase() !=="nasdaq" &&
+          x.exchange.toLowerCase()  !== "nyse"
+        ) {
+         return true;
+        }
+        return false;
+     }).sort((a, b) => new Date(b.date) - new Date(a.date));
+      // if() {
+
+      // }
+      var exchange =  modData.map(x => x.exchange);
+      var exchangeArray = exchange.filter(function(item, pos) {
+      return exchange.indexOf(item) == pos;
+      })
+
+     return modData;
+    }
     return [];
   }
 
@@ -213,6 +213,7 @@ function TableData({articles}) {
               <option value="us">Nasdaq</option>
               <option value="ind">Indian market</option>
               <option value="luna">Crypto</option>
+              <option value="euro">Global markets</option>
               {/* <option value="London">London</option>
               <option value="Singapore">Singapore</option>
               <option value="Hong Kong">Hong Kong</option>
