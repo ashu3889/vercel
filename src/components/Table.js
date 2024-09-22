@@ -173,8 +173,8 @@ function TableData({articles}) {
             <select  class="market-selector" id="lang" onChange={change} value={dropDownVal}>
               <option value="us">Nasdaq</option>
               <option value="ind">Indian market</option>
-              <option value="luna">Crypto</option>
               <option value="euro">Global markets</option>
+              <option value="luna">Crypto</option>
             </select>
             <legend className="trade-title-legend" style={{
               display: 'contents',
