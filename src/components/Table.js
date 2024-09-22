@@ -213,7 +213,7 @@ function TableData({articles}) {
               <option value="us">Nasdaq</option>
               <option value="ind">Indian market</option>
               <option value="luna">Crypto</option>
-              <option value="London">London</option>
+              {/* <option value="London">London</option>
               <option value="Singapore">Singapore</option>
               <option value="Hong Kong">Hong Kong</option>
               <option value="Tokyo">Tokyo</option>
@@ -229,12 +229,7 @@ function TableData({articles}) {
               <option value="Seoul">Seoul</option>
               <option value="Brussels">Brussels</option>
               <option value="Vienna">Vienna</option>
-              <option value="Mexico">Mexico</option>
-              {
-                exchangeArrayList.map((y) => {
-                  
-                })
-              }
+              <option value="Mexico">Mexico</option> */}
             </select>
             <legend className="trade-title-legend" style={{
               display: 'contents',
