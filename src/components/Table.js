@@ -168,7 +168,7 @@ function TableData({articles}) {
   }
 
   const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+    setInputValue(event.target.value.toLowerCase());
   };
 
   const change = (event) => {
