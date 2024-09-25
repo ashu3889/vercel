@@ -40,7 +40,7 @@ function TableData({articles}) {
   const getDataBasedOnCountry = (data) => {
     let modData = [...data];
     if(dropDownValTradetype === "buy") {
-      modData = modData.filter(a => a.tradeType === "Buy");
+      modData = modData.filter(a => a.tradeType === "Buy" ||  a.tradeType === "'Buy'::character varying");
     }
     else if(dropDownValTradetype === "sell"){
       modData = modData.filter(a => a.tradeType === "Sell");
