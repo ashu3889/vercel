@@ -58,6 +58,8 @@ function TableData({articles}) {
     else if(dropDownVal == "ind") {
        // BSE
        // || x.exchange.toLowerCase() == "bse" 
+
+      modData = modData.filter( a.tradeType !== "'Buy'::character varying");
       modData = modData.filter(x => {
         if((x.exchange.toLowerCase() == "nse"  )&& x.scripName && x.scripName.trim().length > 0) {
           return true;
