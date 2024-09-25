@@ -59,7 +59,7 @@ function TableData({articles}) {
        // BSE
        // || x.exchange.toLowerCase() == "bse" 
 
-      modData = modData.filter( a.tradeType !== "'Buy'::character varying");
+      modData = modData.filter( x => x.tradeType !== "'Buy'::character varying");
       modData = modData.filter(x => {
         if((x.exchange.toLowerCase() == "nse"  )&& x.scripName && x.scripName.trim().length > 0) {
           return true;
