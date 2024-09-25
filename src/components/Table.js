@@ -213,7 +213,7 @@ function TableData({articles}) {
             }}>Select market</legend>
             <select  class="market-selector" id="lang" onChange={change} value={dropDownVal}>
               <option value="us">Nasdaq</option>
-              <option value="ind">Indian market</option>
+              {/* <option value="ind">Indian market</option> */}
               <option value="luna">Crypto</option>
               <option value="euro">Global markets</option>
               {/* <option value="London">London</option>
