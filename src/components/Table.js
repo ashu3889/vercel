@@ -295,8 +295,8 @@ function TableData({articles}) {
                     <Column dataKey="tradeType"
                       cellRenderer={
                           ({ cellData, rowIndex, dataKey }) => {
-                            if(cellData == "Buy" ) {
-                              return <span className="buy">{cellData}</span>
+                            if(cellData == "Buy" || cellData == "'Buy'::character varying" ) {
+                              return <span className="buy">Buy</span>
                             }
                             else if(cellData == "Sell" ) {
                               return <span className="sell">{cellData}</span>
