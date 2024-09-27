@@ -301,7 +301,7 @@ class OhlcChart extends Component {
     if(this.state.isGraphDataAvailable === false) {
       return (
         <div>
-          No chart data available.
+          Chart data is not available.
         </div>
       )
     }
