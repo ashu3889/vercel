@@ -275,6 +275,24 @@ class OhlcChart extends Component {
       series.events.once('datavalidated', (ev) => {
         ev.target.get('xAxis').zoom(0.9, 1,);
       });
+
+      var copyright = chart.plotContainer.children.push(am5.Label.new(root, {
+        text: "Copyright amCharts",
+        x: 10,
+        y: am5.p100,
+        centerY: am5.p100,
+        dy: 10
+      }));
+      
+      var logo = chart.plotContainer.children.push(am5.Picture.new(root, {
+        src: "https://assets.codepen.io/t-160/amcharts_light.svg",
+        width: 100,
+        x: am5.p100,
+        centerX: am5.p100,
+        dx: -10,
+        y: am5.p100,
+        centerY: am5.p100
+      }));
    
       series.appear(1000);
       chart.appear(1000, 100);
