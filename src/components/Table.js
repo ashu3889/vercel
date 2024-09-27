@@ -1,21 +1,16 @@
 import React from 'react';
 import { Column, Table, AutoSizer } from 'react-virtualized';
 import { Link } from 'react-router-dom';
-
-
 import './styles.css';
 import 'react-virtualized/styles.css';
 
 function TableData({articles}) {
   const [searchedStock, setSearchedStock] = React.useState('');
   const [dataArticle, setDataArticle] = React.useState([...articles]);
-
   const [inputValue, setInputValue] = React.useState("");
   const [debouncedInputValue, setDebouncedInputValue] = React.useState("");
-
   const [dropDownVal, setDropDownVal] = React.useState("us");
   const [dropDownValTradetype, setDropDownValTradetype] = React.useState("buy");
-
   var exchangeArrayList = [
     "London",
     "Xetra",
@@ -37,39 +32,31 @@ function TableData({articles}) {
     "Mexico",
     "Madrid"
   ];
-
-
-
   const getDataBasedOnCountry = (data) => {
     let modData = [...data];
     if(dropDownValTradetype === "buy") {
-      modData = modData.filter(a => a.tradeType === "Buy" ||  a.tradeType === "'Buy'::character varying");
+      modData = modData.filter(a1 => a1.tradeType === "Buy" ||  a1.tradeType === "'Buy'::character varying");
     }
     else if(dropDownValTradetype === "sell"){
-      modData = modData.filter(a => a.tradeType === "Sell");
+      modData = modData.filter(a2 => a2.tradeType === "Sell");
     }
     if(dropDownVal == "us") {
-      // (a => a.tradeType !== "Sell");
       modData = modData.filter(x => {
          if(x.exchange.toLowerCase() == "nasdaq" || x.exchange.toLowerCase() == "nyse" ) {
           return true;
          }
          return false;
-      }).filter(a => a.isNewIteration).sort((a, b) => new Date(b.date) - new Date(a.date)) ;
+      }).filter(a3 => a3.isNewIteration).sort((a4, b) => new Date(b.date) - new Date(a4.date)) ;
       return modData;
     }
     else if(dropDownVal == "ind") {
-       // BSE
-       // || x.exchange.toLowerCase() == "bse" 
-
-      // modData = modData.filter( x => x.tradeType !== "'Buy'::character varying");
       modData = modData.filter(x => x.breakingFix);
       modData = modData.filter(x => {
         if((x.exchange.toLowerCase() == "nse" || x.exchange.toLowerCase() == "bse" )&& x.scripName && x.scripName.trim().length > 0) {
           return true;
         }
         return false;
-     }).sort((a, b) => new Date(b.date) - new Date(a.date));
+     }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
      return modData;
     }
     else if(dropDownVal == "luna") {
@@ -78,18 +65,9 @@ function TableData({articles}) {
          return true;
         }
         return false;
-     }).sort((a, b) => new Date(b.date) - new Date(a.date));
+     }).sort((a6, b) => new Date(b.date) - new Date(a6.date));
      return modData;
     }
-    // else if(dropDownVal !== "us" &&  dropDownVal !== "ind"  && dropDownVal !== "luna") {
-    //   modData = modData.filter(x => {
-    //     if((x.exchange == dropDownVal) && x.scripName && x.scripName.trim().length > 0) {
-    //       return true;
-    //     }
-    //     return false;
-    //  }).sort((a, b) => new Date(b.date) - new Date(a.date));
-    //  return modData;
-    // }
     else if(dropDownVal == "euro") {
       modData = modData.filter(x => {
         if(
@@ -102,7 +80,7 @@ function TableData({articles}) {
          return true;
         }
         return false;
-     }).sort((a, b) => new Date(b.date) - new Date(a.date));
+     }).sort((a7, b) => new Date(b.date) - new Date(a7.date));
       // if() {
 
       // }
@@ -132,12 +110,10 @@ function TableData({articles}) {
       setDataArticle(data);
     }
     else if(debouncedInputValue.length> 0) {
-      // const newData = articles.filter(a => a.scripName.toLowerCase().startsWith(debouncedInputValue));
       let data1 = getDataBasedOnCountry(articles);
-      console.log('data...' + JSON.stringify(data1));
-      const newData = data1.filter(a =>  {
-        if(a.scripName) {
-          return a.scripName.toLowerCase().startsWith(debouncedInputValue);
+      const newData = data1.filter(a8 =>  {
+        if(a8.scripName) {
+          return a8.scripName.toLowerCase().startsWith(debouncedInputValue);
         }
         return false;
       });
