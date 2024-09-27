@@ -16,6 +16,8 @@ import Profile from '../components/Profile';
 import ProfileFavorites from '../components/ProfileFavorites';
 import Register from '../components/Register';
 import Settings from '../components/Settings';
+import OhlcChart from './ohlc';
+
 import { store } from '../store';
 import { push } from 'react-router-redux';
 
@@ -71,6 +73,7 @@ class App extends React.Component {
             <Route path="/@:username/favorites" component={ProfileFavorites} />
             <Route path="/@:username" component={Profile} />
             <Route path="/disclaimer" component={Disclaimer} />
+            <Route path="/ohlc" component={OhlcChart} />
             </Switch>
         </div>
       );

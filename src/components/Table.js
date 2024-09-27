@@ -1,5 +1,8 @@
 import React from 'react';
 import { Column, Table, AutoSizer } from 'react-virtualized';
+import { Link } from 'react-router-dom';
+
+
 import './styles.css';
 import 'react-virtualized/styles.css';
 
@@ -59,9 +62,10 @@ function TableData({articles}) {
        // BSE
        // || x.exchange.toLowerCase() == "bse" 
 
-      modData = modData.filter( x => x.tradeType !== "'Buy'::character varying");
+      // modData = modData.filter( x => x.tradeType !== "'Buy'::character varying");
+      modData = modData.filter(x => x.breakingFix);
       modData = modData.filter(x => {
-        if((x.exchange.toLowerCase() == "nse"  )&& x.scripName && x.scripName.trim().length > 0) {
+        if((x.exchange.toLowerCase() == "nse" || x.exchange.toLowerCase() == "bse" )&& x.scripName && x.scripName.trim().length > 0) {
           return true;
         }
         return false;
@@ -213,7 +217,7 @@ function TableData({articles}) {
             }}>Select market</legend>
             <select  class="market-selector" id="lang" onChange={change} value={dropDownVal}>
               <option value="us">Nasdaq</option>
-              {/* <option value="ind">Indian market</option> */}
+              <option value="ind">Indian market</option>
               <option value="luna">Crypto</option>
               <option value="euro">Global markets</option>
               {/* <option value="London">London</option>
@@ -257,7 +261,7 @@ function TableData({articles}) {
                   width={width}
                   height={height}
                   headerHeight={50}
-                  rowHeight={70}
+                  rowHeight={80}
                   rowCount={dataArticle.length}
                   // sortBy='date'
                   // sortDirection='ASC'
@@ -297,8 +301,16 @@ function TableData({articles}) {
                     <Column dataKey="tradeType"
                       cellRenderer={
                           ({ cellData, rowIndex, dataKey }) => {
+                            var navLink = "/ohlc/" + dataArticle[rowIndex].code;
                             if(cellData == "Buy" || cellData == "'Buy'::character varying" ) {
-                              return <span className="buy">Buy</span>
+                              return (
+                                <div> 
+                                   <span className="buy">Buy</span>
+                                    <Link to={navLink} className="nav-link" style={{display: 'block'}}>
+                                       View chart
+                                    </Link>
+                                </div>
+                              )
                             }
                             else if(cellData == "Sell" ) {
                               return <span className="sell">{cellData}</span>
@@ -321,6 +333,18 @@ function TableData({articles}) {
                         }
                       }
                     /> 
+                    {/* <Column dataKey="viewChart"
+                      cellRenderer={
+                          ({ cellData, rowIndex, dataKey }) => {
+                            return <span style={{ fontSize: '10px'}}>View Chart</span>
+                          }
+                      }
+                      headerRenderer = {
+                        () => {
+                          return <span style={{ fontSize: '10px'}}>View Chart</span>
+                        }
+                      }
+                    />  */}
                 </Table>
               )}
             </AutoSizer>

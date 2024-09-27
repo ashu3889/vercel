@@ -2,6 +2,7 @@ import ArticlePreview from './ArticlePreview';
 import ListPagination from './ListPagination';
 import React from 'react';
 import TableData from './Table';
+import OhlcChart from './ohlc';
 
 const ArticleList = props => {
   let articleData = [];
