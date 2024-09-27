@@ -1,13 +1,13 @@
 {
-  "main.css": "/cspine/trunk/hplabs/build/static/css/main.10d6322a.chunk.css",
-  "main.js": "/cspine/trunk/hplabs/build/static/js/main.276520be.chunk.js",
-  "main.js.map": "/cspine/trunk/hplabs/build/static/js/main.276520be.chunk.js.map",
-  "runtime~main.js": "/cspine/trunk/hplabs/build/static/js/runtime~main.ff3f8ac2.js",
-  "runtime~main.js.map": "/cspine/trunk/hplabs/build/static/js/runtime~main.ff3f8ac2.js.map",
-  "static/js/2.987f9d5e.chunk.js": "/cspine/trunk/hplabs/build/static/js/2.987f9d5e.chunk.js",
-  "static/js/2.987f9d5e.chunk.js.map": "/cspine/trunk/hplabs/build/static/js/2.987f9d5e.chunk.js.map",
-  "index.html": "/cspine/trunk/hplabs/build/index.html",
-  "precache-manifest.5e411e69087736e5e673694bf215a636.js": "/cspine/trunk/hplabs/build/precache-manifest.5e411e69087736e5e673694bf215a636.js",
-  "service-worker.js": "/cspine/trunk/hplabs/build/service-worker.js",
-  "static/css/main.10d6322a.chunk.css.map": "/cspine/trunk/hplabs/build/static/css/main.10d6322a.chunk.css.map"
+  "files": {
+    "main.css": "/static/css/main.66361878.css",
+    "main.js": "/static/js/main.27cb7760.js",
+    "index.html": "/index.html",
+    "main.66361878.css.map": "/static/css/main.66361878.css.map",
+    "main.27cb7760.js.map": "/static/js/main.27cb7760.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.66361878.css",
+    "static/js/main.27cb7760.js"
+  ]
 }
