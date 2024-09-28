@@ -53,6 +53,8 @@ class OhlcChart extends Component {
       let sidewaysEntryPoint = response[0].sidewaysData.sidewaysLowBlackPoint;
       var tradeDate = +new Date(response[0].sidewaysData.tradeDate);
 
+      debugger;
+
       // Create root element
       // https://www.amcharts.com/docs/v5/getting-started/#Root_element
       var root = am5.Root.new("chartdiv");
