@@ -13,6 +13,7 @@ class OhlcChart extends Component {
     super();
     this.state = {
       isGraphDataAvailable: null,
+      scripName: null,
     };
   }
   componentDidMount() {
@@ -48,14 +49,14 @@ class OhlcChart extends Component {
       this.setState({ isGraphDataAvailable: true});
       const scripName = response[0].scripName;
 
+      this.setState({
+        scripName: response[0].scripName
+      });
+
       let sidewaysStart = response[0].sidewaysData.sidewaysEndTick;
       let sidewaysEndtick = response[0].sidewaysData.sidewaysStartTick;
       let sidewaysEntryPoint = response[0].sidewaysData.sidewaysLowBlackPoint;
       var tradeDate = +new Date(response[0].sidewaysData.tradeDate);
-
-      debugger;
-
-  
 
       // Create root element
       // https://www.amcharts.com/docs/v5/getting-started/#Root_element
@@ -86,18 +87,18 @@ class OhlcChart extends Component {
           wheelZoomPositionX: 1
       }));
 
-      chart.children.unshift(am5.Label.new(root, {
-        text: scripName,
-        fontSize: 14,
-        fontWeight: "bold",
-        textAlign: "center",
-        marginBottom: "300px",
-        x: am5.percent(10),
-        // centerX: am5.percent(50),
-        y: am5.percent(10),
-        paddingTop: 0,
-        paddingBottom: 0
-      }));
+      // chart.children.unshift(am5.Label.new(root, {
+      //   text: scripName,
+      //   fontSize: 14,
+      //   fontWeight: "bold",
+      //   textAlign: "center",
+      //   marginBottom: "300px",
+      //   x: am5.percent(10),
+      //   // centerX: am5.percent(50),
+      //   y: am5.percent(10),
+      //   paddingTop: 0,
+      //   paddingBottom: 0
+      // }));
 
       // var title = chart.title();
       // title.enabled(true);
@@ -320,9 +321,23 @@ class OhlcChart extends Component {
       // // https://www.amcharts.com/docs/v5/charts/stock/#Setting_main_series
       // chart.set("stockSeries", valueSeries);
 
+      debugger;
 
+      var startData = response[0].jsonData.filter(x => x.High === sidewaysStart || x.Low === sidewaysStart);
+      let zoomIndex = 0.95;
+      if(startData.length > 0) {
+        // get index
+        let lengthOfArray = response[0].jsonData.length;
+        let indexData = response[0].jsonData.map(x => + new Date(x.Date)).indexOf(+ new Date(startData[0].Date));
+        zoomIndex = (lengthOfArray-indexData)/indexData;
+        zoomIndex = zoomIndex*1.2;
+        zoomIndex = 1-zoomIndex;
+      }
+
+
+ 
       series.events.once('datavalidated', (ev) => {
-        ev.target.get('xAxis').zoom(0.95, 1,);
+        ev.target.get('xAxis').zoom(zoomIndex, 1,);
       });
 
       var copyright = chart.plotContainer.children.push(am5.Label.new(root, {
@@ -374,11 +389,15 @@ class OhlcChart extends Component {
     }
     return (
        <div>
+            <p style={{
+              textAlign: "center",
+              fontWeight: 'bold'
+            }}> {this.state.scripName} </p>
             <div
                 id="chartcontrols"
                 style={{ height: "auto", padding: "5px 45px 0 15px" }}
             ></div>
-            <div id="chartdiv" style={{ width: "100%", height: "500px" }}>
+              <div id="chartdiv" style={{ width: "100%", height: "500px" }}>
             </div>
        </div>
     )
