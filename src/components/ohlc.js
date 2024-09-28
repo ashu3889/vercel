@@ -228,7 +228,7 @@ class OhlcChart extends Component {
       seriesRangeDataItem3.get("label").setAll({
         location:0,
         visible:true,
-        text:"sideways boundary",
+        text:"sideways range",
         inside:true,
         centerX:0,
         centerY:am5.p100,
