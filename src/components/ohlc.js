@@ -328,7 +328,7 @@ class OhlcChart extends Component {
       if(startData.length > 0) {
         // get index
         let lengthOfArray = response[0].jsonData.length;
-        let indexData = response[0].jsonData.map(x => + new Date(x.Date)).indexOf(+ new Date(startData[0].Date));
+        let indexData = response[0].jsonData.map(x => + new Date(x.Date)).indexOf(+ new Date(startData[startData.length -1].Date));
         zoomIndex = (lengthOfArray-indexData)/indexData;
         zoomIndex = zoomIndex*1.2;
         zoomIndex = 1-zoomIndex;
