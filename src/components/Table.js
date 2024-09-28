@@ -282,9 +282,9 @@ function TableData({articles}) {
                               return (
                                 <div> 
                                    <span className="buy">Buy</span>
-                                    {/* <Link to={navLink} className="nav-link" style={{display: 'block'}}>
+                                    <Link to={navLink} className="nav-link" style={{display: 'block'}}>
                                        View chart
-                                    </Link> */}
+                                    </Link>
                                 </div>
                               )
                             }

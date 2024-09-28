@@ -53,7 +53,7 @@ class OhlcChart extends Component {
       let sidewaysEntryPoint = response[0].sidewaysData.sidewaysLowBlackPoint;
       var tradeDate = +new Date(response[0].sidewaysData.tradeDate);
 
-      debugger;
+  
 
       // Create root element
       // https://www.amcharts.com/docs/v5/getting-started/#Root_element
@@ -84,7 +84,22 @@ class OhlcChart extends Component {
           wheelZoomPositionX: 1
       }));
 
+      chart.children.unshift(am5.Label.new(root, {
+        text: scripName,
+        fontSize: 25,
+        fontWeight: "500",
+        textAlign: "center",
+        marginBottom: "300px",
+        x: am5.percent(20),
+        // centerX: am5.percent(50),
+        y: am5.percent(20),
+        paddingTop: 0,
+        paddingBottom: 0
+      }));
 
+      // var title = chart.title();
+      // title.enabled(true);
+      // title.text(scripName);
 
 
       // Add cursor
