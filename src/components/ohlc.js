@@ -88,13 +88,13 @@ class OhlcChart extends Component {
 
       chart.children.unshift(am5.Label.new(root, {
         text: scripName,
-        fontSize: 25,
-        fontWeight: "500",
+        fontSize: 14,
+        fontWeight: "bold",
         textAlign: "center",
         marginBottom: "300px",
-        x: am5.percent(20),
+        x: am5.percent(10),
         // centerX: am5.percent(50),
-        y: am5.percent(20),
+        y: am5.percent(10),
         paddingTop: 0,
         paddingBottom: 0
       }));
@@ -200,7 +200,8 @@ class OhlcChart extends Component {
           inside:true,
           centerX:0,
           centerY:am5.p100,
-          fontWeight:"bold"
+          fontSize: 14,
+          fontWeight: "normal",
       });
 
 
@@ -226,11 +227,12 @@ class OhlcChart extends Component {
       seriesRangeDataItem3.get("label").setAll({
         location:0,
         visible:true,
-        text:"sideways range",
+        text:"sideways boundary",
         inside:true,
         centerX:0,
         centerY:am5.p100,
-        fontWeight:"bold"
+        fontSize: 14,
+        fontWeight: "normal",
       });      
 
 
@@ -259,11 +261,12 @@ class OhlcChart extends Component {
         seriesRangeDataItem1.get("label").setAll({
           location:0,
           visible:true,
-          text:"retest of beakout of sideways range",
+          text:"sideways breakout rejection line",
           inside:true,
           centerX:0,
           centerY:am5.p100,
-          fontWeight:"bold"
+          fontSize: 14,
+          fontWeight: "normal",
         });
       }
 
@@ -295,6 +298,27 @@ class OhlcChart extends Component {
       });
 
       // xAxis.zoom(0.9, 1);
+
+      // var valueSeries = chart.series.push(am5xy.CandlestickSeries.new(root, {
+      //   name: "MSFT",
+      //   clustered: false,
+      //   valueXField: "Date",
+      //   valueYField: "Close",
+      //   highValueYField: "High",
+      //   lowValueYField: "Low",
+      //   openValueYField: "Open",
+      //   calculateAggregates: true,
+      //   xAxis: xAxis,
+      //   yAxis: yAxis,
+      //   legendValueText: "open: [bold]{openValueY}[/] high: [bold]{highValueY}[/] low: [bold]{lowValueY}[/] close: [bold]{valueY}[/]",
+      //   legendRangeValueText: ""
+      // }));
+      
+      
+      // // Set main value series
+      // // -------------------------------------------------------------------------------
+      // // https://www.amcharts.com/docs/v5/charts/stock/#Setting_main_series
+      // chart.set("stockSeries", valueSeries);
 
 
       series.events.once('datavalidated', (ev) => {
