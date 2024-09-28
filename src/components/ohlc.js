@@ -53,6 +53,8 @@ class OhlcChart extends Component {
       let sidewaysEntryPoint = response[0].sidewaysData.sidewaysLowBlackPoint;
       var tradeDate = +new Date(response[0].sidewaysData.tradeDate);
 
+      debugger;
+
   
 
       // Create root element
@@ -232,33 +234,39 @@ class OhlcChart extends Component {
       });      
 
 
-      var seriesRangeDataItem1 = yAxis.makeDataItem({ value: sidewaysEntryPoint });
-      var seriesRange1 = series.createAxisRange(seriesRangeDataItem1);
-      seriesRange1.fills.template.setAll({
-          visible: true,
-          opacity: 0.3
-      });
+      if(sidewaysEntryPoint === sidewaysStart ||sidewaysEntryPoint === sidewaysEndtick) {
 
-      seriesRange1.fills.template.set("fill", '#008000');
-      seriesRange1.strokes.template.set("stroke", am5.color(0x000000));
+      }
+      else {
+        var seriesRangeDataItem1 = yAxis.makeDataItem({ value: sidewaysEntryPoint });
+        var seriesRange1 = series.createAxisRange(seriesRangeDataItem1);
+        seriesRange1.fills.template.setAll({
+            visible: true,
+            opacity: 0.3
+        });
+  
+        seriesRange1.fills.template.set("fill", '#008000');
+        seriesRange1.strokes.template.set("stroke", am5.color(0x000000));
+  
+        seriesRangeDataItem1.get("grid").setAll({
+            strokeOpacity: 1,
+            visible: true,
+            stroke: am5.color(0x000000),
+            // strokeDasharray: [2, 2],
+            strokeWidth: 2
+        });
+  
+        seriesRangeDataItem1.get("label").setAll({
+          location:0,
+          visible:true,
+          text:"retest of beakout of sideways range",
+          inside:true,
+          centerX:0,
+          centerY:am5.p100,
+          fontWeight:"bold"
+        });
+      }
 
-      seriesRangeDataItem1.get("grid").setAll({
-          strokeOpacity: 1,
-          visible: true,
-          stroke: am5.color(0x000000),
-          // strokeDasharray: [2, 2],
-          strokeWidth: 2
-      });
-
-      seriesRangeDataItem1.get("label").setAll({
-        location:0,
-        visible:true,
-        text:"retest of beakout of sideways range",
-        inside:true,
-        centerX:0,
-        centerY:am5.p100,
-        fontWeight:"bold"
-      });
 
 
       var seriesRangeDataItem2 = xAxis.makeDataItem({ value: tradeDate });
@@ -290,7 +298,7 @@ class OhlcChart extends Component {
 
 
       series.events.once('datavalidated', (ev) => {
-        ev.target.get('xAxis').zoom(0.9, 1,);
+        ev.target.get('xAxis').zoom(0.95, 1,);
       });
 
       var copyright = chart.plotContainer.children.push(am5.Label.new(root, {
