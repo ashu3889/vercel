@@ -35,15 +35,57 @@ function TableData({articles}) {
 
   const removeDuplicateValues = (arr) => {
     const unique = [];
+    const uniqueArr = [];
 
-    arr.map(x => unique.filter(
-        a => a.exchange == x.exchange && 
-        a.scripName == x.scripName &&
-        a.scripName == x.scripName &&
-        + new Date(a.date) === + new Date(x.date)
-      ).length > 0 ? 
-      null : unique.push(x)
-    );
+    let desiredArr = [];
+
+    let groupedArray = Object.groupBy(arr, employee => employee.scripName);
+
+    // Object.values(groupedArray).filter()
+
+    for (var i = 0 ; i <  Object.values(groupedArray).length; i++ ){
+      // check if this array contains scrip code
+      let currentArray = Object.values(groupedArray)[i];
+      let checkScripArray = currentArray.filter(x => x.scripCode);
+      if(checkScripArray.length > 0) {
+        checkScripArray.map( y => {
+          unique.push(y);
+          return y;
+        });
+      }
+      else{
+        currentArray.map(x => unique.filter(
+            a => a.exchange == x.exchange && 
+            a.scripName == x.scripName &&
+            a.scripName == x.scripName &&
+            + new Date(a.date) === + new Date(x.date)
+          ).length > 0 ? 
+          null : unique.push(x)
+        );
+      }
+        // if yes push this in unique array,
+        // else use the logic of below unique arr
+    }
+
+    debugger;
+    // for(var i = 0; i < arr.length-1; i++) {
+    //   let originalArrMap = arr.filter(x => x.scripName === arr[i].scripName);
+    //   let checkScripCodeIndex = originalArrMap.map(x => x.scripCode);
+    //   let current = arr[i];
+    // }
+
+
+    // arr.filter(())
+
+    // arr.map(x => unique.filter(
+    //     a => a.exchange == x.exchange && 
+    //     a.scripName == x.scripName &&
+    //     a.scripName == x.scripName &&
+    //     + new Date(a.date) === + new Date(x.date)
+    //   ).length > 0 ? 
+    //   null : unique.push(x)
+    // );
+    // debugger;
     return unique;
   }
 
@@ -309,7 +351,19 @@ function TableData({articles}) {
                                    <span className="buy">Buy</span>
                                    {
                                     dataArticle[rowIndex].scripCode ?  (
-                                      <Link to={navLink} className="nav-link" style={{display: 'block'}}>
+                                      <Link 
+                                        to={navLink} 
+                                        className="nav-link" 
+                                        target="_blank"
+                                        style={{
+                                          display: 'block',
+                                          color: 'darkgreen',
+                                          fontFamily: 'monospace',
+                                          fontWeight: 'bold',
+                                          cursor: 'pointer',
+                                          textDecoration: 'underline',
+                                        }}
+                                      >
                                         View chart
                                       </Link>
                                     ) : ''
@@ -324,7 +378,19 @@ function TableData({articles}) {
                                    <span className="sell">Sell</span>
                                    {
                                     dataArticle[rowIndex].scripCode ?  (
-                                      <Link to={navLink} className="nav-link" style={{display: 'block'}}>
+                                      <Link 
+                                        to={navLink} 
+                                        className="nav-link" 
+                                        target="_blank"
+                                        style={{
+                                          display: 'block',
+                                          color: 'darkgreen',
+                                          fontFamily: 'monospace',
+                                          fontWeight: 'bold',
+                                          cursor: 'pointer',
+                                          textDecoration: 'underline',
+                                        }}
+                                      >
                                         View chart
                                       </Link>
                                     ) : ''
