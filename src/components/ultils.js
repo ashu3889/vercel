@@ -49,3 +49,17 @@ var b = a.filter(x => {
     }
     return false
 })
+
+
+var b = a.filter(x => {
+    var date = x.date;
+    var dateObj = new Date(x.date);
+    var month = dateObj.getMonth();
+    if(month == 8 && (x.exchange.toLowerCase() == "nasdaq" || x.exchange.toLowerCase() == "nyse") ) {
+        return true;
+    }
+    return false;
+});
+
+
+var c

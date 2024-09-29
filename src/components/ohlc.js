@@ -95,7 +95,8 @@ root.numberFormatter.set("numberFormat", "#,###.00");
 var mainPanel = stockChart.panels.push(am5stock.StockPanel.new(root, {
   wheelY: "zoomX",
   panX: true,
-  panY: true
+  panY: false,
+  pinchZoomX: true
 }));
 
 
@@ -422,7 +423,7 @@ sbSeries.fills.template.setAll({
 
     let retestData = dataOfConcern.sidewaysData.range.retestLine;
 
-    debugger;
+
 
     // activeTradeData
     let activeTradeDataArray = dataOfConcern.sidewaysData.range.activeTradeData[0];
@@ -430,6 +431,30 @@ sbSeries.fills.template.setAll({
     let tradeDirStrokeColor = null;
     let retestLinePoint = 0;
     let retestLinecolor = '#fffff';
+
+
+    let zoomIndex = 1;
+    let zoomStartTime = null;
+
+    if(+ new Date(supportData.date) > + new Date(resistanceData.date) ) {
+      zoomStartTime =  + new Date(resistanceData.date);
+    }
+    else{
+      zoomStartTime =  + new Date(supportData.date);
+    }
+
+    // get zoom-index
+    let timestampArray = data.map((x) => + new Date(x.Date));
+    let sidewaysIndex = timestampArray.indexOf(zoomStartTime);
+    if(sidewaysIndex !== -1) {
+      zoomIndex = (timestampArray.length - sidewaysIndex)/timestampArray.length ;
+      zoomIndex = zoomIndex*1.2
+      zoomIndex = 1-zoomIndex;
+    }
+
+
+
+
     if(activeTradeDataArray.tradeType === "Sell") {
       tradeDirStrokeColor = '#c84517';
       retestLinecolor = '#c84517';
@@ -550,6 +575,33 @@ sbSeries.fills.template.setAll({
       }
     ];
     drawingControl.unserializeDrawings(tradeAlertLine);
+
+    // mainPanel.events.on("datavalidated", function(ev) {
+    //   // ev.target.get("xAxis").zoom(0.9,1);//start from start date to end
+    //   dateAxis.zoom(0.9,1);
+    //   // dateAxis.zoomToValues(1696001908000, 1703864308000);
+
+    // });
+
+    valueSeries.events.once('datavalidated', (ev) => {
+      ev.target.get('xAxis').zoom(zoomIndex, 1);
+    });
+
+
+    // sbSeries.events.once("datavalidated", function(ev) {
+    //   let supportD = supportData;
+    //   let resistanceD = resistanceData;
+    //   let supportDate = + new Date(supportD.date);
+    //   let resistanceDate = + new Date(resistanceD.date);
+
+    //   // if (supportDate > resistanceDate) {
+    //   //   ev.target.get("xAxis").zoomToDates(resistanceDate, new Date());
+    //   // }
+    //   // else{
+    //   //   ev.target.get("xAxis").zoomToDates(supportDate, new Date());
+    //   // }
+    //   // ev.target.get("xAxis").zoomToDates(new Date(startDate), new Date(chartData[chartData.length - 1].date + 600000));
+    // });
  
     });
   }
