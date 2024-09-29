@@ -424,6 +424,26 @@ sbSeries.fills.template.setAll({
 
     debugger;
 
+    // activeTradeData
+    let activeTradeDataArray = dataOfConcern.sidewaysData.range.activeTradeData[0];
+    let targetPoint = null;
+    let tradeDirStrokeColor = null;
+    let retestLinePoint = 0;
+    let retestLinecolor = '#fffff';
+    if(activeTradeDataArray.tradeType === "Sell") {
+      tradeDirStrokeColor = '#c84517';
+      retestLinecolor = '#c84517';
+      targetPoint = supportData.low;
+      retestLinePoint = retestData.UPblackpoint;
+    }
+    else{
+      tradeDirStrokeColor = "#259054";
+      retestLinecolor = "#259054";
+      targetPoint = resistanceData.high;
+      retestLinePoint = retestData.Lowblackpoint;
+
+    }
+
     var sidewaysRetestLine = [
       {
         "__tool": "Line",
@@ -435,7 +455,7 @@ sbSeries.fills.template.setAll({
               "settings": {
                 "stroke": {
                   "type": "Color",
-                  "value": "#259054"
+                  "value": retestLinecolor
                 },
                 "strokeOpacity": 1,
                 "strokeDasharray": [],
@@ -447,7 +467,7 @@ sbSeries.fills.template.setAll({
               "settings": {
                 "fill": {
                   "type": "Color",
-                  "value": "#259054"
+                  "value": retestLinecolor
                 },
                 "fillOpacity": 0.5
               }
@@ -458,14 +478,14 @@ sbSeries.fills.template.setAll({
             "__parse": true
           },
           {
-            "valueY": retestData.Lowblackpoint,
+            "valueY": retestLinePoint,
             "valueX": + new Date(retestData.pivotDate),
             "corner": "p1",
             "index": 1,
             "__parse": true
           },
           {
-            "valueY": retestData.Lowblackpoint,
+            "valueY": retestLinePoint,
             "valueX": + new Date(),
             "corner": "p2",
             "index": 1,
@@ -476,18 +496,7 @@ sbSeries.fills.template.setAll({
     ];
     drawingControl.unserializeDrawings(sidewaysRetestLine);
 
-    // activeTradeData
-    let activeTradeDataArray = dataOfConcern.sidewaysData.range.activeTradeData[0];
-    let targetPoint = null;
-    let tradeDirStrokeColor = null;
-    if(activeTradeDataArray.tradeType === "Sell") {
-      tradeDirStrokeColor = '#c84517';
-      targetPoint = supportData.low;
-    }
-    else{
-      tradeDirStrokeColor = "#259054";
-      targetPoint = resistanceData.high;
-    }
+
   
 
     var tradeAlertLine = [
