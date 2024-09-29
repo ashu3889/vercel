@@ -455,7 +455,7 @@ sbSeries.fills.template.setAll({
 
 
 
-    if(activeTradeDataArray.tradeType === "Sell") {
+    if(activeTradeDataArray.tradeType === "Sell" && retestData) {
       tradeDirStrokeColor = '#c84517';
       retestLinecolor = '#c84517';
       targetPoint = supportData.low;
@@ -465,8 +465,9 @@ sbSeries.fills.template.setAll({
       tradeDirStrokeColor = "#259054";
       retestLinecolor = "#259054";
       targetPoint = resistanceData.high;
-      retestLinePoint = retestData.Lowblackpoint;
-
+      if(retestData) {
+        retestLinePoint = retestData.Lowblackpoint;
+      }
     }
 
     var sidewaysRetestLine = [
@@ -504,7 +505,7 @@ sbSeries.fills.template.setAll({
           },
           {
             "valueY": retestLinePoint,
-            "valueX": + new Date(retestData.pivotDate),
+            "valueX": retestData ? + new Date(retestData.pivotDate): null,
             "corner": "p1",
             "index": 1,
             "__parse": true
