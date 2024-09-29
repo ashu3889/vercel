@@ -32,6 +32,21 @@ function TableData({articles}) {
     "Mexico",
     "Madrid"
   ];
+
+  const removeDuplicateValues = (arr) => {
+    const unique = [];
+
+    arr.map(x => unique.filter(
+        a => a.exchange == x.exchange && 
+        a.scripName == x.scripName &&
+        a.scripName == x.scripName &&
+        + new Date(a.date) === + new Date(x.date)
+      ).length > 0 ? 
+      null : unique.push(x)
+    );
+    return unique;
+  }
+
   const getDataBasedOnCountry = (data) => {
     let modData = [...data];
     if(dropDownValTradetype === "buy") {
@@ -47,6 +62,8 @@ function TableData({articles}) {
          }
          return false;
       }).filter(a3 => a3.isNewIteration).sort((a4, b) => new Date(b.date) - new Date(a4.date)) ;
+      debugger;
+      modData = removeDuplicateValues(modData);
       return modData;
     }
     else if(dropDownVal == "ind") {
@@ -57,6 +74,7 @@ function TableData({articles}) {
         }
         return false;
      }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
+     modData = removeDuplicateValues(modData);
      return modData;
     }
     else if(dropDownVal == "luna") {
@@ -66,6 +84,7 @@ function TableData({articles}) {
         }
         return false;
      }).sort((a6, b) => new Date(b.date) - new Date(a6.date));
+     modData = removeDuplicateValues(modData);
      return modData;
     }
     else if(dropDownVal == "euro") {
@@ -81,12 +100,13 @@ function TableData({articles}) {
         }
         return false;
      }).sort((a7, b) => new Date(b.date) - new Date(a7.date));
+      // modData = removeDuplicateValues(modData);
       // if() {
 
       // }
       var exchange =  modData.map(x => x.exchange);
       var exchangeArray = exchange.filter(function(item, pos) {
-      return exchange.indexOf(item) == pos;
+        return exchange.indexOf(item) == pos;
       })
 
      return modData;
@@ -277,19 +297,40 @@ function TableData({articles}) {
                     <Column dataKey="tradeType"
                       cellRenderer={
                           ({ cellData, rowIndex, dataKey }) => {
-                            var navLink = "/ohlc/" + dataArticle[rowIndex].code;
+
+                            if(dataArticle[rowIndex].scripCode === "CSL") {
+                              debugger;
+                            }
+                            const rowData1 = dataArticle[rowIndex];
+                            var navLink = "/chart/?exchange=" + rowData1.exchange + '&symbol=' + rowData1.scripCode;
                             if(cellData == "Buy" || cellData == "'Buy'::character varying" ) {
                               return (
                                 <div> 
                                    <span className="buy">Buy</span>
-                                    {/* <Link to={navLink} className="nav-link" style={{display: 'block'}}>
-                                       View chart
-                                    </Link> */}
+                                   {
+                                    dataArticle[rowIndex].scripCode ?  (
+                                      <Link to={navLink} className="nav-link" style={{display: 'block'}}>
+                                        View chart
+                                      </Link>
+                                    ) : ''
+                                   }
+
                                 </div>
                               )
                             }
                             else if(cellData == "Sell" ) {
-                              return <span className="sell">{cellData}</span>
+                              return (
+                                <div> 
+                                   <span className="sell">Sell</span>
+                                   {
+                                    dataArticle[rowIndex].scripCode ?  (
+                                      <Link to={navLink} className="nav-link" style={{display: 'block'}}>
+                                        View chart
+                                      </Link>
+                                    ) : ''
+                                   }
+                                </div>
+                              )
                             }
                           }
                       }
@@ -309,18 +350,6 @@ function TableData({articles}) {
                         }
                       }
                     /> 
-                    {/* <Column dataKey="viewChart"
-                      cellRenderer={
-                          ({ cellData, rowIndex, dataKey }) => {
-                            return <span style={{ fontSize: '10px'}}>View Chart</span>
-                          }
-                      }
-                      headerRenderer = {
-                        () => {
-                          return <span style={{ fontSize: '10px'}}>View Chart</span>
-                        }
-                      }
-                    />  */}
                 </Table>
               )}
             </AutoSizer>

@@ -73,7 +73,7 @@ class App extends React.Component {
             <Route path="/@:username/favorites" component={ProfileFavorites} />
             <Route path="/@:username" component={Profile} />
             <Route path="/disclaimer" component={Disclaimer} />
-            <Route path="/ohlc" component={OhlcChart} />
+            <Route path="/chart" component={OhlcChart} />
             </Switch>
         </div>
       );

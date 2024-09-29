@@ -18,12 +18,15 @@ class OhlcChart extends Component {
   }
   componentDidMount() {
     const code = window.location.pathname.split('/')[2] ;
-    if (!code) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const exchangeParam = urlParams.get('exchange');
+    const symbolParam = urlParams.get('symbol');
+    if (!exchangeParam && !symbolParam) {
       return false
     }
 
     this.setState({ isGraphDataAvailable: true});
-    const API_ROOT = 'https://gvvvybsctuddylxfiecz.supabase.co/rest/v1/graph_data?&code=eq.'+code;
+    const API_ROOT = 'https://gvvvybsctuddylxfiecz.supabase.co/rest/v1/graph_data?&exchangeName=eq.'+exchangeParam+'&scripCode=eq.'+symbolParam;
     let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2dnZ5YnNjdHVkZHlseGZpZWN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjYzNDAwMTAsImV4cCI6MjA0MTkxNjAxMH0.1OUIdwq9DmcdMvHJwXPc3hocXMonsJAwbXkbJSfWQtk';
 
     fetch(API_ROOT, {
@@ -46,321 +49,499 @@ class OhlcChart extends Component {
         return false;
       }
 
+
+
       this.setState({ isGraphDataAvailable: true});
-      const scripName = response[0].scripName;
 
-      this.setState({
-        scripName: response[0].scripName
-      });
+      let dataOfConcern = response[response.length-1];
+      const scripName = dataOfConcern.scripName;
 
-      let sidewaysStart = response[0].sidewaysData.sidewaysEndTick;
-      let sidewaysEndtick = response[0].sidewaysData.sidewaysStartTick;
-      let sidewaysEntryPoint = response[0].sidewaysData.sidewaysLowBlackPoint;
-      var tradeDate = +new Date(response[0].sidewaysData.tradeDate);
+      // let sidewaysStart = dataOfConcern.sidewaysData.sidewaysEndTick;
+      // let sidewaysEndtick = dataOfConcern.sidewaysData.sidewaysStartTick;
+      // let sidewaysEntryPoint = dataOfConcern.sidewaysData.sidewaysLowBlackPoint;
+      // var tradeDate = +new Date(dataOfConcern.sidewaysData.tradeDate);
 
-      // Create root element
-      // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+
+
+
+
       var root = am5.Root.new("chartdiv");
 
 
-      // Set themes
-      // https://www.amcharts.com/docs/v5/concepts/themes/
-      root.setThemes([
-          am5themes_Animated.new(root)
-      ]);
+  // Set themes
+  // -------------------------------------------------------------------------------
+  // https://www.amcharts.com/docs/v5/concepts/themes/
+  root.setThemes([
+    am5themes_Animated.new(root)
+  ]);
 
 
-      // panX: true,
-      // panY: false,
-      // wheelX: "zoomX",
-      // wheelZoomPositionX: 1
-
-      // Create chart
-      // https://www.amcharts.com/docs/v5/charts/xy-chart/
-      var chart = root.container.children.push(am5xy.XYChart.new(root, {
-          panX: true,
-          panY: true,
-          wheelX: "panX",
-          wheelY: "zoomX",
-          pinchZoomX: true,
-          paddingLeft: 0,
-          wheelZoomPositionX: 1
-      }));
-
-      // chart.children.unshift(am5.Label.new(root, {
-      //   text: scripName,
-      //   fontSize: 14,
-      //   fontWeight: "bold",
-      //   textAlign: "center",
-      //   marginBottom: "300px",
-      //   x: am5.percent(10),
-      //   // centerX: am5.percent(50),
-      //   y: am5.percent(10),
-      //   paddingTop: 0,
-      //   paddingBottom: 0
-      // }));
-
-      // var title = chart.title();
-      // title.enabled(true);
-      // title.text(scripName);
+    // Create a stock chart
+    // -------------------------------------------------------------------------------
+    // https://www.amcharts.com/docs/v5/charts/stock-chart/#Instantiating_the_chart
+    var stockChart = root.container.children.push(am5stock.StockChart.new(root, {
+    }));
 
 
-      // Add cursor
-      // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
-      var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
-      cursor.lineX.set("forceHidden", true);
-      cursor.lineY.set("forceHidden", true);
-
-      // Generate random data
-      var date = new Date();
-      date.setHours(0, 0, 0, 0);
-
-      var value = 20;
-
-      // var xAxis = chart.xAxes.push(
-      //   am5xy.ValueAxis.new(root, {
-      //     maxDeviation: 0,
-      //     renderer: am5xy.AxisRendererX.new(root, { minGridDistance: 50 })
-      //   })
-      // );
-
-      var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
-          baseInterval: {
-              timeUnit: "day",
-              count: 1
-          },
-          renderer: am5xy.AxisRendererX.new(root, {
-            minorGridEnabled: true,
-            minGridDistance: 80
-          })
-         //  renderer: am5xy.AxisRendererX.new(root, {})
-      }));
-
-      var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-          renderer: am5xy.AxisRendererY.new(root, {})
-      }));
-
-      var series = chart.series.push(am5xy.LineSeries.new(root, {
-          name: "Series",
-          xAxis: xAxis,
-          yAxis: yAxis,
-          valueYField: "value",
-          valueXField: "date",
-          tooltip: am5.Tooltip.new(root, {
-              labelText: "{valueY}"
-          })
-      }));
-
-      series.fills.template.setAll({
-          fillOpacity: 0.2,
-          visible: true
-      });
-
-      chart.set("scrollbarX", am5.Scrollbar.new(root, {
-          orientation: "horizontal"
-      }));
-
-      var data = [...response[0].jsonData];
-      data = data.map(x => {
-        return {
-          date: +new Date(x['Date']),
-          value: x['Close']
-        }
-      });
-
-      series.data.setAll(data);
-      var rangeDate = new Date();
-      am5.time.add(rangeDate, "day", Math.round(series.dataItems.length / 2));
-      var rangeTime = rangeDate.getTime();
-
-      // support lines start
-      var seriesRangeDataItem = yAxis.makeDataItem({ value: sidewaysStart, endValue: sidewaysEndtick });
-      var seriesRange = series.createAxisRange(seriesRangeDataItem);
-      seriesRange.fills.template.setAll({
-          visible: true,
-          opacity: 0.3
-      });
-
-      seriesRange.fills.template.set("fill", '#008000');
-      seriesRange.strokes.template.set("stroke", am5.color(0x000000));
-      // seriesRange.strokes.template.set("stroke-width", '12px');
+// Set global number format
+// -------------------------------------------------------------------------------
+// https://www.amcharts.com/docs/v5/concepts/formatters/formatting-numbers/
+root.numberFormatter.set("numberFormat", "#,###.00");
 
 
-      seriesRangeDataItem.get("grid").setAll({
-          strokeOpacity: 1,
-          visible: true,
-          stroke: am5.color(0x000000),
-          // strokeDasharray: [2, 2]
-          strokeWidth: 1,
-      })
-
-      seriesRangeDataItem.get("label").setAll({
-          location:0,
-          visible:true,
-          text:"Sideways range",
-          inside:true,
-          centerX:0,
-          centerY:am5.p100,
-          fontSize: 14,
-          fontWeight: "normal",
-      });
+// Create a main stock panel (chart)
+// -------------------------------------------------------------------------------
+// https://www.amcharts.com/docs/v5/charts/stock-chart/#Adding_panels
+var mainPanel = stockChart.panels.push(am5stock.StockPanel.new(root, {
+  wheelY: "zoomX",
+  panX: true,
+  panY: true
+}));
 
 
+// Create value axis
+// -------------------------------------------------------------------------------
+// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+var valueAxis = mainPanel.yAxes.push(am5xy.ValueAxis.new(root, {
+  renderer: am5xy.AxisRendererY.new(root, {
+    pan: "zoom"
+  }),
+  extraMin: 0.1, // adds some space for for main series
+  tooltip: am5.Tooltip.new(root, {}),
+  numberFormat: "#,###.00",
+  extraTooltipPrecision: 2
+}));
 
-      var seriesRangeDataItem3 = yAxis.makeDataItem({ value: sidewaysEndtick });
-      var seriesRange3 = series.createAxisRange(seriesRangeDataItem3);
-      seriesRange3.fills.template.setAll({
-          visible: true,
-          opacity: 0.3
-      });
-      
-      seriesRange3.fills.template.set("fill", '#008000');
-      seriesRange3.strokes.template.set("stroke", am5.color(0x000000));
-      
-      seriesRangeDataItem3.get("grid").setAll({
-          strokeOpacity: 1,
-          visible: true,
-          stroke: am5.color(0x000000),
-          // strokeDasharray: [2, 2],
-          strokeWidth: 2
-      });
-      
-      seriesRangeDataItem3.get("label").setAll({
-        location:0,
-        visible:true,
-        text:"sideways range",
-        inside:true,
-        centerX:0,
-        centerY:am5.p100,
-        fontSize: 14,
-        fontWeight: "normal",
-      });      
+var dateAxis = mainPanel.xAxes.push(am5xy.GaplessDateAxis.new(root, {
+  baseInterval: {
+    timeUnit: "day",
+    count: 1
+  },
+  renderer: am5xy.AxisRendererX.new(root, {}),
+  tooltip: am5.Tooltip.new(root, {})
+}));
 
 
-      if(sidewaysEntryPoint === sidewaysStart ||sidewaysEntryPoint === sidewaysEndtick) {
-
-      }
-      else {
-        var seriesRangeDataItem1 = yAxis.makeDataItem({ value: sidewaysEntryPoint });
-        var seriesRange1 = series.createAxisRange(seriesRangeDataItem1);
-        seriesRange1.fills.template.setAll({
-            visible: true,
-            opacity: 0.3
-        });
-  
-        seriesRange1.fills.template.set("fill", '#008000');
-        seriesRange1.strokes.template.set("stroke", am5.color(0x000000));
-  
-        seriesRangeDataItem1.get("grid").setAll({
-            strokeOpacity: 1,
-            visible: true,
-            stroke: am5.color(0x000000),
-            // strokeDasharray: [2, 2],
-            strokeWidth: 2
-        });
-  
-        seriesRangeDataItem1.get("label").setAll({
-          location:0,
-          visible:true,
-          text:"sideways breakout rejection line",
-          inside:true,
-          centerX:0,
-          centerY:am5.p100,
-          fontSize: 14,
-          fontWeight: "normal",
-        });
-      }
+// Add series
+// -------------------------------------------------------------------------------
+// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+var valueSeries = mainPanel.series.push(am5xy.CandlestickSeries.new(root, {
+  name: dataOfConcern.scripCode,
+  clustered: false,
+  valueXField: "Date",
+  valueYField: "Close",
+  highValueYField: "High",
+  lowValueYField: "Low",
+  openValueYField: "Open",
+  calculateAggregates: true,
+  xAxis: dateAxis,
+  yAxis: valueAxis,
+  legendValueText: "open: [bold]{openValueY}[/] high: [bold]{highValueY}[/] low: [bold]{lowValueY}[/] close: [bold]{valueY}[/]",
+  legendRangeValueText: ""
+}));
 
 
+// Set main value series
+// -------------------------------------------------------------------------------
+// https://www.amcharts.com/docs/v5/charts/stock-chart/#Setting_main_series
+stockChart.set("stockSeries", valueSeries);
 
-      var seriesRangeDataItem2 = xAxis.makeDataItem({ value: tradeDate });
-      var seriesRange2 = series.createAxisRange(seriesRangeDataItem2);
-      seriesRange2.fills.template.setAll({
-          visible: true,
-          opacity: 0.3
-      });
 
-      seriesRangeDataItem2.get("grid").setAll({
-        strokeOpacity: 1,
-        visible: true,
-        stroke: '#ffA500',
-        strokeWidth: 2
+// Add a stock legend
+// -------------------------------------------------------------------------------
+// https://www.amcharts.com/docs/v5/charts/stock-chart/stock-legend/
+var valueLegend = mainPanel.plotContainer.children.push(am5stock.StockLegend.new(root, {
+  stockChart: stockChart
+}));
+
+
+// Create volume axis
+// -------------------------------------------------------------------------------
+// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+var volumeAxisRenderer = am5xy.AxisRendererY.new(root, {
+  inside: true
+});
+
+volumeAxisRenderer.labels.template.set("forceHidden", true);
+volumeAxisRenderer.grid.template.set("forceHidden", true);
+
+var volumeValueAxis = mainPanel.yAxes.push(am5xy.ValueAxis.new(root, {
+  numberFormat: "#.#a",
+  height: am5.percent(20),
+  y: am5.percent(100),
+  centerY: am5.percent(100),
+  renderer: volumeAxisRenderer
+}));
+
+// Add series
+// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+var volumeSeries = mainPanel.series.push(am5xy.ColumnSeries.new(root, {
+  name: "Volume",
+  clustered: false,
+  valueXField: "Date",
+  valueYField: "Volume",
+  xAxis: dateAxis,
+  yAxis: volumeValueAxis,
+  legendValueText: "[bold]{valueY.formatNumber('#,###.0a')}[/]"
+}));
+
+volumeSeries.columns.template.setAll({
+  strokeOpacity: 0,
+  fillOpacity: 0.5
+});
+
+// color columns by stock rules
+volumeSeries.columns.template.adapters.add("fill", function(fill, target) {
+  var dataItem = target.dataItem;
+  if (dataItem) {
+    return stockChart.getVolumeColor(dataItem);
+  }
+  return fill;
+})
+
+
+// Set main series
+// -------------------------------------------------------------------------------
+// https://www.amcharts.com/docs/v5/charts/stock-chart/#Setting_main_series
+stockChart.set("volumeSeries", volumeSeries);
+valueLegend.data.setAll([valueSeries, volumeSeries]);
+
+
+// Add cursor(s)
+// -------------------------------------------------------------------------------
+// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+mainPanel.set("cursor", am5xy.XYCursor.new(root, {
+  yAxis: valueAxis,
+  xAxis: dateAxis,
+  snapToSeries: [valueSeries],
+  snapToSeriesBy: "y!"
+}));
+
+
+// Add scrollbar
+// -------------------------------------------------------------------------------
+// https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
+var scrollbar = mainPanel.set("scrollbarX", am5xy.XYChartScrollbar.new(root, {
+  orientation: "horizontal",
+  height: 50
+}));
+stockChart.toolsContainer.children.push(scrollbar);
+
+var sbDateAxis = scrollbar.chart.xAxes.push(am5xy.GaplessDateAxis.new(root, {
+  baseInterval: {
+    timeUnit: "day",
+    count: 1
+  },
+  renderer: am5xy.AxisRendererX.new(root, {})
+}));
+
+var sbValueAxis = scrollbar.chart.yAxes.push(am5xy.ValueAxis.new(root, {
+  renderer: am5xy.AxisRendererY.new(root, {})
+}));
+
+var sbSeries = scrollbar.chart.series.push(am5xy.LineSeries.new(root, {
+  valueYField: "Close",
+  valueXField: "Date",
+  xAxis: sbDateAxis,
+  yAxis: sbValueAxis
+}));
+
+sbSeries.fills.template.setAll({
+  visible: true,
+  fillOpacity: 0.3
+});
+
+// add Bollinger Bands indicator
+// var bollingerBands = stockChart.indicators.push(am5stock.BollingerBands.new(root, {
+//   stockChart: stockChart,
+//   stockSeries: valueSeries,
+//   legend: valueLegend
+// }));
+
+
+// Stock toolbar
+// -------------------------------------------------------------------------------
+// https://www.amcharts.com/docs/v5/charts/stock/toolbar/
+    var indicatorControl = am5stock.IndicatorControl.new(root, {
+      stockChart: stockChart,
+      legend: valueLegend
     });
 
+    var drawingControl = am5stock.DrawingControl.new(root, {
+      stockChart: stockChart
+    });
 
-      seriesRangeDataItem2.get("label").setAll({
-        location:-100,
-        visible:true,
-        text:"Entry point",
-        inside:true,
-        centerX:0,
-        centerY:am5.p100,
-        fontWeight:"bold"
-      });
+    var toolbar = am5stock.StockToolbar.new(root, {
+      container: document.getElementById("chartcontrols"),
+      stockChart: stockChart,
+      controls: [
+        indicatorControl,
+        am5stock.DateRangeSelector.new(root, {
+          stockChart: stockChart
+        }),
+        am5stock.PeriodSelector.new(root, {
+          stockChart: stockChart
+        }),
+        drawingControl,
+        am5stock.ResetControl.new(root, {
+          stockChart: stockChart
+        }),
+        am5stock.SettingsControl.new(root, {
+          stockChart: stockChart
+        })
+      ]
+    })
 
-      // xAxis.zoom(0.9, 1);
-
-      // var valueSeries = chart.series.push(am5xy.CandlestickSeries.new(root, {
-      //   name: "MSFT",
-      //   clustered: false,
-      //   valueXField: "Date",
-      //   valueYField: "Close",
-      //   highValueYField: "High",
-      //   lowValueYField: "Low",
-      //   openValueYField: "Open",
-      //   calculateAggregates: true,
-      //   xAxis: xAxis,
-      //   yAxis: yAxis,
-      //   legendValueText: "open: [bold]{openValueY}[/] high: [bold]{highValueY}[/] low: [bold]{lowValueY}[/] close: [bold]{valueY}[/]",
-      //   legendRangeValueText: ""
-      // }));
-      
-      
-      // // Set main value series
-      // // -------------------------------------------------------------------------------
-      // // https://www.amcharts.com/docs/v5/charts/stock/#Setting_main_series
-      // chart.set("stockSeries", valueSeries);
-
-      debugger;
-
-      var startData = response[0].jsonData.filter(x => x.High === sidewaysStart || x.Low === sidewaysStart);
-      let zoomIndex = 0.95;
-      if(startData.length > 0) {
-        // get index
-        let lengthOfArray = response[0].jsonData.length;
-        let indexData = response[0].jsonData.map(x => + new Date(x.Date)).indexOf(+ new Date(startData[startData.length -1].Date));
-        zoomIndex = (lengthOfArray-indexData)/indexData;
-        zoomIndex = zoomIndex*1.2;
-        zoomIndex = 1-zoomIndex;
+    // data
+    var data = [...response[0].jsonData];
+    data = data.map((x) => {
+      return {
+        ...x,
+        Date: + new Date(x.Date) 
       }
+    });
+
+    // set data to all series
+    valueSeries.data.setAll(data);
+    volumeSeries.data.setAll(data);
+    sbSeries.data.setAll(data);
+
+    // Load serialized annotations and indicators
+    // -------------------------------------------------------------------------------
+    // https://www.amcharts.com/docs/v5/charts/stock/serializing-indicators-annotations/
 
 
+    let resistanceData = dataOfConcern.sidewaysData.range.resistance[0];
+
+    var sidewayResistance = [
+      {
+        "__tool": "Line",
+        "__panelIndex": 0,
+        "__drawing": [
+          {
+            "stroke": {
+              "type": "Template",
+              "settings": {
+                "stroke": {
+                  "type": "Color",
+                  "value": "#882dff"
+                },
+                "strokeOpacity": 1,
+                "strokeDasharray": [],
+                "strokeWidth": 2
+              }
+            },
+            "fill": {
+              "type": "Template",
+              "settings": {
+                "fill": {
+                  "type": "Color",
+                  "value": "#ad6eff"
+                },
+                "fillOpacity": 0.5
+              }
+            },
+            "index": 1,
+            "showExtension": true,
+            "corner": "e",
+            "__parse": true
+          },
+          {
+            "valueY": resistanceData.high,
+            "valueX": + new Date(resistanceData.date),
+            "corner": "p1",
+            "index": 1,
+            "__parse": true
+          },
+          {
+            "valueY": resistanceData.high,
+            "valueX": + new Date(),
+            "corner": "p2",
+            "index": 1,
+            "__parse": true
+          }
+        ]
+      }
+    ];
+    drawingControl.unserializeDrawings(sidewayResistance);
+
+
+    let supportData = dataOfConcern.sidewaysData.range.support[0];
+
+    var sidewaySupport = [
+      {
+        "__tool": "Line",
+        "__panelIndex": 0,
+        "__drawing": [
+          {
+            "stroke": {
+              "type": "Template",
+              "settings": {
+                "stroke": {
+                  "type": "Color",
+                  "value": "#882dff"
+                },
+                "strokeOpacity": 1,
+                "strokeDasharray": [],
+                "strokeWidth": 2
+              }
+            },
+            "fill": {
+              "type": "Template",
+              "settings": {
+                "fill": {
+                  "type": "Color",
+                  "value": "#ad6eff"
+                },
+                "fillOpacity": 0.5
+              }
+            },
+            "index": 1,
+            "showExtension": true,
+            "corner": "e",
+            "__parse": true
+          },
+          {
+            "valueY": supportData.low,
+            "valueX": + new Date(supportData.date),
+            "corner": "p1",
+            "index": 1,
+            "__parse": true
+          },
+          {
+            "valueY": supportData.low,
+            "valueX": + new Date(),
+            "corner": "p2",
+            "index": 1,
+            "__parse": true
+          }
+        ]
+      }
+    ];
+    drawingControl.unserializeDrawings(sidewaySupport);
+
+    let retestData = dataOfConcern.sidewaysData.range.retestLine;
+
+    debugger;
+
+    var sidewaysRetestLine = [
+      {
+        "__tool": "Line",
+        "__panelIndex": 0,
+        "__drawing": [
+          {
+            "stroke": {
+              "type": "Template",
+              "settings": {
+                "stroke": {
+                  "type": "Color",
+                  "value": "#259054"
+                },
+                "strokeOpacity": 1,
+                "strokeDasharray": [],
+                "strokeWidth": 2
+              }
+            },
+            "fill": {
+              "type": "Template",
+              "settings": {
+                "fill": {
+                  "type": "Color",
+                  "value": "#259054"
+                },
+                "fillOpacity": 0.5
+              }
+            },
+            "index": 1,
+            "showExtension": true,
+            "corner": "e",
+            "__parse": true
+          },
+          {
+            "valueY": retestData.Lowblackpoint,
+            "valueX": + new Date(retestData.pivotDate),
+            "corner": "p1",
+            "index": 1,
+            "__parse": true
+          },
+          {
+            "valueY": retestData.Lowblackpoint,
+            "valueX": + new Date(),
+            "corner": "p2",
+            "index": 1,
+            "__parse": true
+          }
+        ]
+      }
+    ];
+    drawingControl.unserializeDrawings(sidewaysRetestLine);
+
+    // activeTradeData
+    let activeTradeDataArray = dataOfConcern.sidewaysData.range.activeTradeData[0];
+    let targetPoint = null;
+    let tradeDirStrokeColor = null;
+    if(activeTradeDataArray.tradeType === "Sell") {
+      tradeDirStrokeColor = '#c84517';
+      targetPoint = supportData.low;
+    }
+    else{
+      tradeDirStrokeColor = "#259054";
+      targetPoint = resistanceData.high;
+    }
+  
+
+    var tradeAlertLine = [
+      {
+        "__tool": "Line",
+        "__panelIndex": 0,
+        "__drawing": [
+          {
+            "stroke": {
+              "type": "Template",
+              "settings": {
+                "stroke": {
+                  "type": "Color",
+                  "value": tradeDirStrokeColor
+                },
+                "strokeOpacity": 1,
+                "strokeDasharray": [],
+                "strokeWidth": 2
+              }
+            },
+            "fill": {
+              "type": "Template",
+              "settings": {
+                "fill": {
+                  "type": "Color",
+                  "value": tradeDirStrokeColor
+                },
+                "fillOpacity": 0.5
+              }
+            },
+            "index": 1,
+            "showExtension": true,
+            "corner": "e",
+            "__parse": true
+          },
+          {
+            "valueY": activeTradeDataArray.close,
+            "valueX": + new Date(activeTradeDataArray.date),
+            "corner": "p1",
+            "index": 1,
+            "__parse": true
+          },
+          {
+            "valueY": targetPoint,
+            "valueX": + new Date() + 24*60*60*60,
+            "corner": "p2",
+            "index": 1,
+            "__parse": true
+          }
+        ]
+      }
+    ];
+    drawingControl.unserializeDrawings(tradeAlertLine);
  
-      series.events.once('datavalidated', (ev) => {
-        ev.target.get('xAxis').zoom(zoomIndex, 1,);
-      });
-
-      var copyright = chart.plotContainer.children.push(am5.Label.new(root, {
-        text: "Copyright amCharts",
-        x: 10,
-        y: am5.p100,
-        centerY: am5.p100,
-        dy: 10
-      }));
-      
-      var logo = chart.plotContainer.children.push(am5.Picture.new(root, {
-        src: "https://assets.codepen.io/t-160/amcharts_light.svg",
-        width: 100,
-        x: am5.p100,
-        centerX: am5.p100,
-        dx: -10,
-        y: am5.p100,
-        centerY: am5.p100
-      }));
-   
-      series.appear(1000);
-      chart.appear(1000, 100);
-
     });
   }
 
