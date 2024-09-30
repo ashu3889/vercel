@@ -110,13 +110,14 @@ function TableData({articles}) {
     }
     else if(dropDownVal == "ind") {
       modData = modData.filter(x => x.breakingFix);
+      modData = removeDuplicateValues(modData);
       modData = modData.filter(x => {
         if((x.exchange.toLowerCase() == "nse" || x.exchange.toLowerCase() == "bse" )&& x.scripName && x.scripName.trim().length > 0) {
           return true;
         }
         return false;
      }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
-     modData = removeDuplicateValues(modData);
+    
      return modData;
     }
     else if(dropDownVal == "luna") {
@@ -255,7 +256,7 @@ function TableData({articles}) {
             }}>Select market</legend>
             <select  class="market-selector" id="lang" onChange={change} value={dropDownVal}>
               <option value="us">Nasdaq</option>
-              {/* <option value="ind">Indian market</option> */}
+              <option value="ind">Indian market</option>
               <option value="luna">Crypto</option>
               <option value="euro">Global markets</option>
               {/* <option value="London">London</option>
