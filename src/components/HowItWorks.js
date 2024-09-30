@@ -58,11 +58,11 @@ class HowItWorks extends React.Component {
                   id="follow-button" 
                   target="_blank"
                   class="btn_twitter" 
-                  title="Follow @trader_alg88109 on X"
-                  href="https://x.com/trader_alg88109"
+                  title="Follow @Algo_trader3899 on X"
+                  href="https://x.com/trader3899"
                 >
                   <i></i>
-                  <span class="label" id="l">Follow <b>@trader_alg88109</b></span>
+                  <span class="label" id="l">Follow <b>@Algo_trader3899</b></span>
                 </a>
               </p>
             </div>
