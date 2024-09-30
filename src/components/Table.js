@@ -104,8 +104,8 @@ function TableData({articles}) {
          }
          return false;
       }).filter(a3 => a3.isNewIteration).sort((a4, b) => new Date(b.date) - new Date(a4.date)) ;
-      debugger;
       modData = removeDuplicateValues(modData);
+      modData = modData.sort((a7, b) => new Date(b.date) - new Date(a7.date));
       return modData;
     }
     else if(dropDownVal == "ind") {
@@ -128,6 +128,7 @@ function TableData({articles}) {
         return false;
      }).sort((a6, b) => new Date(b.date) - new Date(a6.date));
      modData = removeDuplicateValues(modData);
+     modData = modData.sort((a9, b) => new Date(b.date) - new Date(a9.date));
      return modData;
     }
     else if(dropDownVal == "euro") {
