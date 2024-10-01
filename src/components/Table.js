@@ -259,7 +259,7 @@ function TableData({articles}) {
               <option value="us">Nasdaq</option>
               <option value="ind">Indian market</option>
               <option value="luna">Crypto</option>
-              <option value="euro">Global markets</option>
+              {/* <option value="euro">Global markets</option> */}
               {/* <option value="London">London</option>
               <option value="Singapore">Singapore</option>
               <option value="Hong Kong">Hong Kong</option>
