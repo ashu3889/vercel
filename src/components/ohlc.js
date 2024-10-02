@@ -591,11 +591,11 @@ sbSeries.fills.template.setAll({
     });
 
     scrollbar.chart.children.unshift(am5.Label.new(root, {
-      text: "Trading setup Notes",
+      text: "Trading setup Notes: Disclaimer: This is informational only",
       fontSize: 8,
       fontWeight: "bold",
       textAlign: "left",
-      x: am5.percent(89),
+      x: am5.percent(80),
       y: am5.percent(80),
       paddingBottom: 0
     }));
