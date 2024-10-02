@@ -25,6 +25,8 @@ class OhlcChart extends Component {
       return false
     }
 
+    
+
     this.setState({ isGraphDataAvailable: true});
     const API_ROOT = 'https://gvvvybsctuddylxfiecz.supabase.co/rest/v1/graph_data?&exchangeName=eq.'+exchangeParam+'&scripCode=eq.'+symbolParam;
     let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2dnZ5YnNjdHVkZHlseGZpZWN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjYzNDAwMTAsImV4cCI6MjA0MTkxNjAxMH0.1OUIdwq9DmcdMvHJwXPc3hocXMonsJAwbXkbJSfWQtk';
@@ -588,21 +590,90 @@ sbSeries.fills.template.setAll({
       ev.target.get('xAxis').zoom(zoomIndex, 1);
     });
 
+    scrollbar.chart.children.unshift(am5.Label.new(root, {
+      text: "Trading setup Notes",
+      fontSize: 8,
+      fontWeight: "bold",
+      textAlign: "left",
+      x: am5.percent(89),
+      y: am5.percent(80),
+      paddingBottom: 0
+    }));
 
-    // sbSeries.events.once("datavalidated", function(ev) {
-    //   let supportD = supportData;
-    //   let resistanceD = resistanceData;
-    //   let supportDate = + new Date(supportD.date);
-    //   let resistanceDate = + new Date(resistanceD.date);
+    scrollbar.chart.children.unshift(am5.Label.new(root, {
+      text: `Trade type: ${activeTradeDataArray.tradeType}`,
+      fontSize: 8,
+      fontWeight: "50",
+      textAlign: "left",
+      x: am5.percent(89),
+      y: am5.percent(120),
+      paddingBottom: 0
+    }));
+    scrollbar.chart.children.unshift(am5.Label.new(root, {
+      text: `Trade entry date: ${ new Date(activeTradeDataArray.date).getDate()} / ${ new Date(activeTradeDataArray.date).getMonth()} / ${ new Date(activeTradeDataArray.date).getFullYear()}`,
+      fontSize: 8,
+      fontWeight: "50",
+      textAlign: "left",
+      x: am5.percent(89),
+      y: am5.percent(140),
+      paddingBottom: 0
+    }));
+    scrollbar.chart.children.unshift(am5.Label.new(root, {
+      text: `Trade entry price: ${activeTradeDataArray.close}`,
+      fontSize: 8,
+      fontWeight: "50",
+      textAlign: "left",
+      x: am5.percent(89),
+      y: am5.percent(160),
+      paddingBottom: 0
+    }));
+    scrollbar.chart.children.unshift(am5.Label.new(root, {
+      text: `First target: ${activeTradeDataArray.tradeType === "Sell" ? resistanceData.high : supportData.high }`,
+      fontSize: 8,
+      fontWeight: "50",
+      textAlign: "left",
+      x: am5.percent(89),
+      y: am5.percent(180),
+      paddingBottom: 0
+    }));
+    scrollbar.chart.children.unshift(am5.Label.new(root, {
+      text: `Second target: ${activeTradeDataArray.tradeType === "Sell" ? supportData.high : resistanceData.high }`,
+      fontSize: 8,
+      fontWeight: "50",
+      backgroundColor: 'green',
+      textAlign: "left",
+      x: am5.percent(89),
+      y: am5.percent(200),
+      paddingBottom: 0
+    }));
 
-    //   // if (supportDate > resistanceDate) {
-    //   //   ev.target.get("xAxis").zoomToDates(resistanceDate, new Date());
-    //   // }
-    //   // else{
-    //   //   ev.target.get("xAxis").zoomToDates(supportDate, new Date());
-    //   // }
-    //   // ev.target.get("xAxis").zoomToDates(new Date(startDate), new Date(chartData[chartData.length - 1].date + 600000));
-    // });
+    scrollbar.chart.children.unshift(am5.Label.new(root, {
+      text: `Sideways support: ${supportData.low}`,
+      fontSize: 8,
+      fontWeight: "50",
+      textAlign: "left",
+      x: am5.percent(89),
+      y: am5.percent(220),
+      paddingBottom: 0
+    }));
+    scrollbar.chart.children.unshift(am5.Label.new(root, {
+      text: `Sideways resistance: ${resistanceData.high}`,
+      fontSize: 8,
+      fontWeight: "50",
+      textAlign: "left",
+      x: am5.percent(89),
+      y: am5.percent(240),
+      paddingBottom: 0
+    }));
+    scrollbar.chart.children.unshift(am5.Label.new(root, {
+      text: `Sideways breakout retest line: ${retestLinePoint}`,
+      fontSize: 8,
+      fontWeight: "50",
+      textAlign: "left",
+      x: am5.percent(89),
+      y: am5.percent(260),
+      paddingBottom: 0
+    }));
  
     });
   }
@@ -642,6 +713,16 @@ sbSeries.fills.template.setAll({
             ></div>
               <div id="chartdiv" style={{ width: "100%", height: "500px" }}>
             </div>
+            {/* <div>
+              <p> Chart Notes</p>
+              <p> Sideways resistance: </p>
+              <p> Sideways support: </p>
+              <p> Sideways breakout retest line: </p>
+              <p> Entry Date: </p>    
+              <p> Entry price: </p>
+              <p> First target: </p>
+              <p> Second Target:  </p>
+            </div> */}
        </div>
     )
   }
