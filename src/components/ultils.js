@@ -39,9 +39,9 @@ var b = a.filter(x => {
 
 var b = a.filter(x => {
     if(
-        x.exchange.toLowerCase() !== "nyse" ||
-        x.exchange.toLowerCase() !== "nasdaq" ||
-        x.exchange.toLowerCase() !== "coindcx" ||
+        x.exchange.toLowerCase() === "nyse" ||
+        x.exchange.toLowerCase() === "nasdaq" ||
+        x.exchange.toLowerCase() === "coindcx" ||
         x.exchange.toLowerCase() !== "nse" ||
         x.exchange.toLowerCase() !== "bse"
     ){
@@ -62,4 +62,12 @@ var b = a.filter(x => {
 });
 
 
-var c
+var c = a.filter(x => {
+    if(
+        x.exchange.toLowerCase() === "nse" ||
+        x.exchange.toLowerCase() == "bse"
+    ){
+        return false;
+    }
+    return true;
+})
