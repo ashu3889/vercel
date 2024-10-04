@@ -16,6 +16,23 @@ class OhlcChart extends Component {
       scripName: null,
     };
   }
+
+  getMonthValueInString(data){
+   if(data == 9) {
+    return "October"
+   }
+   else if(data == 8) {
+    return "September"
+   }
+   else if(data == 7) {
+    return "August"
+   }
+   else if(data == 6) {
+    return "July"
+   }
+   return data;
+
+  }
   componentDidMount() {
     const code = window.location.pathname.split('/')[2] ;
     const urlParams = new URLSearchParams(window.location.search);
@@ -610,7 +627,7 @@ sbSeries.fills.template.setAll({
       paddingBottom: 0
     }));
     scrollbar.chart.children.unshift(am5.Label.new(root, {
-      text: `Trade entry date: ${ new Date(activeTradeDataArray.date).getDate()} / ${ new Date(activeTradeDataArray.date).getMonth()} / ${ new Date(activeTradeDataArray.date).getFullYear()}`,
+      text: `Trade entry date: ${ new Date(activeTradeDataArray.date).getDate()} / ${ this.getMonthValueInString(new Date(activeTradeDataArray.date).getMonth())} / ${ new Date(activeTradeDataArray.date).getFullYear()}`,
       fontSize: 8,
       fontWeight: "50",
       textAlign: "left",

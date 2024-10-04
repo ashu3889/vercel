@@ -1,5 +1,7 @@
 import React from 'react';
 import { Column, Table, AutoSizer } from 'react-virtualized';
+const lookup = require("coordinate_to_country");
+
 import { Link } from 'react-router-dom';
 import './styles.css';
 import 'react-virtualized/styles.css';
@@ -11,6 +13,12 @@ function TableData({articles}) {
   const [debouncedInputValue, setDebouncedInputValue] = React.useState("");
   const [dropDownVal, setDropDownVal] = React.useState("us");
   const [dropDownValTradetype, setDropDownValTradetype] = React.useState("buy");
+
+
+  // <option value="us">Nasdaq</option>
+  // <option value="ind">Indian market</option>
+  // <option value="luna">Crypto</option>
+
   var exchangeArrayList = [
     "London",
     "Xetra",
@@ -32,6 +40,41 @@ function TableData({articles}) {
     "Mexico",
     "Madrid"
   ];
+
+
+  let usOptionData = [
+    {value: 'us', label: 'Nasdaq'},
+    {value: 'ind', label: 'Indian market'},
+    {value: 'luna', label: 'Crypto'},
+  ];
+
+  let indiaOptionData = [
+    {value: 'ind', label: 'Indian market'},
+    {value: 'us', label: 'Nasdaq'},
+    {value: 'luna', label: 'Crypto'},
+  ];
+
+  let selectedOptionDropdown = [...usOptionData];
+
+  // function success(pos) {
+  //   const crd = pos.coords;
+  
+  //   console.log("Your current position is:");
+  //   console.log(`Latitude : ${crd.latitude}`);
+  //   console.log(`Longitude: ${crd.longitude}`);
+  //   console.log(`More or less ${crd.accuracy} meters.`);
+
+  //   var country = lookup(crd.latitude, crd.longitude);
+
+  //   debugger;
+  // }
+
+  // if (navigator.geolocation) {
+  //   let data = navigator.geolocation.getCurrentPosition(success);
+  //   // debugger;
+  // } else {
+  //   // x.innerHTML = "Geolocation is not supported by this browser.";
+  // }
 
   const removeDuplicateValues = (arr) => {
     const unique = [];
@@ -67,7 +110,7 @@ function TableData({articles}) {
         // else use the logic of below unique arr
     }
 
-    debugger;
+    // debugger;
     // for(var i = 0; i < arr.length-1; i++) {
     //   let originalArrMap = arr.filter(x => x.scripName === arr[i].scripName);
     //   let checkScripCodeIndex = originalArrMap.map(x => x.scripCode);
@@ -256,9 +299,16 @@ function TableData({articles}) {
               marginLeft: '10px'
             }}>Select market</legend>
             <select  class="market-selector" id="lang" onChange={change} value={dropDownVal}>
-              <option value="us">Nasdaq</option>
+              {
+                selectedOptionDropdown.map(e => {
+                  let val = e.value;
+                  return (
+                    <option value={val}>{e.label}</option>
+                  )
+              })}
+              {/* <option value="us">Nasdaq</option>
               <option value="ind">Indian market</option>
-              <option value="luna">Crypto</option>
+              <option value="luna">Crypto</option> */}
               {/* <option value="euro">Global markets</option> */}
               {/* <option value="London">London</option>
               <option value="Singapore">Singapore</option>
@@ -343,7 +393,7 @@ function TableData({articles}) {
                           ({ cellData, rowIndex, dataKey }) => {
 
                             if(dataArticle[rowIndex].scripCode === "CSL") {
-                              debugger;
+                              // debugger;
                             }
                             const rowData1 = dataArticle[rowIndex];
                             var navLink = "/chart/?exchange=" + rowData1.exchange + '&symbol=' + rowData1.scripCode;
