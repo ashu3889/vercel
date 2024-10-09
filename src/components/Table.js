@@ -42,10 +42,14 @@ function TableData({articles}) {
   ];
 
 
+  // <option value="euro">Global markets</option> 
+
   let usOptionData = [
     {value: 'us', label: 'Nasdaq'},
     {value: 'ind', label: 'Indian market'},
     {value: 'luna', label: 'Crypto'},
+    {value: 'London', label: 'London (LSE)' },
+    // {value: 'euro', label: 'Global market'},
   ];
 
   let indiaOptionData = [
@@ -156,6 +160,18 @@ function TableData({articles}) {
       modData = removeDuplicateValues(modData);
       modData = modData.filter(x => {
         if((x.exchange.toLowerCase() == "nse" || x.exchange.toLowerCase() == "bse" )&& x.scripName && x.scripName.trim().length > 0) {
+          return true;
+        }
+        return false;
+     }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
+    
+     return modData;
+    }
+    else if(dropDownVal == "London") {
+      modData = modData.filter(x => x.breakingFix);
+      modData = removeDuplicateValues(modData);
+      modData = modData.filter(x => {
+        if((x.exchange.toLowerCase() == "london")&& x.scripName && x.scripName.trim().length > 0) {
           return true;
         }
         return false;
@@ -326,7 +342,26 @@ function TableData({articles}) {
               <option value="Seoul">Seoul</option>
               <option value="Brussels">Brussels</option>
               <option value="Vienna">Vienna</option>
-              <option value="Mexico">Mexico</option> */}
+              <option value="Mexico">Mexico</option> 
+              
+                      <Link 
+          to={'/backtest'} 
+          className="nav-link" 
+          style={{
+            display: 'block',
+            color: 'aliceblue',
+            fontFamily: 'monospace',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            textDecoration: 'underline',
+            marginLeft: '52px',
+            marginTop: '20px'
+          }}
+        >
+          Click here to see backtest result      
+        </Link>
+              
+              */}
             </select>
             <legend className="trade-title-legend" style={{
               display: 'contents',
@@ -339,6 +374,8 @@ function TableData({articles}) {
               <option value="sell" disabled={(dropDownVal !== "us"  ) ? true: false} >Sell</option>
               <option value="both" disabled={(dropDownVal !== "us" ) ? true: false}>Show both</option>
             </select>
+        </div>
+        <div>
         </div>
       </div>
 
