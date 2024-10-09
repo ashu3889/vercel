@@ -7,7 +7,7 @@ import './styles.css';
 import 'react-virtualized/styles.css';
 
 import { useState } from "react";
-import DatePicker from "react-multi-date-picker";
+// import DatePicker from "react-multi-date-picker";
 
 function DatePickerComponent() {
   const today = new Date()
@@ -18,11 +18,14 @@ function DatePickerComponent() {
   const [values, setValues] = useState([today, tomorrow])
 
   return (
-    <DatePicker 
-      multiple
-      value={values} 
-      onChange={setValues}
-    />
+    <>
+      hello world
+    </>
+    // <DatePicker 
+    //   multiple
+    //   value={values} 
+    //   onChange={setValues}
+    // />
   )
 }
 
