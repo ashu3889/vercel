@@ -48,7 +48,11 @@ function TableData({articles}) {
     {value: 'us', label: 'Nasdaq'},
     {value: 'ind', label: 'Indian market'},
     {value: 'luna', label: 'Crypto'},
+    // {value: 'euro', label: 'Europe' }
     {value: 'London', label: 'London (LSE)' },
+    {value: 'Oslo', label: 'Oslo (OSL)' },
+    // {value: 'Hong Kong', label: 'Hong Kong' },
+
     // {value: 'euro', label: 'Global market'},
   ];
 
@@ -179,6 +183,30 @@ function TableData({articles}) {
     
      return modData;
     }
+    else if(dropDownVal == "Oslo") {
+      modData = modData.filter(x => x.breakingFix);
+      modData = removeDuplicateValues(modData);
+      modData = modData.filter(x => {
+        if((x.exchange.toLowerCase() == "oslo")&& x.scripName && x.scripName.trim().length > 0) {
+          return true;
+        }
+        return false;
+     }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
+    
+     return modData;
+    }
+    // else if(dropDownVal == "Hong Kong") {
+    //   modData = modData.filter(x => x.breakingFix);
+    //   modData = removeDuplicateValues(modData);
+    //   modData = modData.filter(x => {
+    //     if((x.exchange.toLowerCase() == "Hong Kong")&& x.scripName && x.scripName.trim().length > 0) {
+    //       return true;
+    //     }
+    //     return false;
+    //  }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
+    
+    //  return modData;
+    // }
     else if(dropDownVal == "luna") {
       modData = modData.filter(x => {
         if(x.exchange.toLowerCase() == "coindcx" ) {
@@ -190,30 +218,30 @@ function TableData({articles}) {
      modData = modData.sort((a9, b) => new Date(b.date) - new Date(a9.date));
      return modData;
     }
-    else if(dropDownVal == "euro") {
-      modData = modData.filter(x => {
-        if(
-          x.exchange.toLowerCase() !== "coindcx" && 
-          x.exchange.toLowerCase() !== "nse" &&
-          x.exchange.toLowerCase() !== "bse" &&
-          x.exchange.toLowerCase() !=="nasdaq" &&
-          x.exchange.toLowerCase()  !== "nyse"
-        ) {
-         return true;
-        }
-        return false;
-     }).sort((a7, b) => new Date(b.date) - new Date(a7.date));
-      // modData = removeDuplicateValues(modData);
-      // if() {
+    // else if(dropDownVal == "euro") {
+    //   modData = modData.filter(x => {
+    //     if(
+    //       x.exchange.toLowerCase() !== "coindcx" && 
+    //       x.exchange.toLowerCase() !== "nse" &&
+    //       x.exchange.toLowerCase() !== "bse" &&
+    //       x.exchange.toLowerCase() !=="nasdaq" &&
+    //       x.exchange.toLowerCase()  !== "nyse"
+    //     ) {
+    //      return true;
+    //     }
+    //     return false;
+    //  }).sort((a7, b) => new Date(b.date) - new Date(a7.date));
+    //   // modData = removeDuplicateValues(modData);
+    //   // if() {
 
-      // }
-      var exchange =  modData.map(x => x.exchange);
-      var exchangeArray = exchange.filter(function(item, pos) {
-        return exchange.indexOf(item) == pos;
-      })
+    //   // }
+    //   var exchange =  modData.map(x => x.exchange);
+    //   var exchangeArray = exchange.filter(function(item, pos) {
+    //     return exchange.indexOf(item) == pos;
+    //   })
 
-     return modData;
-    }
+    //  return modData;
+    // }
     return [];
   }
 
