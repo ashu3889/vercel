@@ -84,6 +84,26 @@ function TableData({articles}) {
   //   // x.innerHTML = "Geolocation is not supported by this browser.";
   // }
 
+
+  const checkExist = (entry, arr) => {
+    var filteredArr = arr.filter(b => {
+      if(
+        b.exchange === entry.exchange && 
+        b.scripName === entry.scripName &&
+        + new Date(b.date) === + new Date(entry.date) &&
+        b.scripCode === entry.scripCode
+      ) {
+        return true
+      }
+      return false;
+    });
+
+    if (filteredArr.length > 0) {
+      return true
+    }
+    return false;
+  }
+
   const removeDuplicateValues = (arr) => {
     const unique = [];
     const uniqueArr = [];
@@ -100,7 +120,11 @@ function TableData({articles}) {
       let checkScripArray = currentArray.filter(x => x.scripCode);
       if(checkScripArray.length > 0) {
         checkScripArray.map( y => {
-          unique.push(y);
+
+          var isExist = checkExist(y, unique);
+          if(!isExist) {
+            unique.push(y);
+          }
           return y;
         });
       }
