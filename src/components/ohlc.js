@@ -73,6 +73,8 @@ class OhlcChart extends Component {
       this.setState({ isGraphDataAvailable: true});
 
       let dataOfConcern = response[response.length-1];
+
+      // debugger;
       const scripName = dataOfConcern.scripName;
 
       // let sidewaysStart = dataOfConcern.sidewaysData.sidewaysEndTick;
@@ -321,6 +323,19 @@ sbSeries.fills.template.setAll({
       }
     });
 
+    var lastTs = data[data.length-1].Date;
+    for(var i = 0 ; i < 45 ; i++) {
+      data.push ({
+        "Open" : null,
+        "High": null,
+        "Low": null,
+        "Close" : null,
+        "Date": lastTs + i*24*60*60*1000
+      })
+    }
+
+    // debugger;
+
     // set data to all series
     valueSeries.data.setAll(data);
     volumeSeries.data.setAll(data);
@@ -469,6 +484,7 @@ sbSeries.fills.template.setAll({
       zoomIndex = (timestampArray.length - sidewaysIndex)/timestampArray.length ;
       zoomIndex = zoomIndex*1.2
       zoomIndex = 1-zoomIndex;
+      //zoomIndex = -0.02;
     }
 
 
@@ -599,12 +615,14 @@ sbSeries.fills.template.setAll({
     // mainPanel.events.on("datavalidated", function(ev) {
     //   // ev.target.get("xAxis").zoom(0.9,1);//start from start date to end
     //   dateAxis.zoom(0.9,1);
-    //   // dateAxis.zoomToValues(1696001908000, 1703864308000);
+    //   // dateAxis.zoomToValues(1696001908500, 1703864308500);
 
     // });
 
     valueSeries.events.once('datavalidated', (ev) => {
       ev.target.get('xAxis').zoom(zoomIndex, 1);
+      // ev.target.get('xAxis')
+      // // debugger;
     });
 
     // scrollbar.chart.children.push(function () {
@@ -626,9 +644,9 @@ sbSeries.fills.template.setAll({
       fontWeight: "bold",
       textAlign: "left",
       x: am5.percent(80),
-      y: am5.percent(80),
+      y: am5.percent(250),
       paddingBottom: 0,
-      fill: 'red'
+      fill: '#000000'
     }));
 
     scrollbar.chart.children.unshift(am5.Label.new(root, {
@@ -636,82 +654,82 @@ sbSeries.fills.template.setAll({
       fontSize: 9,
       fontWeight: "bold",
       textAlign: "left",
-      x: am5.percent(89),
-      y: am5.percent(120),
+      x: am5.percent(85),
+      y: am5.percent(290),
       paddingBottom: 0,
-      fill: '##000000'
+      fill: activeTradeDataArray.tradeType === "Buy" ? 'green' : 'red'
     }));
     scrollbar.chart.children.unshift(am5.Label.new(root, {
       text: `Trade entry date: ${ new Date(activeTradeDataArray.date).getDate()} / ${ this.getMonthValueInString(new Date(activeTradeDataArray.date).getMonth())} / ${ new Date(activeTradeDataArray.date).getFullYear()}`,
       fontSize: 9,
       fontWeight: "bold",
       textAlign: "left",
-      x: am5.percent(89),
-      y: am5.percent(140),
+      x: am5.percent(85),
+      y: am5.percent(310),
       paddingBottom: 0,
-       fill: '##000000'
+      fill: activeTradeDataArray.tradeType === "Buy" ? 'green' : 'red'
     }));
     scrollbar.chart.children.unshift(am5.Label.new(root, {
       text: `Trade entry price: ${activeTradeDataArray.close}`,
       fontSize: 9,
-      fontWeight: "bold",
+      fontWeight: 500,
       textAlign: "left",
-      x: am5.percent(89),
-      y: am5.percent(180),
+      x: am5.percent(85),
+      y: am5.percent(330),
       paddingBottom: 0,
-       fill: '##000000'
+      fill: activeTradeDataArray.tradeType === "Buy" ? 'green' : 'red'
     }));
     scrollbar.chart.children.unshift(am5.Label.new(root, {
       text: `First target: ${activeTradeDataArray.tradeType === "Sell" ? resistanceData.high : supportData.high }`,
       fontSize: 9,
-      fontWeight: "bold",
+      fontWeight: 500,
       textAlign: "left",
-      x: am5.percent(89),
-      y: am5.percent(200),
+      x: am5.percent(85),
+      y: am5.percent(360),
       paddingBottom: 0,
-       fill: '##000000'
+      fill: activeTradeDataArray.tradeType === "Buy" ? 'green' : 'red'
     }));
     scrollbar.chart.children.unshift(am5.Label.new(root, {
       text: `Second target: ${activeTradeDataArray.tradeType === "Sell" ? supportData.high : resistanceData.high }`,
       fontSize: 9,
-      fontWeight: "bold",
+      fontWeight: 500,
       backgroundColor: 'green',
       textAlign: "left",
-      x: am5.percent(89),
-      y: am5.percent(220),
+      x: am5.percent(85),
+      y: am5.percent(380),
       paddingBottom: 0,
-       fill: '##000000'
+      fill: activeTradeDataArray.tradeType === "Buy" ? 'green' : 'red'
     }));
 
     scrollbar.chart.children.unshift(am5.Label.new(root, {
       text: `Sideways support: ${supportData.low}`,
       fontSize: 9,
-      fontWeight: "200",
+      fontWeight: 500,
       textAlign: "left",
-      x: am5.percent(89),
-      y: am5.percent(250),
+      x: am5.percent(85),
+      y: am5.percent(410),
       paddingBottom: 0,
-       fill: '##000000'
+      fill: activeTradeDataArray.tradeType === "Buy" ? 'green' : 'red'
     }));
     scrollbar.chart.children.unshift(am5.Label.new(root, {
       text: `Sideways resistance: ${resistanceData.high}`,
       fontSize: 9,
-      fontWeight: "200",
+      fontWeight: 500,
       textAlign: "left",
-      x: am5.percent(89),
-      y: am5.percent(270),
+      x: am5.percent(85),
+      y: am5.percent(430),
       paddingBottom: 0,
-       fill: '##000000'
+      fill: activeTradeDataArray.tradeType === "Buy" ? 'green' : 'red'
     }));
     scrollbar.chart.children.unshift(am5.Label.new(root, {
       text: `Sideways breakout retest line: ${retestLinePoint}`,
       fontSize: 9,
-      fontWeight: "200",
+      fontWeight: 500,
       textAlign: "left",
-      x: am5.percent(89),
-      y: am5.percent(290),
+      x: am5.percent(85),
+      y: am5.percent(450),
       paddingBottom: 0,
-       fill: '##000000'
+      fill: activeTradeDataArray.tradeType === "Buy" ? 'green' : 'red'
     }));
  
     });
