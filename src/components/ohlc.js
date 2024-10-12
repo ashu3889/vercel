@@ -680,7 +680,7 @@ sbSeries.fills.template.setAll({
       fill: activeTradeDataArray.tradeType === "Buy" ? 'green' : 'red'
     }));
     scrollbar.chart.children.unshift(am5.Label.new(root, {
-      text: `First target: ${activeTradeDataArray.tradeType === "Sell" ? resistanceData.high : supportData.high }`,
+      text: `First target: ${activeTradeDataArray.tradeType === "Sell" ? resistanceData.high : supportData.low }`,
       fontSize: 9,
       fontWeight: 500,
       textAlign: "left",
