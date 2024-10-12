@@ -68,6 +68,7 @@ function TableData({articles}) {
     {value: 'ind', label: 'Indian market'},
     {value: 'luna', label: 'Crypto'},
     {value: 'london', label: 'London (LSE)' },
+    {value: 'xetra', label: 'Xetra' },
     {value: 'oslo', label: 'Oslo (OSL)' },
     {value: 'switzerland', label: 'Switzerland' },
     // {value: 'Tokyo', label: 'Tokyo' },
@@ -242,6 +243,18 @@ function TableData({articles}) {
       modData = removeDuplicateValues(modData);
       modData = modData.filter(x => {
         if((x.exchange.toLowerCase() == "switzerland")&& x.scripName && x.scripName.trim().length > 0) {
+          return true;
+        }
+        return false;
+     }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
+    
+     return modData;
+    }
+    else if(dropDownVal == "xetra") {
+      modData = modData.filter(x => x.breakingFix);
+      modData = removeDuplicateValues(modData);
+      modData = modData.filter(x => {
+        if((x.exchange.toLowerCase() == "xetra")&& x.scripName && x.scripName.trim().length > 0) {
           return true;
         }
         return false;
