@@ -6,16 +6,35 @@ import { Link } from 'react-router-dom';
 import './styles.css';
 import 'react-virtualized/styles.css';
 
+function getQueryVariable(variable)
+{
+        var query = window.location.search.substring(1);
+        console.log(query)//"app=article&act=news_content&aid=160990"
+        var vars = query.split("&");
+        console.log(vars) //[ 'app=article', 'act=news_content', 'aid=160990' ]
+        for (var i=0;i<vars.length;i++) {
+                    var pair = vars[i].split("=");
+                    console.log(pair)//[ 'app', 'article' ][ 'act', 'news_content' ][ 'aid', '160990' ] 
+        if(pair[0] == variable){return pair[1];}
+         }
+         return(false);
+}
+
 function TableData({articles}) {
+  let selectedVal = 'nasdaq'
+  let exchange = getQueryVariable('exchange');
+  if(exchange) {
+    selectedVal = exchange.toLowerCase();
+  }
   const [searchedStock, setSearchedStock] = React.useState('');
   const [dataArticle, setDataArticle] = React.useState([...articles]);
   const [inputValue, setInputValue] = React.useState("");
   const [debouncedInputValue, setDebouncedInputValue] = React.useState("");
-  const [dropDownVal, setDropDownVal] = React.useState("us");
+  const [dropDownVal, setDropDownVal] = React.useState(selectedVal);
   const [dropDownValTradetype, setDropDownValTradetype] = React.useState("buy");
 
 
-  // <option value="us">Nasdaq</option>
+  // <option value="nasdaq">Nasdaq</option>
   // <option value="ind">Indian market</option>
   // <option value="luna">Crypto</option>
 
@@ -45,20 +64,19 @@ function TableData({articles}) {
   // <option value="euro">Global markets</option> 
 
   let usOptionData = [
-    {value: 'us', label: 'Nasdaq'},
+    {value: 'nasdaq', label: 'Nasdaq'},
     {value: 'ind', label: 'Indian market'},
     {value: 'luna', label: 'Crypto'},
-    // {value: 'euro', label: 'Europe' }
-    {value: 'London', label: 'London (LSE)' },
-    {value: 'Oslo', label: 'Oslo (OSL)' },
-    // {value: 'Hong Kong', label: 'Hong Kong' },
-
+    {value: 'london', label: 'London (LSE)' },
+    {value: 'oslo', label: 'Oslo (OSL)' },
+    {value: 'switzerland', label: 'Switzerland' },
+    // {value: 'Tokyo', label: 'Tokyo' },
     // {value: 'euro', label: 'Global market'},
   ];
 
   let indiaOptionData = [
     {value: 'ind', label: 'Indian market'},
-    {value: 'us', label: 'Nasdaq'},
+    {value: 'nasdaq', label: 'Nasdaq'},
     {value: 'luna', label: 'Crypto'},
   ];
 
@@ -172,7 +190,7 @@ function TableData({articles}) {
     else if(dropDownValTradetype === "sell"){
       modData = modData.filter(a2 => a2.tradeType === "Sell");
     }
-    if(dropDownVal == "us") {
+    if(dropDownVal == "nasdaq") {
       modData = modData.filter(x => {
          if(x.exchange.toLowerCase() == "nasdaq" || x.exchange.toLowerCase() == "nyse" ) {
           return true;
@@ -195,7 +213,7 @@ function TableData({articles}) {
     
      return modData;
     }
-    else if(dropDownVal == "London") {
+    else if(dropDownVal == "london") {
       modData = modData.filter(x => x.breakingFix);
       modData = removeDuplicateValues(modData);
       modData = modData.filter(x => {
@@ -207,7 +225,7 @@ function TableData({articles}) {
     
      return modData;
     }
-    else if(dropDownVal == "Oslo") {
+    else if(dropDownVal == "oslo") {
       modData = modData.filter(x => x.breakingFix);
       modData = removeDuplicateValues(modData);
       modData = modData.filter(x => {
@@ -219,18 +237,18 @@ function TableData({articles}) {
     
      return modData;
     }
-    // else if(dropDownVal == "Hong Kong") {
-    //   modData = modData.filter(x => x.breakingFix);
-    //   modData = removeDuplicateValues(modData);
-    //   modData = modData.filter(x => {
-    //     if((x.exchange.toLowerCase() == "Hong Kong")&& x.scripName && x.scripName.trim().length > 0) {
-    //       return true;
-    //     }
-    //     return false;
-    //  }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
+    else if(dropDownVal == "switzerland") {
+      modData = modData.filter(x => x.breakingFix);
+      modData = removeDuplicateValues(modData);
+      modData = modData.filter(x => {
+        if((x.exchange.toLowerCase() == "switzerland")&& x.scripName && x.scripName.trim().length > 0) {
+          return true;
+        }
+        return false;
+     }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
     
-    //  return modData;
-    // }
+     return modData;
+    }
     else if(dropDownVal == "luna") {
       modData = modData.filter(x => {
         if(x.exchange.toLowerCase() == "coindcx" ) {
@@ -242,6 +260,18 @@ function TableData({articles}) {
      modData = modData.sort((a9, b) => new Date(b.date) - new Date(a9.date));
      return modData;
     }
+    // else if(dropDownVal == "Tokyo") {
+    //   modData = modData.filter(x => x.breakingFix);
+    //   modData = removeDuplicateValues(modData);
+    //   modData = modData.filter(x => {
+    //     if((x.exchange.toLowerCase() == "tokyo")&& x.scripName && x.scripName.trim().length > 0) {
+    //       return true;
+    //     }
+    //     return false;
+    //  }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
+    
+    //  return modData;
+    // }
     // else if(dropDownVal == "euro") {
     //   modData = modData.filter(x => {
     //     if(
@@ -374,7 +404,7 @@ function TableData({articles}) {
                     <option value={val}>{e.label}</option>
                   )
               })}
-              {/* <option value="us">Nasdaq</option>
+              {/* <option value="nasdaq">Nasdaq</option>
               <option value="ind">Indian market</option>
               <option value="luna">Crypto</option> */}
               {/* <option value="euro">Global markets</option> */}
@@ -423,8 +453,8 @@ function TableData({articles}) {
             }}>Select trade</legend>
             <select  class="direction-selector" id="lang" onChange={changeTradetype} value={dropDownValTradetype}>
               <option value="buy">Buy</option>
-              <option value="sell" disabled={(dropDownVal !== "us"  ) ? true: false} >Sell</option>
-              <option value="both" disabled={(dropDownVal !== "us" ) ? true: false}>Show both</option>
+              <option value="sell" disabled={(dropDownVal !== "nasdaq"  ) ? true: false} >Sell</option>
+              <option value="both" disabled={(dropDownVal !== "nasdaq" ) ? true: false}>Show both</option>
             </select>
         </div>
         <div>
