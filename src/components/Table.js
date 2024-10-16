@@ -69,10 +69,10 @@ function TableData({articles}) {
     {value: 'luna', label: 'Crypto'},
     {value: 'london', label: 'London (LSE)' },
     {value: 'xetra', label: 'Xetra' },
-    {value: 'oslo', label: 'Oslo (OSL)' },
-    {value: 'switzerland', label: 'Switzerland' },
+    // {value: 'oslo', label: 'Oslo (OSL)' },
+    // {value: 'switzerland', label: 'Switzerland' },
     // {value: 'Tokyo', label: 'Tokyo' },
-    // {value: 'euro', label: 'Global market'},
+    {value: 'euro', label: 'Global market'},
   ];
 
   let indiaOptionData = [
@@ -273,42 +273,42 @@ function TableData({articles}) {
      modData = modData.sort((a9, b) => new Date(b.date) - new Date(a9.date));
      return modData;
     }
-    // else if(dropDownVal == "Tokyo") {
-    //   modData = modData.filter(x => x.breakingFix);
-    //   modData = removeDuplicateValues(modData);
-    //   modData = modData.filter(x => {
-    //     if((x.exchange.toLowerCase() == "tokyo")&& x.scripName && x.scripName.trim().length > 0) {
-    //       return true;
-    //     }
-    //     return false;
-    //  }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
+    else if(dropDownVal == "Tokyo") {
+      modData = modData.filter(x => x.breakingFix);
+      modData = removeDuplicateValues(modData);
+      modData = modData.filter(x => {
+        if((x.exchange.toLowerCase() == "tokyo")&& x.scripName && x.scripName.trim().length > 0) {
+          return true;
+        }
+        return false;
+     }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
     
-    //  return modData;
-    // }
-    // else if(dropDownVal == "euro") {
-    //   modData = modData.filter(x => {
-    //     if(
-    //       x.exchange.toLowerCase() !== "coindcx" && 
-    //       x.exchange.toLowerCase() !== "nse" &&
-    //       x.exchange.toLowerCase() !== "bse" &&
-    //       x.exchange.toLowerCase() !=="nasdaq" &&
-    //       x.exchange.toLowerCase()  !== "nyse"
-    //     ) {
-    //      return true;
-    //     }
-    //     return false;
-    //  }).sort((a7, b) => new Date(b.date) - new Date(a7.date));
-    //   // modData = removeDuplicateValues(modData);
-    //   // if() {
+     return modData;
+    }
+    else if(dropDownVal == "euro") {
+      modData = modData.filter(x => {
+        if(
+          x.exchange.toLowerCase() !== "coindcx" && 
+          x.exchange.toLowerCase() !== "nse" &&
+          x.exchange.toLowerCase() !== "bse" &&
+          x.exchange.toLowerCase() !=="nasdaq" &&
+          x.exchange.toLowerCase()  !== "nyse"
+        ) {
+         return true;
+        }
+        return false;
+     }).sort((a7, b) => new Date(b.date) - new Date(a7.date));
+      // modData = removeDuplicateValues(modData);
+      // if() {
 
-    //   // }
-    //   var exchange =  modData.map(x => x.exchange);
-    //   var exchangeArray = exchange.filter(function(item, pos) {
-    //     return exchange.indexOf(item) == pos;
-    //   })
+      // }
+      var exchange =  modData.map(x => x.exchange);
+      var exchangeArray = exchange.filter(function(item, pos) {
+        return exchange.indexOf(item) == pos;
+      })
 
-    //  return modData;
-    // }
+     return modData;
+    }
     return [];
   }
 
