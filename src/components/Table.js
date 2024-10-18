@@ -184,6 +184,7 @@ function TableData({articles}) {
   }
 
   const getDataBasedOnCountry = (data) => {
+    // return data.sort((a5, b) => new Date(b.date) - new Date(a5.date));
     let modData = [...data];
     if(dropDownValTradetype === "buy") {
       modData = modData.filter(a1 => a1.tradeType === "Buy" ||  a1.tradeType === "'Buy'::character varying");
@@ -331,7 +332,7 @@ function TableData({articles}) {
       let data1 = getDataBasedOnCountry(articles);
       const newData = data1.filter(a8 =>  {
         if(a8.scripName) {
-          return a8.scripName.toLowerCase().startsWith(debouncedInputValue);
+          return a8.scripName.toLowerCase().includes(debouncedInputValue.toLowerCase());
         }
         return false;
       });
