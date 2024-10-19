@@ -68,13 +68,17 @@ class OhlcChart extends Component {
         return false;
       }
 
+      response = response.sort((a,b) => +new Date(a.created_at) - +new Date(b.created_at) );
+
 
 
       this.setState({ isGraphDataAvailable: true});
 
+      // debugger;
+
       let dataOfConcern = response[response.length-1];
 
-      // debugger;
+      // // debugger;
       const scripName = dataOfConcern.scripName;
 
       // let sidewaysStart = dataOfConcern.sidewaysData.sidewaysEndTick;
@@ -315,7 +319,7 @@ sbSeries.fills.template.setAll({
     })
 
     // data
-    var data = [...response[0].jsonData];
+    var data = [...dataOfConcern.jsonData];
     data = data.map((x) => {
       return {
         ...x,
@@ -323,7 +327,10 @@ sbSeries.fills.template.setAll({
       }
     });
 
+    // debugger;
+
     var lastTs = data[data.length-1].Date;
+    // debugger;
     for(var i = 0 ; i < 45 ; i++) {
       data.push ({
         "Open" : null,
@@ -335,6 +342,8 @@ sbSeries.fills.template.setAll({
     }
 
     // debugger;
+
+    // // debugger;
 
     // set data to all series
     valueSeries.data.setAll(data);
@@ -622,7 +631,7 @@ sbSeries.fills.template.setAll({
     valueSeries.events.once('datavalidated', (ev) => {
       ev.target.get('xAxis').zoom(zoomIndex, 1);
       // ev.target.get('xAxis')
-      // // debugger;
+      // // // debugger;
     });
 
     // scrollbar.chart.children.push(function () {
