@@ -66,13 +66,13 @@ function TableData({articles}) {
   let usOptionData = [
     {value: 'nasdaq', label: 'Nasdaq'},
     {value: 'ind', label: 'Indian market'},
-    {value: 'luna', label: 'Crypto'},
     {value: 'london', label: 'London (LSE)' },
     {value: 'xetra', label: 'Xetra' },
-    // {value: 'oslo', label: 'Oslo (OSL)' },
-    // {value: 'switzerland', label: 'Switzerland' },
-    // {value: 'Tokyo', label: 'Tokyo' },
+    {value: 'sydney', label: 'Sydney' },
+    {value: 'scandinavia', label: 'Scandinavia' },
+    {value: 'tokyo', label: 'Tokyo' },
     {value: 'euro', label: 'Global market'},
+    {value: 'luna', label: 'Crypto'},
   ];
 
   let indiaOptionData = [
@@ -227,11 +227,14 @@ function TableData({articles}) {
     
      return modData;
     }
-    else if(dropDownVal == "oslo") {
+    else if(dropDownVal == "sydney") {
       modData = modData.filter(x => x.breakingFix);
       modData = removeDuplicateValues(modData);
       modData = modData.filter(x => {
-        if((x.exchange.toLowerCase() == "oslo")&& x.scripName && x.scripName.trim().length > 0) {
+        if((
+          x.exchange.toLowerCase() == "sydney" 
+        
+        )&& x.scripName && x.scripName.trim().length > 0) {
           return true;
         }
         return false;
@@ -239,11 +242,15 @@ function TableData({articles}) {
     
      return modData;
     }
-    else if(dropDownVal == "switzerland") {
+    else if(dropDownVal == "scandinavia") {
       modData = modData.filter(x => x.breakingFix);
       modData = removeDuplicateValues(modData);
       modData = modData.filter(x => {
-        if((x.exchange.toLowerCase() == "switzerland")&& x.scripName && x.scripName.trim().length > 0) {
+        if((
+          x.exchange.toLowerCase() == "stockholm" ||
+          x.exchange.toLowerCase() == "helsinki" ||
+          x.exchange.toLowerCase() == "oslo" 
+        )&& x.scripName && x.scripName.trim().length > 0) {
           return true;
         }
         return false;
@@ -274,7 +281,7 @@ function TableData({articles}) {
      modData = modData.sort((a9, b) => new Date(b.date) - new Date(a9.date));
      return modData;
     }
-    else if(dropDownVal == "Tokyo") {
+    else if(dropDownVal == "tokyo") {
       modData = modData.filter(x => x.breakingFix);
       modData = removeDuplicateValues(modData);
       modData = modData.filter(x => {
@@ -293,7 +300,14 @@ function TableData({articles}) {
           x.exchange.toLowerCase() !== "nse" &&
           x.exchange.toLowerCase() !== "bse" &&
           x.exchange.toLowerCase() !=="nasdaq" &&
-          x.exchange.toLowerCase()  !== "nyse"
+          x.exchange.toLowerCase()  !== "nyse" &&
+          x.exchange.toLowerCase()  !== "tokyo" &&
+           x.exchange.toLowerCase()  !== "london" &&
+           x.exchange.toLowerCase() !== "stockholm" &&
+           x.exchange.toLowerCase() !== "helsinki" &&
+           x.exchange.toLowerCase() !== "oslo" &&
+           x.exchange.toLowerCase() !== "xetra" &&
+           x.exchange.toLowerCase() !== "sydney"
         ) {
          return true;
         }
