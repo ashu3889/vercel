@@ -67,11 +67,11 @@ function TableData({articles}) {
     {value: 'nasdaq', label: 'Nasdaq'},
     {value: 'ind', label: 'Indian market'},
     {value: 'london', label: 'London (LSE)' },
-    {value: 'xetra', label: 'Xetra' },
+    {value: 'europe', label: 'Europe' },
     {value: 'sydney', label: 'Sydney' },
     {value: 'scandinavia', label: 'Scandinavia' },
     {value: 'tokyo', label: 'Tokyo' },
-    {value: 'euro', label: 'Global market'},
+    {value: 'global', label: 'Global market'},
     {value: 'luna', label: 'Crypto'},
   ];
 
@@ -227,6 +227,26 @@ function TableData({articles}) {
     
      return modData;
     }
+    else if(dropDownVal == "europe") {
+      modData = modData.filter(x => x.breakingFix);
+      modData = removeDuplicateValues(modData);
+      modData = modData.filter(x => {
+        if((
+          x.exchange.toLowerCase() == "paris"  ||
+           x.exchange.toLowerCase() == "milan"  ||
+           x.exchange.toLowerCase() == "warsaw" ||
+           x.exchange.toLowerCase() == "bats europe" ||
+          x.exchange.toLowerCase() == "madrid"  ||
+           x.exchange.toLowerCase() == "switzerland"  ||
+           x.exchange.toLowerCase() == "vienna" 
+        )&& x.scripName && x.scripName.trim().length > 0) {
+          return true;
+        }
+        return false;
+     }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
+    
+     return modData;
+    }
     else if(dropDownVal == "sydney") {
       modData = modData.filter(x => x.breakingFix);
       modData = removeDuplicateValues(modData);
@@ -293,7 +313,7 @@ function TableData({articles}) {
     
      return modData;
     }
-    else if(dropDownVal == "euro") {
+    else if(dropDownVal == "global") {
       modData = modData.filter(x => {
         if(
           x.exchange.toLowerCase() !== "coindcx" && 
@@ -306,8 +326,15 @@ function TableData({articles}) {
            x.exchange.toLowerCase() !== "stockholm" &&
            x.exchange.toLowerCase() !== "helsinki" &&
            x.exchange.toLowerCase() !== "oslo" &&
-           x.exchange.toLowerCase() !== "xetra" &&
-           x.exchange.toLowerCase() !== "sydney"
+          //  x.exchange.toLowerCase() !== "xetra" &&
+           x.exchange.toLowerCase() !== "sydney" &&
+             x.exchange.toLowerCase() !== "paris"  &&
+           x.exchange.toLowerCase() !== "milan"  &&
+           x.exchange.toLowerCase() !== "warsaw" &&
+           x.exchange.toLowerCase() !==  "bats europe" &&
+          x.exchange.toLowerCase() !==  "madrid"  &&
+           x.exchange.toLowerCase() !==  "switzerland" &&
+           x.exchange.toLowerCase() !==  "vienna" 
         ) {
          return true;
         }
