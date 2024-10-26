@@ -6,6 +6,95 @@ import { Link } from 'react-router-dom';
 import './styles.css';
 import 'react-virtualized/styles.css';
 
+function countryCodeToFlag(countryCode) {
+
+
+  var map = {
+    'NASDAQ' : 'us',
+    'NYSE': 'us',
+    "London": 'gb',
+    "Xetra": 'de',
+    "Sydney": 'au',
+    "Toronto": 'ca',
+    "Switzerland": 'ch',
+    "Paris": 'fr',
+    "Milan": 'it',
+    "Tokyo": 'jp',
+    "Amsterdam" : 'nl',
+    "Hong Kong": "hk",
+    "Tel Aviv": "il",
+    "Stockholm": 'se',
+    "Seoul": 'kr',
+    "Brussels": 'be',
+    "Vienna": 'at',
+    "Singapore":'sg',
+    "Oslo": "no",
+    "Mexico": "mx",
+    "Madrid": 'es',
+    "NSE": 'in',
+    'BSE': 'in',
+    "Jakarta": 'id',
+    "Mexico": 'mx',
+    "Singapore" : 'sg',
+    "Taiwan": 'tw',
+    "Istanbul": 'tr',
+    "Paris": 'fr',
+    "Frankfurt": 'de',
+    "Shenzhen":  'cn',
+    "Stuttgart": 'de',
+    "BSE" : 'in',
+    "Berlin" : 'de',
+    "Shanghai": 'cn',
+    "Doha": 'qa',
+    "Tokyo" : 'jp',
+    "Johannesburg": 'za',
+    "New Zealand": 'nz',
+    "Thailand": 'th',
+    "Warsaw": 'pl',
+    "Kuala Lumpur" : 'my',
+    "Karachi": 'pk',
+    "Lagos": 'ng',
+    "Mauritius": 'mu',
+    "Hong Kong": 'hk',
+    "Abu Dhabi": 'ae',
+    "Dubai" : 'ae',
+    "Athens": 'gr',
+    "Sofia": 'bg',
+    "Budapest": 'hu',
+    "Hamburg": 'de',
+    "Madrid": 'es',
+    "Lima": 'pe',
+    "Egypt" : 'eg',
+    "Dusseldorf": 'de',
+    "Helsinki":'fi',
+    "Iceland": 'is',
+    "Ho Chi Minh" : 'vn',
+    "Stockholm" :'se',
+    "Buenos Aires": 'ar',
+    "Bucharest" : 'rou'
+  };
+
+  var countryCode = map[countryCode];
+
+
+
+
+  // Validate the input to be exactly two characters long and all alphabetic
+  if (!countryCode || countryCode.length !== 2 || !/^[a-zA-Z]+$/.test(countryCode)) {
+    return '🏳️'; // White Flag Emoji for unknown or invalid country codes
+  }
+
+  // Convert the country code to uppercase to match the regional indicator symbols
+  const code = countryCode.toUpperCase();
+  
+  // Calculate the offset for the regional indicator symbols
+  const offset = 127397;
+  
+  // Convert each letter in the country code to its corresponding regional indicator symbol
+  const flag = Array.from(code).map(letter => String.fromCodePoint(letter.charCodeAt(0) + offset)).join('');
+  
+  return flag;
+}
 function getQueryVariable(variable)
 {
         var query = window.location.search.substring(1);
@@ -593,8 +682,14 @@ function TableData({articles}) {
                       }
                       dataKey="scripName" 
                       cellRenderer={
-                        ({ cellData }) => {
-                          return <span className="stock-name-column">{cellData}</span>
+                        ({ cellData, rowIndex }) => {
+                          const exchange = dataArticle[rowIndex].exchange ;
+                          return  (
+                            <div>
+                              <span>{countryCodeToFlag(exchange)}  </span>
+                              <span className="stock-name-column">{cellData}</span>
+                            </div>
+                          )
                         }
                       }
                     />
