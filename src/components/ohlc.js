@@ -33,6 +33,96 @@ class OhlcChart extends Component {
    return data;
 
   }
+
+  countryCodeToFlag(countryCode) {
+
+
+    var map = {
+      'NASDAQ' : 'us',
+      'NYSE': 'us',
+      "London": 'gb',
+      "Xetra": 'de',
+      "Sydney": 'au',
+      "Toronto": 'ca',
+      "Switzerland": 'ch',
+      "Paris": 'fr',
+      "Milan": 'it',
+      "Tokyo": 'jp',
+      "Amsterdam" : 'nl',
+      "Hong Kong": "hk",
+      "Tel Aviv": "il",
+      "Stockholm": 'se',
+      "Seoul": 'kr',
+      "Brussels": 'be',
+      "Vienna": 'at',
+      "Singapore":'sg',
+      "Oslo": "no",
+      "Mexico": "mx",
+      "Madrid": 'es',
+      "NSE": 'in',
+      'BSE': 'in',
+      "Jakarta": 'id',
+      "Mexico": 'mx',
+      "Singapore" : 'sg',
+      "Taiwan": 'tw',
+      "Istanbul": 'tr',
+      "Paris": 'fr',
+      "Frankfurt": 'de',
+      "Shenzhen":  'cn',
+      "Stuttgart": 'de',
+      "BSE" : 'in',
+      "Berlin" : 'de',
+      "Shanghai": 'cn',
+      "Doha": 'qa',
+      "Tokyo" : 'jp',
+      "Johannesburg": 'za',
+      "New Zealand": 'nz',
+      "Thailand": 'th',
+      "Warsaw": 'pl',
+      "Kuala Lumpur" : 'my',
+      "Karachi": 'pk',
+      "Lagos": 'ng',
+      "Mauritius": 'mu',
+      "Hong Kong": 'hk',
+      "Abu Dhabi": 'ae',
+      "Dubai" : 'ae',
+      "Athens": 'gr',
+      "Sofia": 'bg',
+      "Budapest": 'hu',
+      "Hamburg": 'de',
+      "Madrid": 'es',
+      "Lima": 'pe',
+      "Egypt" : 'eg',
+      "Dusseldorf": 'de',
+      "Helsinki":'fi',
+      "Iceland": 'is',
+      "Ho Chi Minh" : 'vn',
+      "Stockholm" :'se',
+      "Buenos Aires": 'ar',
+      "Bucharest" : 'rou'
+    };
+  
+    var countryCode = map[countryCode];
+  
+  
+  
+  
+    // Validate the input to be exactly two characters long and all alphabetic
+    if (!countryCode || countryCode.length !== 2 || !/^[a-zA-Z]+$/.test(countryCode)) {
+      return '🏳️'; // White Flag Emoji for unknown or invalid country codes
+    }
+  
+    // Convert the country code to uppercase to match the regional indicator symbols
+    const code = countryCode.toUpperCase();
+    
+    // Calculate the offset for the regional indicator symbols
+    const offset = 127397;
+    
+    // Convert each letter in the country code to its corresponding regional indicator symbol
+    const flag = Array.from(code).map(letter => String.fromCodePoint(letter.charCodeAt(0) + offset)).join('');
+    
+    return flag;
+  }
   componentDidMount() {
     const code = window.location.pathname.split('/')[2] ;
     const urlParams = new URLSearchParams(window.location.search);
@@ -78,8 +168,11 @@ class OhlcChart extends Component {
 
       let dataOfConcern = response[response.length-1];
 
+
+
       // // debugger;
-      const scripName = dataOfConcern.scripName;
+      const scripName1 = dataOfConcern.scripName;
+      const exchange = dataOfConcern.exchangeName;
 
       // let sidewaysStart = dataOfConcern.sidewaysData.sidewaysEndTick;
       // let sidewaysEndtick = dataOfConcern.sidewaysData.sidewaysStartTick;
@@ -152,7 +245,7 @@ var dateAxis = mainPanel.xAxes.push(am5xy.GaplessDateAxis.new(root, {
 // -------------------------------------------------------------------------------
 // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
 var valueSeries = mainPanel.series.push(am5xy.CandlestickSeries.new(root, {
-  name: dataOfConcern.scripCode,
+  name: `${this.countryCodeToFlag(exchange)} ${scripName1}`,
   clustered: false,
   valueXField: "Date",
   valueYField: "Close",
@@ -646,6 +739,19 @@ sbSeries.fills.template.setAll({
     //     }),
     //   });
     // });
+
+    // debugger;
+
+    // scrollbar.chart.children.unshift(am5.Label.new(root, {
+    //   text: `${this.countryCodeToFlag(exchange)} ${scripName1}`,
+    //   fontSize: 20,
+    //   fontWeight: "bold",
+    //   textAlign: "left",
+    //   x: am5.percent(82),
+    //   y: am5.percent(180),
+    //   paddingBottom: 0,
+    //   fill: '#000000'
+    // }));
 
     scrollbar.chart.children.unshift(am5.Label.new(root, {
       text: "Trading setup Notes: Disclaimer: This is informational only",
