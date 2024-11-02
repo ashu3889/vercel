@@ -754,7 +754,7 @@ sbSeries.fills.template.setAll({
     // }));
 
     scrollbar.chart.children.unshift(am5.Label.new(root, {
-      text: "Trading setup Notes: Disclaimer: This is informational only",
+      text: "Trading setup Notes: Disclaimer: No Financial advise.",
       fontSize: 9,
       fontWeight: "bold",
       textAlign: "left",
