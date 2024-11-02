@@ -6,6 +6,147 @@ import { Link } from 'react-router-dom';
 import './styles.css';
 import 'react-virtualized/styles.css';
 
+var bitcoinExchange = [
+  "ViteX",
+  "Synthetic",
+  "BitMart",
+  "KuCoin",
+  "",
+  "Cryptopia",
+  "Gate.io",
+  "MEXC",
+  "Graviex",
+  "Binance",
+  "HTX",
+  "YoBit",
+  "CoinExchange",
+  "CoinEx",
+  "Bibox",
+  "Kraken",
+  "WazirX",
+  "Coins.ph",
+  "C-Patex",
+  "Bitrue",
+  "ProBit Exchange",
+  "Bitbns",
+  "HitBTC",
+  "Bittrex",
+  "SouthXchange",
+  "FTX",
+  "Trade Satoshi",
+  "STEX",
+  "FinexBox",
+  "IDAX",
+  "Mercatox",
+  "LBank",
+  "Zonda (BitBay)",
+  "AscendEX (BitMax)",
+  "Bilaxy",
+  "XT.COM",
+  "BigONE",
+  "Independent Reserve",
+  "Altilly",
+  "Korbit",
+  "TradeOgre",
+  "Bitget",
+  "Paribu",
+  "XeggeX",
+  "FreiExchange",
+  "Coinbase Pro",
+  "EXMO.ME",
+  "Coinstore",
+  "Crex24",
+  "EXMO",
+  "Coinsbit",
+  "Upbit",
+  "GOPAX",
+  "SafeTrade",
+  "CoinW",
+  "Hotbit",
+  "LATOKEN",
+  "Indodax",
+  "OKX",
+  "P2PB2B",
+  "BitForex",
+  "Bithumb",
+  "Bitbank",
+  "Nova Exchange",
+  "CryptoBridge",
+  "Poloniex",
+  "Coinmetro",
+  "HCoin",
+  "VinDAX",
+  "EtherDelta",
+  "DigiFinex",
+  "Txbit",
+  "Bitkub",
+  "Bitfinex",
+  "BTC Markets",
+  "Bitvavo",
+  "CEX.IO",
+  "Livecoin",
+  "BitGlobal",
+  "AEX",
+  "Tokpie",
+  "ExMarkets",
+  "Coinbene",
+  "Waves Decentralized Exchange",
+  "OrangeX",
+  "Coinone",
+  "Bitso",
+  "Binance DEX",
+  "Luno",
+  "Zaif",
+  "Liqui",
+  "Tidex",
+  "BTCTurk",
+  "Bancor Network",
+  "BTSE",
+  "Crypto.com Exchange",
+  "Liquid",
+  "CoinTiger",
+  "Bit-Z",
+  "NLexch",
+  "TruBit Pro Exchange",
+  "IDEX",
+  "Orbix",
+  "MercadoBitcoin",
+  "TOPBTC",
+  "StakeCube",
+  "IndoEx",
+  "NovaDAX",
+  "Coingecko",
+  "AltCoinTrader",
+  "Fatbtc",
+  "Lykke Exchange",
+  "Chiliz",
+  "Cryptonex",
+  "COSS",
+  "Bitexen",
+  "Gemini",
+  "OTCBTC",
+  "COINEGG",
+  "Exrates",
+  "Kryptono",
+  "IDCM",
+  "Token Store",
+  "FMFW.io",
+  "CoinDCX",
+  "Stocks.Exchange",
+  "BitStamp",
+  "C-CEX",
+  "bitFlyer",
+  "ForkDelta",
+  "Stellarport",
+  "KoinBX",
+  "Dcoin",
+  "TOKOK",
+  "DragonEX",
+  "ZT",
+  "ZB.COM",
+  "PayBito"
+];
+
 function countryCodeToFlag(countryCode) {
 
 
@@ -354,22 +495,22 @@ function TableData({articles}) {
     
      return modData;
     }
-    else if(dropDownVal == "jp") {
-      modData = modData.filter(x => x.breakingFix);
-      modData = removeDuplicateValues(modData);
-      modData = modData.filter(x => {
-        if((
-            x.exchange.toLowerCase() == "seoul" || 
-            x.exchange.toLowerCase() == "taiwan" ||
-            x.exchange.toLowerCase() == "tokyo" 
-          )&& x.scripName && x.scripName.trim().length > 0) {
-          return true;
-        }
-        return false;
-     }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
+    // else if(dropDownVal == "jp") {
+    //   modData = modData.filter(x => x.breakingFix);
+    //   modData = removeDuplicateValues(modData);
+    //   modData = modData.filter(x => {
+    //     if((
+    //         x.exchange.toLowerCase() == "seoul" || 
+    //         x.exchange.toLowerCase() == "taiwan" ||
+    //         x.exchange.toLowerCase() == "tokyo" 
+    //       )&& x.scripName && x.scripName.trim().length > 0) {
+    //       return true;
+    //     }
+    //     return false;
+    //  }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
     
-     return modData;
-    }
+    //  return modData;
+    // }
     else if(dropDownVal == "hk") {
       modData = modData.filter(x => x.breakingFix);
       modData = removeDuplicateValues(modData);
@@ -418,8 +559,16 @@ function TableData({articles}) {
     }
     else if(dropDownVal == "luna") {
       modData = modData.filter(x => {
+        //bitcoinExchange
+
+
         if(x.exchange.toLowerCase() == "coindcx" ) {
          return true;
+        }
+        if (
+          bitcoinExchange.indexOf(x.exchange) !== -1 
+        ) {
+          return true;
         }
         return false;
      }).sort((a6, b) => new Date(b.date) - new Date(a6.date));
@@ -430,6 +579,7 @@ function TableData({articles}) {
     else if(dropDownVal == "jp") {
       modData = modData.filter(x => x.breakingFix);
       modData = removeDuplicateValues(modData);
+      debugger;
       modData = modData.filter(x => {
         if((
           x.exchange.toLowerCase() == "seoul" || 
@@ -440,6 +590,8 @@ function TableData({articles}) {
         }
         return false;
      }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
+
+     debugger;
     
      return modData;
     }
