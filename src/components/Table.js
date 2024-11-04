@@ -625,7 +625,8 @@ function TableData({articles}) {
             x.exchange.toLowerCase() !== "taiwan" &&
             x.exchange.toLowerCase() !== "tokyo"  && 
             x.exchange.toLowerCase() !== "brussels" &&
-            x.exchange.toLowerCase() !== "ho chi minh"
+            x.exchange.toLowerCase() !== "ho chi minh" &&
+            bitcoinExchange.indexOf(x.exchange) === -1 
         ) {
          return true;
         }
