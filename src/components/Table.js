@@ -426,7 +426,7 @@ function TableData({articles}) {
     }
     if(dropDownVal == "nasdaq") {
       modData = modData.filter(x => {
-         if(x.exchange.toLowerCase() == "nasdaq" || x.exchange.toLowerCase() == "nyse" ) {
+         if(x.exchange.toLowerCase() == "nasdaq" || x.exchange.toLowerCase() == "nyse" || x.exchange.toLowerCase() == "smart" ) {
           return true;
          }
          return false;
