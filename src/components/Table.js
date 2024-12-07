@@ -11,7 +11,6 @@ var bitcoinExchange = [
   "Synthetic",
   "BitMart",
   "KuCoin",
-  "",
   "Cryptopia",
   "Gate.io",
   "MEXC",
@@ -295,6 +294,7 @@ function TableData({articles}) {
 
   let usOptionData = [
     {value: 'nasdaq', label: 'Nasdaq'},
+    {value: 'luna', label: 'Crypto'},
     {value: 'ind', label: 'Indian market'},
     {value: 'london', label: 'London (LSE)' },
     {value: 'europe', label: 'Europe' },
@@ -304,7 +304,6 @@ function TableData({articles}) {
     {value: 'scandinavia', label: 'Scandinavia' },
     // {value: 'tokyo', label: 'Tokyo' },
     {value: 'global', label: 'Global market'},
-    {value: 'luna', label: 'Crypto'},
   ];
 
   let indiaOptionData = [
