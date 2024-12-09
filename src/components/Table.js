@@ -607,7 +607,7 @@ function TableData({articles}) {
            x.exchange.toLowerCase() !== "stockholm" &&
            x.exchange.toLowerCase() !== "helsinki" &&
            x.exchange.toLowerCase() !== "oslo" &&
-          //  x.exchange.toLowerCase() !== "xetra" &&
+           x.exchange.toLowerCase() !== "" &&
             x.exchange.toLowerCase() !== "sydney" &&
             x.exchange.toLowerCase() !== "paris"  &&
             x.exchange.toLowerCase() !== "milan"  &&
