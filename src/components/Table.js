@@ -295,6 +295,7 @@ function TableData({articles}) {
   let usOptionData = [
     {value: 'nasdaq', label: 'Nasdaq'},
     {value: 'luna', label: 'Crypto'},
+    {value: 'web3', label: 'Web 3'},
     {value: 'ind', label: 'Indian market'},
     {value: 'london', label: 'London (LSE)' },
     {value: 'europe', label: 'Europe' },
@@ -555,6 +556,18 @@ function TableData({articles}) {
      }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
     
      return modData;
+    } // web3
+    else if(dropDownVal == "web3") {
+      modData = modData.filter(x => {
+        //bitcoinExchange
+        if(x.exchange.toLowerCase() == "web3" ) {
+          return true;
+        }
+        return false;
+      }).sort((a6, b) => new Date(b.date) - new Date(a6.date));
+      modData = removeDuplicateValues(modData);
+      modData = modData.sort((a9, b) => new Date(b.date) - new Date(a9.date));
+      return modData;
     }
     else if(dropDownVal == "luna") {
       modData = modData.filter(x => {
