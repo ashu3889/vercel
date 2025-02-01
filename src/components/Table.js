@@ -574,7 +574,7 @@ function TableData({articles}) {
         //bitcoinExchange
 
 
-        if(x.exchange.toLowerCase() == "coindcx" ) {
+        if(x.exchange.toLowerCase() == "coindcx" || x.exchange.toLowerCase() == "coindcx_new" ) {
          return true;
         }
         if (
@@ -611,6 +611,7 @@ function TableData({articles}) {
       modData = modData.filter(x => {
         if(
           x.exchange.toLowerCase() !== "coindcx" && 
+          x.exchange.toLowerCase() !== "coindcx_new" && 
           x.exchange.toLowerCase() !== "nse" &&
           x.exchange.toLowerCase() !== "bse" &&
           x.exchange.toLowerCase() !=="nasdaq" &&
