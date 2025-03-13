@@ -260,7 +260,7 @@ function TableData({articles}) {
   const [inputValue, setInputValue] = React.useState("");
   const [debouncedInputValue, setDebouncedInputValue] = React.useState("");
   const [dropDownVal, setDropDownVal] = React.useState(selectedVal);
-  const [dropDownValTradetype, setDropDownValTradetype] = React.useState("buy");
+  const [dropDownValTradetype, setDropDownValTradetype] = React.useState("upTrend");
 
 
   // <option value="nasdaq">Nasdaq</option>
@@ -418,19 +418,29 @@ function TableData({articles}) {
   const getDataBasedOnCountry = (data) => {
     // return data.sort((a5, b) => new Date(b.date) - new Date(a5.date));
     let modData = [...data];
-    if(dropDownValTradetype === "buy") {
+    if(dropDownValTradetype === "upTrend") {
       modData = modData.filter(a1 => a1.tradeType === "Buy" ||  a1.tradeType === "'Buy'::character varying");
     }
-    else if(dropDownValTradetype === "sell"){
-      modData = modData.filter(a2 => a2.tradeType === "Sell");
-    }
+    // else if(dropDownValTradetype === "downTrend"){
+    //   modData = modData.filter(a2 => a2.tradeType === "Sell");
+    // }
     if(dropDownVal == "nasdaq") {
+      // debugger;
+
+      // if(dropDownValTradetype == "upTrend") {
+      //   debugger;
+      // }
+      // else{
+      //   debugger;
+      // }
       modData = modData.filter(x => {
-         if(x.exchange.toLowerCase() == "nasdaq" || x.exchange.toLowerCase() == "nyse" || x.exchange.toLowerCase() == "smart" ) {
+         if( (dropDownValTradetype == "upTrend" ? x.isSidewaysUp === true : x.isSidewaysUp === false) && (x.exchange.toLowerCase() == "nasdaq" || x.exchange.toLowerCase() == "nyse" || x.exchange.toLowerCase() == "smart" ) ) {
           return true;
          }
          return false;
       }).filter(a3 => a3.isNewIteration).sort((a4, b) => new Date(b.date) - new Date(a4.date)) ;
+
+      debugger;
       modData = removeDuplicateValues(modData);
       modData = modData.sort((a7, b) => new Date(b.date) - new Date(a7.date));
       return modData;
@@ -811,11 +821,11 @@ function TableData({articles}) {
               color: 'white',
               fontSize: '10px',
               marginLeft: '10px'
-            }}>Select trade</legend>
+            }}>Select direction</legend>
             <select  class="direction-selector" id="lang" onChange={changeTradetype} value={dropDownValTradetype}>
-              <option value="buy">Buy</option>
-              <option value="sell" disabled={(dropDownVal !== "nasdaq"  ) ? true: false} >Sell</option>
-              <option value="both" disabled={(dropDownVal !== "nasdaq" ) ? true: false}>Show both</option>
+              <option value="upTrend">Uptrend</option>
+              <option value="downTrend" disabled={(dropDownVal !== "nasdaq"  ) ? true: false} >Downtrend</option>
+              {/* <option value="both" disabled={(dropDownVal !== "nasdaq" ) ? true: false}>Show both</option> */}
             </select>
         </div>
         <div>
@@ -886,7 +896,7 @@ function TableData({articles}) {
                             if(cellData == "Buy" || cellData == "'Buy'::character varying" ) {
                               return (
                                 <div> 
-                                   <span className="buy">Buy</span>
+                                   <span className="upTrend">Buy</span>
                                    {
                                     dataArticle[rowIndex].scripCode ?  (
                                       <Link 
@@ -913,7 +923,7 @@ function TableData({articles}) {
                             else if(cellData == "Sell" ) {
                               return (
                                 <div> 
-                                   <span className="sell">Sell</span>
+                                   <span className="downTrend">Sell</span>
                                    {
                                     dataArticle[rowIndex].scripCode ?  (
                                       <Link 
