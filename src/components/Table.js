@@ -294,17 +294,17 @@ function TableData({articles}) {
 
   let usOptionData = [
     {value: 'nasdaq', label: 'Nasdaq'},
-    {value: 'luna', label: 'Crypto'},
-    {value: 'web3', label: 'Web 3'},
+    // {value: 'luna', label: 'Crypto'},
+    // {value: 'web3', label: 'Web 3'},
     {value: 'ind', label: 'Indian market'},
-    {value: 'london', label: 'London (LSE)' },
-    {value: 'europe', label: 'Europe' },
-    // {value: 'jp', label: 'East asia' },
+    // {value: 'london', label: 'London (LSE)' },
+    // {value: 'europe', label: 'Europe' },
+    // // {value: 'jp', label: 'East asia' },
     // {value: 'hk', label: 'South east asia' },
     // {value: 'sydney', label: 'Australia' },
-    {value: 'scandinavia', label: 'Scandinavia' },
-    // {value: 'tokyo', label: 'Tokyo' },
-    {value: 'global', label: 'Global market'},
+    // {value: 'scandinavia', label: 'Scandinavia' },
+    // // {value: 'tokyo', label: 'Tokyo' },
+    // {value: 'global', label: 'Global market'},
   ];
 
   let indiaOptionData = [
