@@ -446,16 +446,29 @@ function TableData({articles}) {
       return modData;
     }
     else if(dropDownVal == "ind") {
-      modData = modData.filter(x => x.breakingFix);
-      modData = removeDuplicateValues(modData);
+      debugger;
+
       modData = modData.filter(x => {
-        if((x.exchange.toLowerCase() == "nse" || x.exchange.toLowerCase() == "bse" )&& x.scripName && x.scripName.trim().length > 0) {
-          return true;
+        if( (x.exchange.toLowerCase() == "nse" || x.exchange.toLowerCase() == "bse"  ) ) {
+         return true;
         }
         return false;
-     }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
-    
+     }).filter(a3 => a3.isNewIteration).sort((a4, b) => new Date(b.date) - new Date(a4.date)).filter(a1 => a1.tradeType === "Buy" ||  a1.tradeType === "'Buy'::character varying") ;
+
+     debugger;
+     modData = removeDuplicateValues(modData);
+     modData = modData.sort((a7, b) => new Date(b.date) - new Date(a7.date));
      return modData;
+    //   modData = modData.filter(x => x.breakingFix);
+    //   modData = removeDuplicateValues(modData);
+    //   modData = modData.filter(x => {
+    //     if((x.exchange.toLowerCase() == "nse" || x.exchange.toLowerCase() == "bse" )&& x.scripName && x.scripName.trim().length > 0) {
+    //       return true;
+    //     }
+    //     return false;
+    //  }).sort((a5, b) => new Date(b.date) - new Date(a5.date));
+    
+    //  return modData;
     }
     else if(dropDownVal == "london") {
       modData = modData.filter(x => x.breakingFix);
