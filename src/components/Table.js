@@ -418,6 +418,11 @@ function TableData({articles}) {
   const getDataBasedOnCountry = (data) => {
     // return data.sort((a5, b) => new Date(b.date) - new Date(a5.date));
     let modData = [...data];
+
+    // 1743735811187
+    modData = modData.filter(x => + new Date(x.evalDate) > 1743735811187);
+
+    debugger;
     if(dropDownValTradetype === "upTrend") {
       modData = modData.filter(a1 => a1.tradeType === "Buy" ||  a1.tradeType === "'Buy'::character varying");
     }
