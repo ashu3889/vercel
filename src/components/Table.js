@@ -420,7 +420,8 @@ function TableData({articles}) {
     let modData = [...data];
 
     // 1743735811187
-    modData = modData.filter(x => + new Date(x.evalDate) > 1743735811187);
+    modData = modData.filter(x => + new Date(x.evalDate) > 1752684579892);
+    debugger;
 
     debugger;
     if(dropDownValTradetype === "upTrend") {
