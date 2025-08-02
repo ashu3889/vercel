@@ -294,7 +294,7 @@ function TableData({articles}) {
 
   let usOptionData = [
     {value: 'nasdaq', label: 'Nasdaq'},
-    // {value: 'luna', label: 'Crypto'},
+    {value: 'luna', label: 'Crypto'},
     // {value: 'web3', label: 'Web 3'},
     {value: 'ind', label: 'Indian market'},
     // {value: 'london', label: 'London (LSE)' },
@@ -420,7 +420,8 @@ function TableData({articles}) {
     let modData = [...data];
 
     // 1743735811187
-    modData = modData.filter(x => + new Date(x.evalDate) > 1752684579892);
+    // 1752684579892
+    modData = modData.filter(x => + new Date(x.evalDate) >= 1753554630000);
     debugger;
 
     debugger;
@@ -612,7 +613,7 @@ function TableData({articles}) {
           return true;
         }
         return false;
-     }).sort((a6, b) => new Date(b.date) - new Date(a6.date));
+     }).filter(a1 => a1.tradeType === "Buy" ||  a1.tradeType === "'Buy'::character varying").sort((a6, b) => new Date(b.date) - new Date(a6.date));
      modData = removeDuplicateValues(modData);
      modData = modData.sort((a9, b) => new Date(b.date) - new Date(a9.date));
      return modData;
