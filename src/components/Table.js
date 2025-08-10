@@ -421,7 +421,7 @@ function TableData({articles}) {
 
     // 1743735811187
     // 1752684579892
-    modData = modData.filter(x => + new Date(x.evalDate) >= 1753554630000);
+    modData = modData.filter(x => + new Date(x.evalDate) >= 1754491144000 && x.properPullBackAfterLPFormation);
     debugger;
 
     debugger;
@@ -440,12 +440,23 @@ function TableData({articles}) {
       // else{
       //   debugger;
       // }
+
+      debugger;
+      // modData = modData.filter(x => {
+      //    if( (dropDownValTradetype == "upTrend" ? x.isSidewaysUp === true : x.isSidewaysUp === false) && (x.exchange.toLowerCase() == "nasdaq" || x.exchange.toLowerCase() == "nyse" || x.exchange.toLowerCase() == "smart" ) ) {
+      //     return true;
+      //    }
+      //    return false;
+      // }).filter(a3 => a3.isNewIteration).sort((a4, b) => new Date(b.date) - new Date(a4.date)) ;
+
+
       modData = modData.filter(x => {
-         if( (dropDownValTradetype == "upTrend" ? x.isSidewaysUp === true : x.isSidewaysUp === false) && (x.exchange.toLowerCase() == "nasdaq" || x.exchange.toLowerCase() == "nyse" || x.exchange.toLowerCase() == "smart" ) ) {
-          return true;
-         }
-         return false;
-      }).filter(a3 => a3.isNewIteration).sort((a4, b) => new Date(b.date) - new Date(a4.date)) ;
+        if( (x.exchange.toLowerCase() == "nasdaq" || x.exchange.toLowerCase() == "nyse" || x.exchange.toLowerCase() == "smart" ) ) {
+         return true;
+        }
+        return false;
+     }).filter(a3 => a3.isNewIteration).sort((a4, b) => new Date(b.date) - new Date(a4.date)).filter(a1 => a1.tradeType === "Buy" ||  a1.tradeType === "'Buy'::character varying") ;
+
 
       debugger;
       modData = removeDuplicateValues(modData);
