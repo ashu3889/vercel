@@ -421,7 +421,14 @@ function TableData({articles}) {
 
     // 1743735811187
     // 1752684579892
-    modData = modData.filter(x => + new Date(x.evalDate) >= 1754491144000 && x.properPullBackAfterLPFormation);
+    // modData = modData.filter(x => + new Date(x.evalDate) >= 1754491144000 && x.properPullBackAfterLPFormation);
+    // modData = modData.filter(x => + new Date(x.evalDate) >= 1754491144000 && x.tradeType !== "Sell" );
+
+    modData = modData.filter(
+      x =>  x.properPullBackAfterLPFormation &&
+      x.sidewaysDirection == "uptrend"
+    );
+
     debugger;
 
     debugger;
