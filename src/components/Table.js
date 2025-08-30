@@ -425,8 +425,8 @@ function TableData({articles}) {
     // modData = modData.filter(x => + new Date(x.evalDate) >= 1754491144000 && x.tradeType !== "Sell" );
 
     modData = modData.filter(
-      x =>  x.properPullBackAfterLPFormation &&
-      x.sidewaysDirection == "uptrend"
+      x =>  x.properPullBackAfterLPFormation 
+      // && x.sidewaysDirection == "uptrend"
     );
 
     debugger;
