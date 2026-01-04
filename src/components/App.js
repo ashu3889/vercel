@@ -7,6 +7,7 @@ import { Route, Switch } from 'react-router-dom';
 import Article from '../components/Article';
 import Editor from '../components/Editor';
 import Home from '../components/Home';
+import Weekness from '../components/Weekness';
 import HowItWorks from '../components/HowItWorks';
 import HowToUse from '../components/HowToUse';
 import BacktestResult from './Report';
@@ -64,6 +65,7 @@ class App extends React.Component {
             currentUser={this.props.currentUser} />
             <Switch>
             <Route exact path="/" component={Home}/>
+            <Route exact path="/weekness" component={Weekness}/>
             <Route exact path="/backtest" component={BacktestResult}/>
             <Route path="/about" component={HowItWorks} />
             <Route path="/how-to-use" component={HowToUse} />

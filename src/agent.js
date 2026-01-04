@@ -7,6 +7,8 @@ const superagent = superagentPromise(_superagent, global.Promise);
 
 const API_ROOT = 'https://gvvvybsctuddylxfiecz.supabase.co/rest/v1/result';
 
+const API_ROOT_WEEKNESS = 'https://gvvvybsctuddylxfiecz.supabase.co/rest/v1/result_penny_stock';
+
 const encode = encodeURIComponent;
 const responseBody = res => res.body;
 
@@ -29,7 +31,9 @@ const requests = {
   put: (url, body) =>
     superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
   post: (url, body) =>
-    superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody)
+    superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
+  getWeekness: url =>
+    superagent.get(`${API_ROOT_WEEKNESS}${url}`).use(tokenPlugin).then(responseBody),
 };
 
 const Auth = {
@@ -53,6 +57,8 @@ const Articles = {
   all: page =>
     requests.get(``),
     // requests.get(`/articles?${limit(10, page)}`),
+  allWeekness : page =>
+    requests.getWeekness(``),
   byAuthor: (author, page) =>
     requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
   byTag: (tag, page) =>

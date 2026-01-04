@@ -34,8 +34,7 @@ class Home extends React.Component {
     const tab = this.props.token ? 'feed' : 'all';
     const articlesPromise = this.props.token ?
       agent.Articles.feed :
-      agent.Articles.all;
-
+      agent.Articles.allWeekness;
 
     this.props.onLoad(tab, articlesPromise, Promise.all([articlesPromise()]));
   }
